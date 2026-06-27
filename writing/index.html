@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Robert Rosina</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
+<link href="favicon.png" rel="icon" type="image/png"/>
+</head>
+<body>
+<div id="page-loader">
+<div class="loader-spinner"></div>
+</div>
+<nav class="nav-overlay">
+<div class="nav-left"><a>
+<span class="site-name">ROBERT <span class="highlight">ROSINA</span> FICTION</span>
+</a></div>
+<ul class="nav-center">
+<li><a href="#literature">BOOKS</a></li>
+<li><a href="#about">ABOUT</a></li>
+<li><a href="#contact">CONTACT</a></li>
+</ul>
+<div class="nav-right"></div>
+</nav>
+<section class="reveal" id="literature">
+<div class="hub-section" style="text-align:left;">
+<img alt="Mythic action scene" src="stormy-banner-image.png" style="width:100%; display:block; margin:20px auto; border-radius:10px;"/>
+<h4 style="
+  text-align:center;
+  margin:2rem 2rem;
+  max-width:900px;
+  line-height:1.5;
+  text-transform: uppercase;
+">
+In the tradition of <em>The Lord of the Rings</em>, <em>Dune</em>, and the <em>Cthulhu Mythos</em>, <strong><em>Thy Eternal Winter</em></strong> is a dark mythic fantasy set in the wider Wyrdcasters universe.</h4>
+<h3><em>Thy Eternal Winter</em></h3>
+<p>A novel by Robert Rosina, and part of the wider <em>Wyrdcasters</em> mythic universe.</p>
+<img alt="Thy Eternal Winter book cover" src="thy-eternal-winter-cover.png" style="width:400px; display:block; margin:20px auto; border-radius:10px;"/>
+<p><span class="semibold">Enter the frozen mythscape of <em>Thy Eternal Winter</em> — a dark epic of gods, ruin, prophecy, and survival at the edge of annihilation.</span></p>
+<p>The world of Heim stands on the brink of annihilation. A catastrophic rupture has unleashed the Frost across the land, spreading monstrosities, collapsing kingdoms, and turning old certainties into ash. Rival nations advance, traitors plot from within, and ancient powers circle the dying realm. Amid the ruin, a young Odin is thrust into a war for survival. As winter deepens and the Helmouth becomes the axis of catastrophe, he and his allies must gather the Wyrdcasters and stand against a darkness that may consume gods and men alike.</p>
+<div style="text-align:center;">
+<a class="pdf-trigger" href="#" id="openPdf">Read a Preview</a>
+</div>
+<!-- PDF Overlay -->
+<div aria-labelledby="pdfTitle" aria-modal="true" class="pdf-overlay" id="pdfOverlay" role="dialog">
+<div class="pdf-dialog">
+<iframe class="pdf-frame" id="pdfFrame" loading="lazy" title="PDF preview"></iframe>
+</div>
+</div>
+<script>
+  const overlay  = document.getElementById('pdfOverlay');
+  const frame    = document.getElementById('pdfFrame');
+  const openBtn  = document.getElementById('openPdf');
+  const closeBtn = document.getElementById('closePdf');
+  let lastFocus = null;
+
+  // Ensure overlay lives under <body>, not inside a transformed section
+  if (overlay && overlay.parentElement !== document.body) {
+    document.body.appendChild(overlay);
+  }
+
+  function openOverlay() {
+    document.body.classList.add('overlay-open');
+    lastFocus = document.activeElement;
+    frame.src = 'Wyrdcasters_Sample.pdf#view=FitH';
+    overlay.setAttribute('open', '');
+    setTimeout(() => closeBtn.focus(), 0);
+    document.addEventListener('keydown', onKeydown);
+    overlay.addEventListener('click', onBackdrop);
+  }
+  function closeOverlay() {
+    frame.src = 'about:blank';
+    overlay.removeAttribute('open');
+    document.body.classList.remove('overlay-open');
+    document.removeEventListener('keydown', onKeydown);
+    overlay.removeEventListener('click', onBackdrop);
+    if (lastFocus) lastFocus.focus();
+  }
+  function onKeydown(e){ if (e.key === 'Escape') closeOverlay(); }
+  function onBackdrop(e){ if (e.target === overlay) closeOverlay(); }
+
+  openBtn.addEventListener('click', (e) => { e.preventDefault(); openOverlay(); });
+  closeBtn.addEventListener('click', closeOverlay);
+</script>
+<div class="hub-section">
+<h3><em>On the Series</em></h3>
+<p><em>The Saga of the Wyrdcasters</em> is the central mythopoeic work of the Wyrdcasters universe — an epic unfolding across nine volumes, beginning with the opening trilogy. Inspired by Norse mythology and born of visions encountered during a profound break from ordinary reality, the Wyrdcasters universe poses a singular, enduring question — a question the author anticipates may take a lifetime, or longer, to answer: </p><p><span class="semibold"><em>What if the Norse gods were real — an advanced race from a forgotten age — but ancient humanity, due to their limited undestanding, misinterpreted their histories as myth?</em></span></p>
+<p>Rather than a strict retelling of the Eddas, the narrative extrapolates from the Norse cosmology, exploring themes of spiritual evolution and corruption, madness, metaphysics, and transformation, as literature's most enduring characters journey through a collapsing spiritual cosmos as it spirals toward Ragnarök.</p>
+</div>
+</div></section>
+<section class="reveal" id="about">
+<div class="section-title">About the Author</div>
+<div class="hub-section">
+<img alt="Robert Rosina" src="your-photo.jpg" style="width:400px; display:block; margin:20px auto; border-radius:10px;"/>
+<p><b><small>ROBERT ROSINA</small> </b>is an author whose work fuses myth, philosophy, and speculative realism into a singular expression of modern mythopoeia. This fusion makes his masterwork, <em>The Wyrdcasters Saga</em>, philosophically ambitious — closer to Herbert’s <em>Dune</em> or Wolfe’s <em>Book of the New Sun</em> than to conventional mythic fantasy. Though rooted in ancient myth, Rosina’s work speaks urgently to the modern condition: a world fractured by technological excess, cultural collapse, and spiritual exhaustion. Through his writing, he invites readers to confront timeless questions of spiritual evolution, corruption, and the search for transcendence amid decay — questions as vital now as they were in the first age of the stories.</p>
+</div>
+</section>
+<section class="reveal" id="contact">
+<div class="section-title">Contact</div>
+<form action="mailto:contact@wyrdcasters.com" enctype="text/plain" method="post">
+<input name="name" placeholder="Your Name" required="" type="text"/>
+<input name="email" placeholder="Your Email" required="" type="email"/>
+<textarea name="message" placeholder="Your Message" required="" rows="5"></textarea>
+<button type="submit">Send Message</button>
+</form>
+</section>
+<footer>
+<div class="social-links">
+<p>© <span id="year"></span> Robert Rosina. All rights reserved. · <a href="http://www.robertrosina.com">Main site</a></p>
+</div>
+</footer>
+<script>
+  // Loader fades out on full load
+  window.addEventListener('load', function () {
+    const loader = document.getElementById('page-loader');
+    if (!loader) return;
+    loader.style.transition = 'opacity 0.5s ease';
+    loader.style.opacity = '0';
+    setTimeout(() => loader.style.display = 'none', 500);
+  });
+
+  // Reveal-on-scroll (same logic as your reference)
+  function revealOnScroll(){
+    const els = document.querySelectorAll('.reveal');
+    const vh = window.innerHeight;
+    for (const el of els){
+      const top = el.getBoundingClientRect().top;
+      const threshold = 100;
+      if (top < vh - threshold) el.classList.add('active');
+    }
+  }
+  window.addEventListener('scroll', revealOnScroll, {passive:true});
+  window.addEventListener('load', revealOnScroll);
+  document.addEventListener('DOMContentLoaded', revealOnScroll);
+</script>
+</body>
+</html>
