@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="en-AU">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Repertoire | Robert Rosina Music</title>
+<meta content="Browse Robert Rosina's repertoire, filter songs by occasion and style, hear 30-second snippets, and build a setlist enquiry." name="description"/>
+<meta content="Repertoire | Robert Rosina Music" property="og:title"/>
+<meta content="Browse songs, hear available snippets, and build a setlist enquiry for contemporary, lounge, wedding and funeral bookings." property="og:description"/>
+<meta content="website" property="og:type"/>
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="site.webmanifest" rel="manifest"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Mea+Culpa&amp;family=Inter:wght@400;500;600;700;800;900&amp;family=Libre+Baskerville:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="style.css?v=rrm-20260627-v32" rel="stylesheet"/>
+</head>
+<body>
+<header class="site-header">
+<a aria-label="Robert Rosina home" class="brand" href="index.html#top">
+<span class="brand-text">
+<span class="brand-name">Robert Rosina</span>
+</span>
+</a>
+<nav aria-label="Primary navigation" class="nav">
+<a href="contemporary-guitar-voice-sydney.html">Contemporary</a>
+<a href="lounge-singer-sydney.html">Lounge</a>
+<a href="wedding-singer-sydney.html">Weddings</a>
+<a href="funeral-music-sydney.html">Funerals</a>
+<a href="if-these-walls.html">If These Walls</a>
+<a href="repertoire.html">Repertoire</a>
+<a class="nav-cta" href="index.html#enquire">Contact</a>
+</nav>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button">
+<span></span><span></span><span></span>
+</button>
+</header>
+<div aria-hidden="true" class="mobile-menu" id="mobile-menu">
+<div aria-label="Mobile navigation" aria-modal="true" class="mobile-menu-panel" role="dialog">
+<button aria-label="Close menu" class="mobile-menu-close" type="button">×</button>
+<nav aria-label="Mobile navigation" class="mobile-menu-nav">
+<a href="index.html">Home</a>
+<a href="contemporary-guitar-voice-sydney.html">Contemporary</a>
+<a href="lounge-singer-sydney.html">Lounge</a>
+<a href="wedding-singer-sydney.html">Weddings</a>
+<a href="funeral-music-sydney.html">Funerals</a>
+<a href="if-these-walls.html">If These Walls</a>
+<a href="repertoire.html">Repertoire</a>
+<a class="mobile-nav-cta" href="index.html#enquire">Contact</a>
+</nav>
+</div>
+</div>
+<main id="top">
+<section class="hero hero-clean repertoire-hero">
+<div class="container hero-clean-grid">
+<div class="hero-copy">
+<p class="eyebrow">Song library</p>
+<h1>Repertoire.</h1>
+<p class="hero-lead">Browse songs, hear available snippets, and build a shortlist for your enquiry.</p>
+<div class="hero-actions">
+<a class="button button-primary" href="#song-library">Browse songs</a>
+<a class="button button-secondary" href="#setlist-panel">View setlist</a>
+</div>
+</div>
+<aside aria-label="Repertoire hero image" class="hero-image-card"><figure class="hero-image-figure"><img alt="A client browsing music options on a tablet." src="images/hero-repertoire.jpg"/></figure></aside>
+</div>
+</section>
+<section class="section-pad repertoire-section" id="song-library">
+<div class="container">
+<div class="section-head compact-head">
+<p class="eyebrow">Browse songs</p>
+<h2>Build a setlist.</h2>
+<p>Songs are listed together. Use filters as a guide, choose favourites, and I will shape the final set around the occasion.</p>
+</div>
+<div class="repertoire-controls">
+<label class="search-label" for="song-search">Search songs<input id="song-search" placeholder="Search by song, artist, style or occasion" type="search"/></label>
+<div aria-label="Song filters" class="filter-panel"><button class="filter-chip is-active" data-filter="All" type="button">All</button><button class="filter-chip" data-filter="Contemporary" type="button">Contemporary</button><button class="filter-chip" data-filter="Lounge" type="button">Lounge</button><button class="filter-chip" data-filter="Weddings" type="button">Weddings</button><button class="filter-chip" data-filter="Funerals" type="button">Funerals</button><button class="filter-chip" data-filter="Instrumental" type="button">Instrumental</button><button class="filter-chip" data-filter="Playable snippets" type="button">Playable snippets</button></div>
+<div class="filter-status"><span id="song-count">Loading songs</span><span id="active-filters">Showing all songs.</span></div>
+</div>
+<div class="repertoire-layout">
+<div aria-live="polite" class="song-list" id="song-list"></div>
+<aside class="setlist-panel" id="setlist-panel">
+<div class="setlist-head">
+<p class="eyebrow">Your shortlist</p>
+<h2>My setlist.</h2>
+<span id="selected-count">0 selected</span>
+</div>
+<ol class="selected-songs" id="selected-songs"></ol>
+<div class="setlist-actions">
+<button class="button button-secondary" id="copy-setlist" type="button">Copy list</button>
+<button class="button button-primary" id="email-setlist" type="button">Email enquiry</button>
+<button class="plain-button" id="clear-setlist" type="button">Clear</button>
+</div>
+<p class="media-note">This sends a shortlist. Final sets can be shaped around timing, flow and the occasion.</p>
+</aside>
+</div>
+</div>
+</section>
+<section class="section-pad paper-soft practical-section">
+<div class="container">
+<div class="section-head compact-head">
+<p class="eyebrow">Replacing audio</p>
+<h2>Snippet files.</h2>
+<p>Every song still has an MP3 filename reserved in the audio folder, though only the proof-set songs show listen buttons for now. Replace the placeholders later while keeping the filenames unchanged.</p>
+</div>
+<div class="info-grid">
+<article class="info-card"><h3>File names</h3><p>Use <code>repertoire-audio-manifest.csv</code> to match each song to its MP3 file and see which songs are currently public proof snippets.</p></article>
+<article class="info-card"><h3>Audio length</h3><p>Use 30-second clips that begin at the strongest recognisable part of the song.</p></article>
+<article class="info-card"><h3>Best proof</h3><p>The public listen buttons now appear only on the smaller proof set.</p></article>
+</div>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-grid">
+<div>
+<strong>Robert Rosina Music</strong>
+<p>Sydney live music for contemporary events, lounges, weddings, farewells and premium venue concepts.</p>
+<p>© 2026 Robert Rosina Music. All rights reserved.</p>
+</div>
+<div aria-label="Related links" class="footer-links">
+<a href="if-these-walls.html">If These Walls</a>
+<a href="repertoire.html">Repertoire</a>
+<a href="mailto:robertrosina@outlook.com.au">robertrosina@outlook.com.au</a>
+</div>
+</div>
+</footer>
+<script>
+  const menuToggle = document.querySelector('.menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuClose = document.querySelector('.mobile-menu-close');
+  const mobileMenuLinks = document.querySelectorAll('.mobile-menu-nav a');
+  function openMobileMenu() {
+    mobileMenu.classList.add('is-open');
+    document.body.classList.add('menu-open');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    mobileMenuClose.focus();
+  }
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('is-open');
+    document.body.classList.remove('menu-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+  }
+  menuToggle.addEventListener('click', openMobileMenu);
+  mobileMenuClose.addEventListener('click', closeMobileMenu);
+  mobileMenuLinks.forEach((link) => link.addEventListener('click', closeMobileMenu));
+  mobileMenu.addEventListener('click', (event) => { if (event.target === mobileMenu) closeMobileMenu(); });
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && mobileMenu.classList.contains('is-open')) closeMobileMenu(); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 980 && mobileMenu.classList.contains('is-open')) closeMobileMenu(); });
+</script>
+<script src="songs.js"></script>
+<script src="repertoire.js"></script>
+</body>
+</html>
