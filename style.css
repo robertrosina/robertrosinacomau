@@ -1305,3 +1305,66 @@ body { background: var(--ivory); }
 .hero-setting-panel .product-card figure img { object-position: center center; }
 @media (max-width: 1100px) { .hero-setting-panel .product-grid-impact { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .home-hero-products { padding-bottom: 58px; } .hero-setting-panel .product-grid-impact { grid-template-columns: 1fr; } }
+
+
+/* v34 If These Walls video-only watch section */
+.single-media-grid { grid-template-columns: minmax(0, 760px); justify-content: center; }
+.single-media-grid .media-card { max-width: 760px; width: 100%; }
+
+
+/* v35: premium styling for If These Walls “Entertainment that belongs” section */
+.ifw-premium-belongs-section {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(200,154,69,.18), transparent 28%),
+    radial-gradient(circle at 15% 82%, rgba(90,30,27,.22), transparent 30%),
+    linear-gradient(135deg, #11100E 0%, #0b1020 56%, #3B3A36 100%);
+  color: var(--white);
+}
+.ifw-premium-belongs-section .section-head h2,
+.ifw-premium-belongs-section h3 { color: var(--white); }
+.ifw-premium-belongs-section .eyebrow,
+.ifw-premium-belongs-section .media-label { color: var(--brass-soft); }
+.ifw-premium-belongs-section .section-head p,
+.ifw-premium-belongs-section p,
+.ifw-premium-belongs-section li { color: rgba(255,255,255,.78); }
+.ifw-premium-belongs-section .media-card,
+.ifw-premium-belongs-section .info-card {
+  border: 1px solid rgba(255,255,255,.13);
+  background: rgba(255,255,255,.06);
+  box-shadow: var(--shadow);
+}
+.ifw-premium-belongs-section .video-click-card {
+  border-color: rgba(255,255,255,.13);
+  background: rgba(0,0,0,.28);
+}
+
+/* v36: keep If These Walls premium background continuous from Flagship concept through Entertainment that belongs */
+.ifw-showcase-section + .ifw-belongs-section {
+  margin-top: 0;
+  padding-top: 0;
+}
+.ifw-belongs-section {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(200,154,69,.18), transparent 28%),
+    radial-gradient(circle at 15% 82%, rgba(90,30,27,.22), transparent 30%),
+    linear-gradient(135deg, #11100E 0%, #0b1020 56%, #3B3A36 100%);
+  color: var(--white);
+}
+.ifw-belongs-section .section-head h2,
+.ifw-belongs-section h3 { color: var(--white); }
+.ifw-belongs-section .eyebrow,
+.ifw-belongs-section .media-label { color: var(--brass-soft); }
+.ifw-belongs-section .section-head p,
+.ifw-belongs-section p,
+.ifw-belongs-section li { color: rgba(255,255,255,.78); }
+.ifw-belongs-section .media-card,
+.ifw-belongs-section .info-card {
+  border: 1px solid rgba(255,255,255,.13);
+  background: rgba(255,255,255,.06);
+  box-shadow: var(--shadow);
+}
+.ifw-belongs-section .media-card { max-width: 860px; margin: 0 auto 28px; }
+.ifw-belongs-section .video-click-card {
+  border-color: rgba(255,255,255,.13);
+  background: rgba(0,0,0,.28);
+}
