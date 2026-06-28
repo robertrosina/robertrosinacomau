@@ -1609,3 +1609,33 @@ body { background: var(--ivory); }
     letter-spacing: 1.4px;
   }
 }
+
+
+/* v51 clickable product cards */
+.product-card-clickable {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.product-card-clickable .card-link {
+  display: inline-flex;
+}
+.product-card-clickable:hover,
+.product-card-clickable:focus-visible {
+  transform: translateY(-3px);
+}
+.product-card-clickable:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 4px;
+}
+
+
+/* v59 homepage product heading colour */
+.home-hero-products .product-card h3 {
+  color: #1f3f63;
+}
+.home-hero-products .product-card-clickable:hover h3,
+.home-hero-products .product-card-clickable:focus-visible h3 {
+  color: #1f3f63;
+}
