@@ -108,3 +108,5 @@ V23 changes: lounge hero image replaced with corrected contrast version; Useful 
 
 
 v27: Reordered homepage sections, merged booking/pricing guidance, changed main video to MZaXMmD66hs, changed top menu CTA to Contact, and added rotating testimonial placeholders.
+
+Updated: restored the original internal If These Walls page and added a restrained link from that page to https://ifthesewalls.com.au/.
