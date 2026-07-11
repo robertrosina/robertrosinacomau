@@ -1658,3 +1658,227 @@ body { background: var(--ivory); }
 .ifw-learn-more-card p:not(.eyebrow) {
   max-width: 760px;
 }
+
+
+/* v52 portfolio header system */
+.site-header {
+  position: absolute;
+  z-index: 40;
+  top: 0;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: calc(100% - 64px);
+  max-width: 1500px;
+  min-height: 86px;
+  padding: 0;
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: 1px solid rgba(255,255,255,.15);
+}
+.site-header .brand {
+  min-width: 250px;
+  gap: 0;
+  text-decoration: none;
+}
+.site-header .brand-site-name {
+  font-family: Inter, Arial, sans-serif;
+  font-size: .77rem;
+  line-height: 1;
+  letter-spacing: .17em;
+  font-weight: 500;
+  color: rgba(255,255,255,.82);
+}
+.site-header .brand-site-name strong { color: #fff; font-weight: 800; }
+.site-header .brand-discipline { color: var(--brass-soft); margin-left: 10px; }
+.site-header .nav {
+  gap: 16px;
+  padding-right: 48px;
+  font-size: .65rem;
+  letter-spacing: .085em;
+  font-weight: 700;
+}
+.site-header .nav a {
+  position: relative;
+  color: rgba(255,255,255,.74);
+  white-space: nowrap;
+}
+.site-header .nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -9px;
+  height: 1px;
+  background: var(--brass-soft);
+  transition: right .2s ease;
+}
+.site-header .nav a:hover::after,
+.site-header .nav a:focus-visible::after,
+.site-header .nav a[aria-current="page"]::after { right: 0; }
+.site-header .nav a[aria-current="page"] { color: #fff; }
+.site-header .nav-crosslink { color: rgba(255,255,255,.58); }
+.site-header .nav-crosslink:first-of-type { margin-left: 6px; }
+.menu-toggle span { background: #fff; }
+.mobile-crosslink { color: var(--brass-soft); }
+@media (max-width: 1160px) {
+  .site-header .nav { gap: 11px; padding-right: 0; font-size: .61rem; }
+  .site-header .brand { min-width: 220px; }
+}
+@media (max-width: 980px) {
+  .site-header { width: calc(100% - 40px); min-height: 76px; }
+  .site-header .brand { min-width: 0; }
+}
+@media (max-width: 520px) {
+  .site-header { width: calc(100% - 32px); }
+  .site-header .brand-site-name { font-size: .68rem; letter-spacing: .13em; }
+  .site-header .brand-discipline { margin-left: 7px; }
+}
+
+
+/* v53 music portfolio accent */
+:root { --music-accent: #b42b38; }
+.site-header .brand-discipline { color: var(--music-accent); }
+.site-header .nav a::after { background: var(--music-accent); }
+.site-header .nav a[aria-current="page"] { color: #fff; }
+.hero-clean .signature-name { color: var(--music-accent); }
+.mobile-crosslink { color: var(--music-accent); }
+
+
+/* v60 discipline-led music introduction */
+.home-hero-products .music-identity-copy {
+  max-width: 800px;
+  padding-top: clamp(1.2rem, 3vw, 2.4rem);
+}
+.music-kicker {
+  margin: 0 0 1.25rem;
+  color: var(--music-accent);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: .74rem;
+  font-weight: 700;
+}
+.music-intro {
+  max-width: 790px;
+  margin: 0;
+  color: rgba(255,255,255,.76);
+  font-family: var(--heading);
+  font-size: clamp(1rem, 1.75vw, 1.17rem);
+  line-height: 1.78;
+}
+@media (max-width: 640px) {
+  .home-hero-products .music-identity-copy { padding-top: .5rem; }
+  .music-kicker { margin-bottom: 1rem; font-size: .68rem; }
+  .music-intro { line-height: 1.68; }
+}
+
+
+/* v61 wedding formats and strings repertoire */
+.wedding-offer-overview { padding-bottom: 48px; }
+.wedding-offer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.wedding-offer-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 310px;
+  padding: 34px;
+  border-radius: var(--radius);
+  background: rgba(251, 247, 238, .92);
+  border: 1px solid var(--line);
+  box-shadow: var(--soft-shadow);
+}
+.wedding-offer-card-strings {
+  color: var(--white);
+  background: linear-gradient(145deg, #1e2330, #4c2029);
+  border-color: rgba(255,255,255,.12);
+}
+.offer-number {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--wine);
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.wedding-offer-card-strings .offer-number { color: var(--brass-soft); }
+.wedding-offer-card h3 {
+  margin: 0 0 16px;
+  font-size: clamp(1.65rem, 2.6vw, 2.45rem);
+  letter-spacing: -.045em;
+}
+.wedding-offer-card p { margin: 0; color: var(--muted); line-height: 1.72; }
+.wedding-offer-card-strings p { color: rgba(255,255,255,.76); }
+.wedding-offer-card a {
+  margin-top: auto;
+  padding-top: 24px;
+  color: var(--wine);
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.wedding-offer-card-strings a { color: var(--brass-soft); }
+.strings-offer-head { max-width: 920px; }
+.string-repertoire-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+.repertoire-group { padding: 24px; background: rgba(255,255,255,.76); }
+.repertoire-group h4 { line-height: 1.45; }
+.repertoire-group ol { margin: 0; padding-left: 1.25rem; }
+.repertoire-group li { margin: 7px 0; color: var(--ink); font-size: .94rem; line-height: 1.48; }
+.repertoire-group .repertoire-note {
+  margin-top: 15px;
+  padding-top: 13px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .9rem;
+}
+.repertoire-group-extras {
+  background: linear-gradient(145deg, rgba(30,35,48,.98), rgba(76,32,41,.98));
+  border-color: rgba(255,255,255,.10);
+}
+.repertoire-group-extras h4 { color: var(--brass-soft); }
+.repertoire-group-extras p { color: rgba(255,255,255,.78); }
+@media (max-width: 1050px) {
+  .string-repertoire-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .wedding-offer-grid, .string-repertoire-grid { grid-template-columns: 1fr; }
+  .wedding-offer-card { min-height: 0; padding: 27px; }
+}
+
+/* Keep product heroes single-column on tablets and phones. */
+@media (max-width: 980px) {
+  .product-hero-clean .hero-clean-grid { grid-template-columns: minmax(0, 1fr); }
+  .product-hero-clean .hero-copy { max-width: none; width: 100%; }
+  .product-hero-clean .hero-image-card { width: 100%; }
+}
+
+
+/* v62 wedding combined-format option */
+.wedding-combination-note {
+  max-width: 880px;
+  margin: 24px auto 0;
+  padding: 18px 22px;
+  border-left: 4px solid var(--wine);
+  background: rgba(255,255,255,.58);
+  color: var(--muted);
+  line-height: 1.7;
+}
+.wedding-combination-note strong,
+.combined-format-inline strong { color: var(--ink); }
+.combined-format-inline {
+  margin: 24px 0 0;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: rgba(76,32,41,.08);
+  color: var(--muted);
+  line-height: 1.7;
+}

@@ -1,32 +1,27 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en-AU">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Robert Rosina</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet"/>
-<link href="styles.css" rel="stylesheet"/>
+<title>Robert Rosina | Author</title>
+<meta content="Mythic fantasy, children’s picture books and the Wyrdcasters universe by Australian author Robert Rosina." name="description"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="styles.css?v=4" rel="stylesheet"/>
 <link href="favicon.png" rel="icon" type="image/png"/>
 </head>
 <body>
 <div id="page-loader">
 <div class="loader-spinner"></div>
 </div>
-<nav class="nav-overlay">
-<div class="nav-left"><a>
-<span class="site-name">ROBERT <span class="highlight">ROSINA</span> FICTION</span>
-</a></div>
-<ul class="nav-center">
-<li><a href="#literature">BOOKS</a></li>
-<li><a href="#about">ABOUT</a></li>
-<li><a href="#contact">CONTACT</a></li>
-</ul>
-<div class="nav-right"></div>
-</nav>
+<nav class="nav-overlay"><div class="nav-left"><a aria-label="Robert Rosina home" href="../index.html"><span class="site-name">ROBERT <strong>ROSINA</strong> <span class="site-discipline">AUTHOR</span></span></a></div><ul class="nav-center"><li><a href="#literature">Novels</a></li><li><a href="#children">Children’s Books</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul><div class="nav-right"><a class="nav-crosslink" href="../music.html">Music</a><a class="nav-crosslink" href="../acting/index.html">Actor</a></div></nav>
 <section class="reveal" id="literature">
-<div class="hub-section" style="text-align:left;">
-<img alt="Mythic action scene" src="stormy-banner-image.png" style="width:100%; display:block; margin:20px auto; border-radius:10px;"/>
+<div class="hub-section literature-hub" style="text-align:left;">
+<div class="author-hero-copy">
+<p class="author-kicker">Australian author · Mythic and children’s fiction</p>
+<p>Robert Rosina writes across two imaginative worlds: mythic fantasy concerned with gods, ruin and spiritual transformation, and children’s stories shaped by wonder, courage and the safety of home.</p>
+</div>
+<img alt="Mythic action scene" class="literature-banner" src="stormy-banner-image.png"/>
 <h4 style="
   text-align:center;
   margin:2rem 2rem;
@@ -46,6 +41,7 @@ In the tradition of <em>The Lord of the Rings</em>, <em>Dune</em>, and the <em>C
 <!-- PDF Overlay -->
 <div aria-labelledby="pdfTitle" aria-modal="true" class="pdf-overlay" id="pdfOverlay" role="dialog">
 <div class="pdf-dialog">
+<div class="pdf-bar"><span id="pdfTitle"><em>Thy Eternal Winter</em> preview</span><button class="pdf-btn" id="closePdf" type="button">Close</button></div>
 <iframe class="pdf-frame" id="pdfFrame" loading="lazy" title="PDF preview"></iframe>
 </div>
 </div>
@@ -90,6 +86,22 @@ In the tradition of <em>The Lord of the Rings</em>, <em>Dune</em>, and the <em>C
 <p>Rather than a strict retelling of the Eddas, the narrative extrapolates from the Norse cosmology, exploring themes of spiritual evolution and corruption, madness, metaphysics, and transformation, as literature's most enduring characters journey through a collapsing spiritual cosmos as it spirals toward Ragnarök.</p>
 </div>
 </div></section>
+<section class="reveal children-section" id="children">
+<div class="section-title">Children’s Books</div>
+<div class="hub-section children-book-grid">
+<figure class="children-cover">
+<img alt="Cover of Owl Fred and the Giant by Robert Rosina" src="owl-fred-and-the-giant-cover.png"/>
+</figure>
+<div class="children-book-copy">
+<p class="book-status">Picture book · Released 2026</p>
+<h2><em>Owl Fred and the Giant</em></h2>
+<p class="children-lead">A small owl ventures into the night and meets someone impossibly large.</p>
+<p>When Owl Fred encounters a towering figure in the darkness, fear gives way to recognition, warmth and home. The first Owl Fred picture book is a gentle story about imagination, courage and the security found in a parent’s care.</p>
+<p class="series-note">The Owl Fred series begins here, with further adventures to follow.</p>
+<a class="book-enquiry" href="mailto:robertrosina@outlook.com.au?subject=Owl%20Fred%20and%20the%20Giant">Book enquiries</a>
+</div>
+</div>
+</section>
 <section class="reveal" id="about">
 <div class="section-title">About the Author</div>
 <div class="hub-section">
@@ -108,7 +120,7 @@ In the tradition of <em>The Lord of the Rings</em>, <em>Dune</em>, and the <em>C
 </section>
 <footer>
 <div class="social-links">
-<p>© <span id="year"></span> Robert Rosina. All rights reserved. · <a href="http://www.robertrosina.com">Main site</a></p>
+<p>© <span id="year"></span> Robert Rosina. All rights reserved. · <a href="../index.html">Main site</a> · <a href="#children">Children’s Books</a> · <a href="../acting/index.html">Acting</a> · <a href="../music.html">Music</a></p>
 </div>
 </footer>
 <script>
