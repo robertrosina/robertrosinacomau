@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="theme-color" content="#17231f"/>
-<title>Robert's Life Guide v2.20</title>
+<title>Robert's Life Guide v2.21</title>
 <style>
 :root{
   --ink:#202522;--muted:#6a716c;--paper:#f5f0e6;--card:#fffdf8;--line:#d8cfbf;
@@ -120,7 +120,7 @@ label{display:block;font-size:.76rem;font-weight:800;letter-spacing:.04em;text-t
     <button class="nav-btn" data-tab="life">Exercise &amp; Activities</button>
     <button class="nav-btn" data-tab="dreams">Dreams</button>
   </nav>
-  <div class="header-actions"><div class="header-date"><label for="globalDate">Guide date</label><input id="globalDate" type="date"/></div><button class="nav-btn header-tab-btn" data-tab="edit">Edit Lists</button><button class="nav-btn header-tab-btn" data-tab="data">Save &amp; Export</button><button class="icon-btn" id="printBtn">Print</button></div>
+  <div class="header-actions"><div class="header-date"><label for="globalDate">Guide date</label><input id="globalDate" type="date"/></div><button class="nav-btn header-tab-btn" data-tab="data">Save &amp; Export</button><button class="icon-btn" id="printBtn">Print</button></div>
 </div></header>
 <main id="main">
 <section class="hero"><p class="kicker">Order the day</p><h1>Robert's Life Guide</h1><p>Keep the foundations, apportion the working hours, and choose the activities that deserve the day.</p><div class="save-line" id="saveStatus">Saved in this browser</div></section>
@@ -282,7 +282,7 @@ label{display:block;font-size:.76rem;font-weight:800;letter-spacing:.04em;text-t
   <div class="card"><h2>Source record</h2><p>Trello remains the live task and appointment record. Enduring business work and recreation libraries from Trello are available here as selectable activities; ordinary errands and changing tasks remain in Trello.</p></div>
 </section>
 </main>
-<footer><div class="footer-line"><span>Life Guide v2.20 · self-contained browser file</span><span>Autosaves locally · export JSON for backup</span></div></footer>
+<footer><div class="footer-line"><span>Life Guide v2.21 · self-contained browser file</span><span>Autosaves locally · export JSON for backup</span></div></footer>
 <div class="toast" id="toast"></div>
 <script>
 const STORAGE_KEY='robert-life-guide-v1';
@@ -427,7 +427,7 @@ const ACTIVITY_LEVELS=[
  {id:'recreation',name:'Recreation',description:'Choose a game, book, audiobook, film or series for the day.',groups:[
    {label:'Games and tabletop',items:['Switch games','Board game — Brass','Improv RPG','Divinity: Original Sin II','Arcade','Board or card games']},
    {label:'Books and audiobooks',items:['Lovecraft','Fantasy or science-fiction audiobook','Jonathan Strange','The Lord of the Rings — extended film, audiobook or music','Home library or other audiobook']},
-   {label:'Films and series',items:['Angel','Sherlock','Mr Church','Classic adventure film — such as Indiana Jones','Total Recall','Demolition Man','Sphere','Gattaca','Séance','Blackadder','Film or live entertainment']}
+   {label:'Films and series',items:['Angel','Sherlock','Mr Church','Classic adventure film — such as Indiana Jones','Total Recall','Demolition Man','Sphere','Gattaca','Séance','Blackadder','The Last Kingdom','The Sopranos','Film or live entertainment']}
  ]},
  {id:'alfie-family',name:'Alfie and family',description:'Choose one shared ritual, play activity or family outing.',groups:[
    {label:'At home together',items:['Saturday morning family ritual — cuddles, songs, books and floor play','Read and sing to Alfie','Read nursery rhymes or Lovecraft to Alfie','Talk to Alfie, make faces and copy his sounds','Music with Dad — singing, guitar and family favourites','Dance together','Tummy time']},
@@ -495,7 +495,7 @@ function ensureTrelloDuty(log){
 }
 function defaultLifeLog(lib){return {activities:Object.fromEntries(activityLevels(lib).map(x=>[x.id,{choice:'',done:false}])),movement:Object.fromEntries(MOVEMENT_REQUIREMENTS.map(r=>[r.id,{choice:r.choices[0],done:false}])),notes:''}}
 function defaultVocalLog(){return {practice:Object.fromEntries(VOCAL_PRACTICE.map(x=>[x.id,false])),support:Object.fromEntries(VOCAL_SUPPORT.map(x=>[x.id,false])),notes:''}}
-function defaultState(){return {version:20,dailyHours:6,season:clone(DEFAULT_SEASON),allocation:defaultAllocation(),outcomes:clone(OUTCOME_DEFAULTS),dreams:clone(DREAM_DEFAULTS),practices:clone(DEFAULT_PRACTICES),library:clone(DEFAULT_LIBRARY),dailyLogs:{},writingLogs:{},lifeLogs:{},vocalLogs:{}}}
+function defaultState(){return {version:21,dailyHours:6,season:clone(DEFAULT_SEASON),allocation:defaultAllocation(),outcomes:clone(OUTCOME_DEFAULTS),dreams:clone(DREAM_DEFAULTS),practices:clone(DEFAULT_PRACTICES),library:clone(DEFAULT_LIBRARY),dailyLogs:{},writingLogs:{},lifeLogs:{},vocalLogs:{}}}
 function mergeLibrary(raw,oldVersion=0){
  const out=clone(DEFAULT_LIBRARY);
  if(!raw||typeof raw!=='object')return out;
@@ -575,7 +575,7 @@ function mergeState(raw){const d=defaultState();if(!raw||typeof raw!=='object')r
  const vocalLogs={};Object.entries(raw.vocalLogs||{}).forEach(([date,old])=>{const fresh=defaultVocalLog();if(old&&typeof old==='object'){VOCAL_PRACTICE.forEach(x=>fresh.practice[x.id]=!!old.practice?.[x.id]);VOCAL_SUPPORT.forEach(x=>fresh.support[x.id]=!!old.support?.[x.id]);fresh.notes=String(old.notes||'')}vocalLogs[date]=fresh});
  const outcomes=clone(OUTCOME_DEFAULTS);WORK_DOMAINS.forEach(domain=>{const source=raw.outcomes&&raw.outcomes[domain];if(source&&typeof source==='object')outcomes[domain]={...outcomes[domain],...source,progress:Math.max(0,Math.min(100,Number(source.progress??outcomes[domain].progress)||0))}});
  const dreams=mergeDreams(raw.dreams);const season={...clone(DEFAULT_SEASON),...(raw.season&&typeof raw.season==='object'?raw.season:{})};season.hours=Math.max(0,Number(season.hours)||DEFAULT_SEASON.hours);
- return {...d,version:20,dailyHours:Number(raw.dailyHours??((Number(raw.weeklyHours)||30)/5))||6,season,allocation:WORK_DOMAINS.map(domain=>({domain,pct:Number(((raw.allocation||[]).find(a=>a.domain===domain)||{}).pct??PRESETS.music[domain])||0})),outcomes,dreams,practices,library,dailyLogs,writingLogs,lifeLogs,vocalLogs}
+ return {...d,version:21,dailyHours:Number(raw.dailyHours??((Number(raw.weeklyHours)||30)/5))||6,season,allocation:WORK_DOMAINS.map(domain=>({domain,pct:Number(((raw.allocation||[]).find(a=>a.domain===domain)||{}).pct??PRESETS.music[domain])||0})),outcomes,dreams,practices,library,dailyLogs,writingLogs,lifeLogs,vocalLogs}
 }
 function loadState(){try{return mergeState(JSON.parse(localStorage.getItem(STORAGE_KEY)))}catch(e){return defaultState()}}
 let state=loadState(),activeDate=todayISO(),saveTimer;
