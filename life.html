@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="theme-color" content="#17231f"/>
-<title>Robert's Life Guide v2.18</title>
+<title>Robert's Life Guide v2.20</title>
 <style>
 :root{
   --ink:#202522;--muted:#6a716c;--paper:#f5f0e6;--card:#fffdf8;--line:#d8cfbf;
@@ -48,6 +48,22 @@ label{display:block;font-size:.76rem;font-weight:800;letter-spacing:.04em;text-t
 .vocal-check-text{font-weight:700;font-size:.9rem}.vocal-check-note{display:block;color:var(--muted);font-size:.78rem;font-weight:400;margin-top:3px}
 .vocal-score{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px}
 .vocal-score .foundation-tag{background:#ece4ef;color:#5a4662}
+.vocal-support-reference{margin-top:18px}
+.vocal-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vocal-support-card{border:1px solid #d9cfda;border-radius:13px;background:#fffefa;padding:14px}
+.vocal-support-card h3{margin:0 0 9px;font-size:1.02rem;color:#51445a}
+.vocal-support-card p{margin:0;color:#404742;font-size:.9rem}
+.vocal-support-card ul{margin:0;padding-left:20px;color:#404742;font-size:.9rem}
+.vocal-support-card li+li{margin-top:6px}
+.vocal-support-card .substeps{margin-top:7px;padding-left:20px;color:var(--muted);font-size:.86rem}
+.vocal-support-card.wide{grid-column:1/-1}
+.vocal-range-scale{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:center;margin-top:10px;padding:12px;border-radius:11px;background:#f4eef5;border:1px solid #ded2e1}
+.vocal-range-scale span:not(.range-arrow){display:grid;gap:2px}
+.vocal-range-scale span:last-child{text-align:right}
+.vocal-range-scale small{color:var(--muted)}
+.range-arrow{font-size:1.5rem;color:var(--purple);font-weight:800}
+@media(max-width:760px){.vocal-support-grid{grid-template-columns:1fr}.vocal-support-card.wide{grid-column:auto}}
+
 .vocal-notes-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:18px;margin-top:18px}
 .vocal-note-box{border:1px solid var(--line);border-radius:13px;background:#fffefa;padding:15px}
 .vocal-note-box h3{margin:0 0 9px}.vocal-note-box ul{margin:0;padding-left:20px;color:var(--muted)}
@@ -141,9 +157,92 @@ label{display:block;font-size:.76rem;font-weight:800;letter-spacing:.04em;text-t
   <section class="card vocal-reference">
     <div class="section-head compact"><div><p class="kicker">Technique reference</p><h2>Current Cumulative Vocal Technique</h2><p>Use this as the current organising reference for support and practice. It is not itself a completion checklist.</p></div></div>
     <div class="vocal-technique-grid">
-      <article class="vocal-phase"><h3>Inhale</h3><ul><li><strong>Traps open to Adam’s Apple</strong><span class="vocal-check-note"></span></li><li><strong>Shock inhale</strong><ol class="substeps"><li>Obliques: ping-pong balls at the obliques.</li><li>Chest: hands either side of the sternum.</li></ol></li></ul></article>
-      <article class="vocal-phase"><h3>Between</h3><ul><li><strong>Clench the perineum and pull in 1AI</strong><span class="vocal-check-note">Continue maintaining the traps open to the Adam’s Apple. </span></li></ul></article>
-      <article class="vocal-phase"><h3>Exhale</h3><ul><li><strong>Resonate the cheekbones.</strong><span class="vocal-check-note">Maintain the traps open to the Adam’s Apple, the perineum clenched, and 1AI pulled in.</span></li></ul></article>
+      <article class="vocal-phase">
+        <h3>Inhale</h3>
+        <ul>
+          <li><strong>Traps open to Adam’s Apple</strong><span class="vocal-check-note">Maintained during exhale.</span></li>
+          <li><strong>Concurrent</strong>
+            <ol class="substeps">
+              <li>Shock inhale to ping-pong balls at the obliques.</li>
+              <li>Stretch the perineum to the floor until the lower back straightens, directed to the ping-pong balls at the obliques.</li>
+            </ol>
+          </li>
+          <li><strong>Then — chest:</strong> hands either side of the sternum.</li>
+        </ul>
+      </article>
+      <article class="vocal-phase">
+        <h3>Between</h3>
+        <ul><li><strong>Clench the perineum and press the obliques to the floor</strong><span class="vocal-check-note">Maintained during exhale.</span></li></ul>
+      </article>
+      <article class="vocal-phase">
+        <h3>Exhale</h3>
+        <ul><li><strong>Resonate the cheekbones.</strong></li></ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="card vocal-support-reference">
+    <div class="section-head compact"><div><p class="kicker">Use as necessary</p><h2>Support Techniques</h2><p>Optional coordinations and interpretive tools to apply where the phrase, range or sound requires them.</p></div></div>
+    <div class="vocal-support-grid">
+      <article class="vocal-support-card">
+        <h3>Release and emotion</h3>
+        <ul>
+          <li><strong>Relax:</strong> rear tongue.</li>
+          <li><strong>Emotion / compressor:</strong>
+            <ol class="substeps">
+              <li>Bliss / feel the truth of it; keep the emotion moving even on held notes.</li>
+              <li>Method singing: take on the character and mood; play a part “like a kitty cat.”</li>
+            </ol>
+          </li>
+        </ul>
+      </article>
+      <article class="vocal-support-card">
+        <h3>Breath</h3>
+        <ul>
+          <li><strong>Legato:</strong> sing the line on one breath rather than treating every note individually; feel the whole smooth line.</li>
+          <li><strong>Breathiness:</strong> use a “haa” feeling.</li>
+        </ul>
+      </article>
+      <article class="vocal-support-card">
+        <h3>Vowels and onset</h3>
+        <ul>
+          <li>Move quickly from the consonant to the vowel; train each vowel and train on “ah.”</li>
+          <li>Use almost non-existent diphthongs and modify or darken vowels as needed.</li>
+          <li>Separate plosives during training—for example, K (quick) — ids—then join them.</li>
+          <li><strong>Caution:</strong> avoid guttural or weak starts; the voice begins exactly with the breath.</li>
+        </ul>
+      </article>
+      <article class="vocal-support-card">
+        <h3>Vibrato</h3>
+        <ul>
+          <li>Gentle pitch variation, not tremolo.</li>
+          <li><strong>Submersion, as needed:</strong> submerge the sternum for vibrato.</li>
+        </ul>
+      </article>
+      <article class="vocal-support-card">
+        <h3>Gesture and crescendo</h3>
+        <ul>
+          <li><strong>Gesture:</strong> gesture the idea each phrase or every other phrase, including through the eyes.</li>
+          <li><strong>Crescendo:</strong> bring more power to the top notes.</li>
+        </ul>
+      </article>
+      <article class="vocal-support-card">
+        <h3>Tension and naturalness</h3>
+        <ul>
+          <li>No bodily or mental tension, especially around high A and above.</li>
+          <li>Retain the capacity to turn the head loosely and walk comfortably.</li>
+          <li>Keep it natural and use the mirror to check.</li>
+        </ul>
+      </article>
+      <article class="vocal-support-card wide">
+        <h3>Baggage across the range</h3>
+        <p>Allow the sound and effort to change appropriately as the pitch rises.</p>
+        <div class="vocal-range-scale">
+          <span><strong>Low notes</strong><small>Light volume; gentle.</small></span>
+          <span class="range-arrow">→</span>
+          <span><strong>Top notes</strong><small>Let everything go.</small></span>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -183,7 +282,7 @@ label{display:block;font-size:.76rem;font-weight:800;letter-spacing:.04em;text-t
   <div class="card"><h2>Source record</h2><p>Trello remains the live task and appointment record. Enduring business work and recreation libraries from Trello are available here as selectable activities; ordinary errands and changing tasks remain in Trello.</p></div>
 </section>
 </main>
-<footer><div class="footer-line"><span>Life Guide v2.18 · self-contained browser file</span><span>Autosaves locally · export JSON for backup</span></div></footer>
+<footer><div class="footer-line"><span>Life Guide v2.20 · self-contained browser file</span><span>Autosaves locally · export JSON for backup</span></div></footer>
 <div class="toast" id="toast"></div>
 <script>
 const STORAGE_KEY='robert-life-guide-v1';
