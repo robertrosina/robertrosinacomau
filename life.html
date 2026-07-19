@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en-AU">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="theme-color" content="#17231f"/>
-<title>Robert's Life Guide v2.21</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#2b2d2f" name="theme-color"/>
+<title>Robert's Life Planner v2.40</title>
 <style>
 :root{
   --ink:#202522;--muted:#6a716c;--paper:#f5f0e6;--card:#fffdf8;--line:#d8cfbf;
@@ -69,7 +70,7 @@ label{display:block;font-size:.76rem;font-weight:800;letter-spacing:.04em;text-t
 .vocal-note-box h3{margin:0 0 9px}.vocal-note-box ul{margin:0;padding-left:20px;color:var(--muted)}
 .vocal-affirmation{font-family:Georgia,"Times New Roman",serif;font-size:1.08rem;line-height:1.55;color:#3d4540;border-left:4px solid var(--gold);padding:4px 0 4px 15px;margin:0}
 @media(max-width:950px){.vocal-technique-grid,.vocal-columns,.vocal-notes-grid{grid-template-columns:1fr}}
-@media print{header,.header-actions,.btn,.timer-button,.season-controls{display:none!important}#foundations,#work,#vocal,#life,#dreams{display:block!important}#edit,#data{display:none!important}.card{box-shadow:none;break-inside:avoid}body{background:#fff}main{max-width:none}}
+@media print{header,.header-actions,.btn,.timer-button,.season-controls{display:none!important}#foundations,#work,#vocal,#exercise,#activities,#dreams{display:block!important}#edit,#data{display:none!important}.card{box-shadow:none;break-inside:avoid}body{background:#fff}main{max-width:none}}
 
 .work-context-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-top:4px}
 .work-context-column{min-width:0;border:1px solid var(--line);border-radius:15px;padding:13px;background:#fffefa}
@@ -107,182 +108,738 @@ label{display:block;font-size:.76rem;font-weight:800;letter-spacing:.04em;text-t
 @media(max-width:980px){.dream-grid{grid-template-columns:1fr}.dream-fields{grid-template-columns:1fr}.dream-fields .wide{grid-column:auto}}
 
 @media(max-width:900px){.orientation-list{grid-template-columns:1fr}}
+
+
+/* v2.23 — refined life orientation */
+:root{
+  --ink:#e7ece8;--muted:#9da8a2;--paper:#0d1210;--card:#171e1a;--line:#34403a;
+  --forest:#101714;--forest-2:#1b2923;--gold:#c99b4a;--gold-2:#e0bc75;
+  --red:#d98278;--green:#78ad8e;--blue:#83a9c7;--purple:#a98cbc;
+  --shadow:0 16px 48px rgba(0,0,0,.32)
+}
+html{color-scheme:dark}
+body{background:linear-gradient(180deg,#090d0b 0,#101713 260px,#0d1210 100%);color:var(--ink)}
+header{background:rgba(10,15,13,.96);border-bottom-color:rgba(255,255,255,.10)}
+main{padding-top:22px}.hero{margin:4px 0 20px}.hero h1{color:#f1f4f2}
+.global-season,.foundation-summary-card{display:none!important}
+.card{background:rgba(23,30,26,.98);border-color:var(--line);box-shadow:var(--shadow)}
+.card h2,.card h3,.foundation-text,.vocal-check-text,.work-context-head h3{color:var(--ink)}
+.section-head p,.orientation-note,.row-label,.selection-note{color:var(--muted)}
+.btn{background:#202923;color:var(--ink);border-color:#425047}.btn:hover{box-shadow:0 5px 18px rgba(0,0,0,.28)}
+.btn.primary{background:#294536;border-color:#426a55;color:#f4f8f5}.btn.danger{color:#e59890;border-color:#704742}
+label{color:#aeb8b2}
+input,select,textarea{background:#101613;color:var(--ink);border-color:#415047}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,155,74,.18)}
+.progress{background:#2a342f}.progress span{background:var(--green)}
+.foundation-page-grid{margin-top:0}
+.foundation-main{grid-template-columns:24px minmax(0,1fr) 32px}
+.foundation-item,.orientation-item,.work-activity-row,.support-row,.movement-row,.activity-level,.editor-row,.data-box,
+.vocal-phase,.vocal-check,.vocal-support-card,.vocal-note-box,.work-context-column,.dream-section-details,.dream-details{
+  background:#121915;border-color:#34413a;color:var(--ink)
+}
+.foundation-info-toggle{background:#26312b;color:#cbd3ce}
+.foundation-detail{border-top-color:#34413a;color:var(--muted)}
+.foundation-tier-heading{border-bottom-color:#34413a}.foundation-tier-heading h3{color:#cbd4cf}.foundation-tier-heading span{color:var(--muted)}
+.orientation-item summary{color:var(--ink)}.orientation-item p,.orientation-item ul{color:var(--muted)}.orientation-item blockquote{color:#d9e0dc}
+.allocation-table{border-color:var(--line)}.allocation-header{background:#202a25;color:#b7c1bb}.allocation-row{border-top-color:#34413a}
+.preset,.timer-button{background:#202923;color:#dce3df;border-color:#415047}.preset:hover,.timer-button:hover{border-color:#69786f}
+.allocation-summary{background:linear-gradient(145deg,#122019,#1b2d25)}.donut:after{background:#1b2923}
+.outcome-details{background:linear-gradient(135deg,#19211d,#131915);border-color:#34413a}.outcome-target{background:rgba(255,255,255,.035)}
+.outcome-proof strong,.locked-value,.day-done{color:#b7c1bb}.domain-time-box,.timer-display,.writing-tracker-inactive,.locked-value,.time-requirement,.day-done,.notice{background:#1b241f;border-color:#34413a;color:var(--ink)}
+.domain-time-box.good{background:#18271f}.domain-time-box.warn{background:#2a1e1c}.total-message.good{color:#d9f3e1}.total-message.warn{color:#ffd9d0}
+.row-remove{color:#dc8c83}.timer-button.running{background:#315941;border-color:#48775d;color:#fff}
+.work-context-column.alfie-column{background:linear-gradient(180deg,#17261e,#121915);border-color:#355744}.work-context-column.free-column{background:linear-gradient(180deg,#251d19,#121915);border-color:#5a4032}
+.alfie-column .work-context-badge{background:#22392c;color:#a7d1b4}.free-column .work-context-badge{background:#3a2a21;color:#d9b099}.work-context-empty{background:#101613;border-color:#46534c}
+.vocal-reference{background:linear-gradient(135deg,#241d29,#171e1a);border-color:#5b4864}.vocal-phase h3,.vocal-support-card h3{color:#d4c2df}
+.vocal-phase ul,.vocal-support-card p,.vocal-support-card ul{color:var(--ink)}.vocal-score .foundation-tag{background:#33283a;color:#d5c2df}
+.vocal-range-scale{background:#211a25;border-color:#493b50}.vocal-affirmation{color:#dbe2de}
+.dream-card-head{background:linear-gradient(135deg,rgba(201,155,74,.15),rgba(255,255,255,.025));border-bottom-color:var(--line)}
+.dream-details .dream-detail-body{color:#d8dfdb}.dream-icon{background:#101714}.dream-status-dot{background:var(--gold)}
+footer{color:var(--muted)}
+@media print{
+  html{color-scheme:light}body{background:#fff!important;color:#202522!important}.card,.foundation-item,.orientation-item,.work-activity-row,.support-row,.movement-row,.activity-level,.vocal-phase,.vocal-check,.vocal-support-card,.vocal-note-box,.work-context-column,.dream-section-details,.dream-details{background:#fff!important;color:#202522!important;border-color:#d8cfbf!important}.card h2,.card h3,.foundation-text{color:#202522!important}
+}
+
+
+/* v2.25 — softened charcoal-and-parchment palette */
+@media screen {
+  :root{
+    --ink:#262c28;
+    --muted:#626b65;
+    --paper:#5c645f;
+    --card:#f4f2ec;
+    --line:#c9cec9;
+    --forest:#315846;
+    --forest-2:#3f6955;
+    --gold:#9a7027;
+    --gold-2:#b88a3c;
+    --red:#a44f49;
+    --green:#4e7a61;
+    --blue:#4d7899;
+    --purple:#795d8a;
+    --shadow:0 14px 34px rgba(25,31,28,.18)
+  }
+  html{color-scheme:light}
+  body{
+    background:linear-gradient(180deg,#565e59 0,#68716b 240px,#606863 100%);
+    color:var(--ink)
+  }
+  header{
+    background:rgba(43,50,46,.97);
+    border-bottom-color:rgba(255,255,255,.16)
+  }
+  .hero h1{color:#fff}
+  .brand-sub,.header-date label{color:#dde2df}
+  .nav-btn{color:#edf0ee}
+  .nav-btn:hover,.nav-btn.active{background:rgba(255,255,255,.13);color:#fff}
+  .header-actions .header-tab-btn,.icon-btn{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);color:#fff}
+  .header-date input{background:#f4f2ec;border-color:#d8ddd9;color:#26302a;color-scheme:light}
+
+  .card{
+    background:#f4f2ec;
+    border-color:#c9cec9;
+    box-shadow:var(--shadow)
+  }
+  .card h2,.card h3,.foundation-text,.vocal-check-text,.work-context-head h3,
+  .orientation-item summary,.dream-section-details>summary,.dream-details summary{
+    color:#262c28
+  }
+  .section-head p,.orientation-item p,.orientation-item ul,.foundation-detail,
+  .vocal-check-note,.vocal-support-card p,.vocal-support-card .substeps,
+  .dream-card-head p,.editor-help,.data-box p,.work-context-head p,
+  .row-label,.selection-note,.activity-level p,.movement-copy p{
+    color:#626b65
+  }
+  label{color:#4e5751}
+  input,select,textarea{
+    background:#fffdfa;
+    color:#262c28;
+    border-color:#bdc4bf
+  }
+  input::placeholder,textarea::placeholder{color:#8a928d}
+  input:focus,select:focus,textarea:focus{
+    border-color:#9a7027;
+    box-shadow:0 0 0 3px rgba(154,112,39,.15)
+  }
+
+  .foundation-item,.orientation-item,.work-activity-row,.support-row,.movement-row,
+  .activity-level,.editor-row,.data-box,.vocal-phase,.vocal-check,.vocal-support-card,
+  .vocal-note-box,.work-context-column,.dream-section-details,.dream-details,
+  .outcome-details,.outcome-target,.domain-time-box,.timer-display,.writing-tracker-inactive,
+  .locked-value,.time-requirement,.day-done,.notice{
+    background:#ebe9e2;
+    border-color:#c9cec9;
+    color:#262c28
+  }
+  .foundation-item:hover,.orientation-item:hover,.work-activity-row:hover,.support-row:hover,
+  .movement-row:hover,.activity-level:hover{border-color:#969f99}
+  .foundation-info-toggle{background:#d9ddd8;color:#47514b}
+  .foundation-detail{border-top-color:#c9cec9}
+  .foundation-tier-heading,.foundation-time-heading{border-bottom-color:#c9cec9}
+  .foundation-tier-heading h3{color:#39423d}
+  .orientation-item blockquote{color:#3c4741}
+
+  .btn,.preset,.timer-button{
+    background:#e1e4df;
+    color:#303833;
+    border-color:#b9c0bb
+  }
+  .btn:hover,.preset:hover,.timer-button:hover{background:#d5d9d4;border-color:#8e9791}
+  .btn.primary{background:#315846;border-color:#315846;color:#fff}
+  .btn.danger{color:#9b403a;border-color:#c99d99;background:#f3e7e5}
+  .timer-button.running{background:#3e7054;border-color:#3e7054;color:#fff}
+
+  .allocation-table{border-color:#c9cec9}
+  .allocation-header{background:#dde1dc;color:#465049}
+  .allocation-row{border-top-color:#c9cec9}
+  .allocation-hours{color:#315846}
+  .allocation-summary{
+    background:linear-gradient(145deg,#315846,#426b57);
+    border:1px solid #294d3d;
+    color:#fff
+  }
+  .donut:after{background:#3b624f}
+  .workload-row{color:#e7eee9}
+  .total-message{background:rgba(255,255,255,.10)}
+  .total-message.good{background:rgba(22,76,49,.35);color:#f1fff6}
+  .total-message.warn{background:rgba(116,56,43,.34);color:#fff1ed}
+
+  .work-context-column.alfie-column{background:#e6eee8;border-color:#a9bbae}
+  .work-context-column.free-column{background:#eee9e4;border-color:#c2b5aa}
+  .alfie-column .work-context-badge{background:#cfe1d4;color:#315844}
+  .free-column .work-context-badge{background:#e1d4ca;color:#765746}
+  .work-context-empty{background:#f7f5ef;border-color:#c9cec9;color:#69716c}
+
+  .vocal-reference{background:#ece6f0;border-color:#c4b2cd}
+  .vocal-phase,.vocal-support-card,.vocal-note-box{background:#f3eef5}
+  .vocal-phase h3,.vocal-support-card h3{color:#684d75}
+  .vocal-range-scale{background:#e8dfea;border-color:#c4b2cd}
+  .vocal-affirmation{color:#313934}
+
+  .dream-card-head{background:linear-gradient(135deg,#eee4d2,#f4f2ec);border-bottom-color:#c9cec9}
+  .dream-details .dream-detail-body{color:#414943}
+  .dream-icon{background:#315846;color:#f3d48e}
+  .dream-section-details{background:#f4f2ec}
+
+  .progress{background:#d8ddd8}
+  .notice{border-left-color:#9a7027}
+  .toast{background:#303833;color:#fff;border:1px solid #56615a}
+  footer{color:#eef1ef}
+  .footer-line{border-top-color:rgba(255,255,255,.25)}
+}
+
+
+/* v2.27 — simplified cultural, movement and study choices */
+@media screen {
+  :root{
+    --ink:#252a27;
+    --muted:#59625c;
+    --paper:#777e79;
+    --card:#d8d5cc;
+    --line:#afb5b0;
+    --shadow:0 12px 30px rgba(25,31,28,.16)
+  }
+  body{
+    background:linear-gradient(180deg,#6f7772 0,#858c87 240px,#79817c 100%);
+  }
+  .card{background:#d8d5cc;border-color:#aeb5af}
+  .foundation-item,.orientation-item,.work-activity-row,.support-row,.movement-row,
+  .activity-level,.editor-row,.data-box,.vocal-phase,.vocal-check,.vocal-support-card,
+  .vocal-note-box,.work-context-column,.dream-section-details,.dream-details,
+  .outcome-details,.outcome-target,.domain-time-box,.timer-display,.writing-tracker-inactive,
+  .locked-value,.time-requirement,.day-done,.notice{
+    background:#c9c7bf;
+    border-color:#a8afa9;
+  }
+  input,select,textarea{background:#e5e2da;color:#232925;border-color:#9da59f}
+  .allocation-header{background:#c2c5c0;color:#3f4842}
+  .btn,.preset,.timer-button{background:#c6cac5;border-color:#9fa7a1;color:#29312c}
+  .work-context-column.alfie-column{background:#cbd6ce;border-color:#9cab9f}
+  .work-context-column.free-column{background:#d3ccc6;border-color:#b0a398}
+  .work-context-empty{background:#d7d4cb;border-color:#a8afa9}
+  .vocal-reference{background:#d2c9d6;border-color:#ab9bb3}
+  .vocal-phase,.vocal-support-card,.vocal-note-box{background:#d8d0dc}
+  .vocal-range-scale{background:#c9bdce;border-color:#aa9ab2}
+  .dream-card-head{background:linear-gradient(135deg,#cfc4b2,#d8d5cc)}
+  .dream-section-details{background:#d8d5cc}
+
+  /* Duration goals need stronger contrast than ordinary fields. */
+  .duration-wrap select,
+  select[data-work-duration],
+  select[data-support-duration]{
+    background:#34443c!important;
+    color:#ffffff!important;
+    border-color:#566a60!important;
+    color-scheme:dark;
+    font-weight:800;
+  }
+  .duration-wrap select option,
+  select[data-work-duration] option,
+  select[data-support-duration] option{
+    background:#34443c;
+    color:#ffffff;
+  }
+}
+
+
+
+/* v2.28 — balanced dark theme: soft graphite surfaces, warm text, restrained accents */
+@media screen {
+  :root{
+    --ink:#edf1ed;
+    --muted:#b8c1ba;
+    --paper:#2b2d2f;
+    --card:#373a3d;
+    --line:#555b5f;
+    --forest:#293d34;
+    --forest-2:#355044;
+    --gold:#c4a66a;
+    --gold-2:#d2b77d;
+    --red:#d08a82;
+    --green:#82ad92;
+    --blue:#8faec4;
+    --purple:#b09abb;
+    --shadow:0 12px 30px rgba(0,0,0,.20)
+  }
+  html{color-scheme:dark}
+  body{
+    background:linear-gradient(180deg,#282a2c 0,#2e3033 240px,#2a2c2e 100%);
+    color:var(--ink)
+  }
+  header{
+    background:rgba(34,36,38,.97);
+    border-bottom-color:#4b5054
+  }
+  .brand-title,.hero h1{color:#f5f7f5}
+  .brand-sub,.header-date label{color:#c4ccc6}
+  .nav-btn{color:#dde4df}
+  .nav-btn:hover,.nav-btn.active{background:#414549;color:#fff}
+  .nav-btn.active{box-shadow:inset 0 -2px var(--gold-2)}
+  .header-actions{border-left-color:#4b5054}
+  .header-actions .header-tab-btn,.icon-btn{
+    background:#34373a;
+    border-color:#595f63;
+    color:#e7ece8
+  }
+  .header-date input{
+    background:#2d3033;
+    border-color:#5d6468;
+    color:#f2f5f2;
+    color-scheme:dark
+  }
+
+  .card{
+    background:#373a3d;
+    border-color:#555b5f;
+    box-shadow:var(--shadow)
+  }
+  .card h2,.card h3,.foundation-text,.vocal-check-text,.work-context-head h3,
+  .orientation-item summary,.dream-section-details>summary,.dream-details summary{
+    color:#f0f3f0
+  }
+  .section-head p,.orientation-item p,.orientation-item ul,.foundation-detail,
+  .vocal-check-note,.vocal-support-card p,.vocal-support-card .substeps,
+  .dream-card-head p,.editor-help,.data-box p,.work-context-head p,
+  .row-label,.selection-note,.activity-level p,.movement-copy p,
+  .dream-details .dream-detail-body{
+    color:#bac3bc
+  }
+  label{color:#d0d7d2}
+  a{color:#9fc0d6}
+
+  input,select,textarea{
+    background:#2d3033;
+    color:#f1f4f1;
+    border-color:#60676c;
+    color-scheme:dark
+  }
+  input::placeholder,textarea::placeholder{color:#929d96}
+  input:focus,select:focus,textarea:focus{
+    border-color:#b89b62;
+    box-shadow:0 0 0 3px rgba(196,166,106,.18)
+  }
+  select option{background:#2d3033;color:#f1f4f1}
+
+  .foundation-item,.orientation-item,.work-activity-row,.support-row,.movement-row,
+  .activity-level,.editor-row,.data-box,.vocal-phase,.vocal-check,.vocal-support-card,
+  .vocal-note-box,.work-context-column,.dream-section-details,.dream-details,
+  .outcome-details,.outcome-target,.domain-time-box,.timer-display,.writing-tracker-inactive,
+  .locked-value,.time-requirement,.day-done,.notice{
+    background:#414549;
+    border-color:#5d6468;
+    color:#edf1ed
+  }
+  .foundation-item:hover,.orientation-item:hover,.work-activity-row:hover,.support-row:hover,
+  .movement-row:hover,.activity-level:hover{border-color:#7a8287}
+  .foundation-info-toggle{background:#4c5155;color:#e1e7e2}
+  .foundation-detail{border-top-color:#5d6468}
+  .foundation-tier-heading,.foundation-time-heading{border-bottom-color:#5d6468}
+  .foundation-tier-heading h3{color:#e1e6e2}
+  .orientation-item blockquote{color:#e3e8e4}
+
+  .btn,.preset,.timer-button{
+    background:#484c50;
+    color:#edf1ed;
+    border-color:#676e73
+  }
+  .btn:hover,.preset:hover,.timer-button:hover{background:#50555a;border-color:#7d858a}
+  .btn.primary{background:#456b57;border-color:#5b816c;color:#fff}
+  .btn.danger{color:#f1b3ad;border-color:#7d5450;background:#493633}
+  .timer-button.running{background:#4f785f;border-color:#6d947a;color:#fff}
+
+  .allocation-table{border-color:#5d6468}
+  .allocation-header{background:#484c50;color:#dbe2dc}
+  .allocation-row{border-top-color:#5d6468}
+  .allocation-hours{color:#a7cbb3}
+  .allocation-summary{
+    background:linear-gradient(145deg,#334c40,#3f5f4f);
+    border-color:#5d7869;
+    color:#fff
+  }
+  .donut:after{background:#3b5548}
+  .workload-row{color:#e5ebe6}
+  .total-message{background:rgba(255,255,255,.08)}
+  .total-message.good{background:rgba(74,123,91,.33);color:#effbf3}
+  .total-message.warn{background:rgba(139,81,67,.34);color:#fff0ec}
+
+  .work-context-column.alfie-column{background:#3f4943;border-color:#606c65}
+  .work-context-column.free-column{background:#494542;border-color:#68615c}
+  .alfie-column .work-context-badge{background:#4d6757;color:#edf6f0}
+  .free-column .work-context-badge{background:#66584e;color:#f5eee9}
+  .work-context-empty{background:#383c3f;border-color:#5d6468;color:#aeb8b1}
+
+  .vocal-reference{background:#403d43;border-color:#655d6b}
+  .vocal-phase,.vocal-support-card,.vocal-note-box{background:#48434c;border-color:#675f6d}
+  .vocal-phase h3,.vocal-support-card h3{color:#d6c1df}
+  .vocal-range-scale{background:#3c3840;border-color:#655d6b}
+  .vocal-affirmation{color:#eef1ee}
+
+  .dream-card-head{background:linear-gradient(135deg,#4a4540,#3f4245);border-bottom-color:#5d625d}
+  .dream-icon{background:#42604f;color:#e8cf96}
+  .dream-section-details{background:#373a3d}
+  .dream-status-dot{background:var(--gold)}
+
+  .progress{background:#50555a}
+  .notice{border-left-color:#c4a66a}
+  .toast{background:#252729;color:#f1f4f1;border-color:#555b5f}
+  footer{color:#b7c0ba}
+  .footer-line{border-top-color:#4f5559}
+
+  .duration-wrap select,
+  select[data-work-duration],
+  select[data-support-duration]{
+    background:#292c2f!important;
+    color:#ffffff!important;
+    border-color:#6b7378!important;
+    color-scheme:dark;
+    font-weight:800
+  }
+  .duration-wrap select option,
+  select[data-work-duration] option,
+  select[data-support-duration] option{
+    background:#292c2f;
+    color:#ffffff
+  }
+}
+
+/* v2.30 — Work simplified; Exercise and Activities separated */
+.combined-work-block{display:grid;gap:10px}
+.combined-work-head{display:flex;justify-content:flex-end;color:var(--muted);font-size:.72rem;font-weight:700;letter-spacing:.02em}
+.combined-work-list{display:grid;gap:10px}
+.combined-work-block .work-context-actions{margin-top:2px}
+.work-activity-row.music-row.no-project{grid-template-columns:28px minmax(185px,1.15fr) minmax(150px,.85fr) minmax(190px,1.2fr) 130px minmax(190px,.85fr) 34px}
+
+/* Dreams v2.31: summary first, individual records collapsed */
+.dream-overview-card{margin-top:18px}
+.dream-overview-stats{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.dream-overview-stats>div{min-width:90px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.035)}
+.dream-overview-stats strong{display:block;font-family:Georgia,"Times New Roman",serif;font-size:1.35rem;line-height:1}
+.dream-overview-stats span{display:block;margin-top:4px;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;font-weight:800}
+.dream-overview-stats p{margin:0 0 0 auto;color:var(--muted);font-size:.82rem}
+.dream-overview-list{display:grid;border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.dream-overview-row{display:grid;grid-template-columns:minmax(250px,1.4fr) 150px 135px minmax(220px,1fr);gap:14px;align-items:center;padding:12px 14px;background:rgba(255,255,255,.025)}
+.dream-overview-row+.dream-overview-row{border-top:1px solid var(--line)}
+.dream-overview-name{display:grid;grid-template-columns:10px minmax(0,1fr);column-gap:9px;align-items:center}
+.dream-overview-name strong,.dream-overview-name small{grid-column:2;min-width:0}
+.dream-overview-name small{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.dream-overview-status,.dream-overview-date{font-size:.8rem;font-weight:800}
+.dream-overview-status{display:inline-flex;width:max-content;max-width:100%;padding:4px 8px;border-radius:999px;background:rgba(201,155,74,.14);color:var(--gold-2)}
+.dream-overview-date,.dream-overview-next{color:var(--muted)}
+.dream-overview-next{font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dream-grid{margin-top:18px}
+.dream-grid>.dream-card{margin-top:0!important}
+.dream-card{padding:0}
+.dream-card>summary{list-style:none;cursor:pointer}
+.dream-card>summary::-webkit-details-marker{display:none}
+.dream-card-title{min-width:0;flex:1}
+.dream-card-status{flex:0 0 auto;padding:4px 8px;border-radius:999px;background:rgba(201,155,74,.14);color:var(--gold-2);font-size:.72rem;font-weight:800}
+.dream-expand{flex:0 0 auto;color:var(--muted);font-weight:900;transition:transform .18s}
+.dream-card[open] .dream-expand{transform:rotate(180deg)}
+.dream-card-body{border-top:1px solid var(--line)}
+@media(max-width:900px){.dream-overview-row{grid-template-columns:1fr 120px}.dream-overview-date,.dream-overview-next{grid-column:2}.dream-overview-stats p{width:100%;margin-left:0}}
+@media(max-width:620px){.dream-overview-row{grid-template-columns:1fr}.dream-overview-status,.dream-overview-date,.dream-overview-next{grid-column:auto}.dream-card-head{align-items:center}.dream-card-status{display:none}}
+
+/* v2.35 — nested collapsible, editable and reorderable Activities */
+.activity-ladder{display:grid;gap:18px}
+.activity-category{border:1px solid var(--line);background:#252a2d;border-radius:15px;overflow:hidden}.activity-category>summary{list-style:none}.activity-category>summary::-webkit-details-marker{display:none}
+.activity-category-head{display:grid;grid-template-columns:minmax(220px,1fr) minmax(180px,.6fr) auto;gap:12px;align-items:center;padding:15px 16px;background:#2b3033;cursor:pointer;user-select:none}.activity-category[open]>.activity-category-head{border-bottom:1px solid var(--line)}.activity-category-head:hover{background:#303639}.activity-category-chevron{display:inline-block;color:#aab2b6;font-size:1rem;font-weight:900;transition:transform .18s}.activity-category[open]>.activity-category-head .activity-category-chevron{transform:rotate(180deg)}
+.activity-category-body{padding-top:12px}.activity-category-actions{display:flex;justify-content:flex-end;align-items:center;gap:9px;padding:0 16px}
+.activity-category-copy h2{margin:0;font-size:1.25rem}.activity-category-copy p{margin:4px 0 0;color:var(--muted);font-size:.82rem}
+.activity-today{display:block;border:1px solid #4a5359;background:#202528;border-radius:10px;padding:8px 10px;min-width:0}.activity-today small{display:block;color:var(--muted);font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.activity-today strong{display:block;margin-top:2px;color:var(--ink);font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.activity-today.empty strong{color:var(--muted);font-weight:600}
+.activity-done{display:flex;align-items:center;gap:7px;margin:0;padding:8px 10px;border:1px solid #48534d;background:#202724;border-radius:9px;color:var(--ink);white-space:nowrap}.activity-done input{width:17px;height:17px;margin:0;accent-color:var(--green)}
+.activity-clear{border:1px solid #50575c;background:#22272a;color:var(--muted);border-radius:9px;padding:9px 11px;font-weight:800}.activity-clear:not(:disabled):hover{color:var(--ink);border-color:#6c757b}.activity-clear:disabled{opacity:.4;cursor:default}
+.activity-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:16px}
+.activity-option-group{border:1px solid #41484d;background:#212629;border-radius:12px;overflow:hidden}.activity-option-group summary{list-style:none}.activity-option-group summary::-webkit-details-marker{display:none}.activity-group-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0;padding:12px;cursor:pointer;user-select:none}.activity-group-head:hover{background:#272d30}.activity-group-head h3{margin:0;font-size:.91rem;color:#d8ddd9}.activity-group-controls{display:flex;align-items:center;gap:9px}.activity-group-chevron{display:inline-block;color:#aab2b6;font-size:.9rem;font-weight:900;transition:transform .18s}.activity-option-group[open] .activity-group-chevron{transform:rotate(180deg)}.activity-add{display:inline-flex;align-items:center;justify-content:center;width:29px;height:29px;border:1px solid #4b5550;background:#29312d;color:#bfcac4;border-radius:8px;padding:0;font-size:1rem;line-height:1;font-weight:800}.activity-add:hover{border-color:#718079;color:#eef2ef}
+.activity-option-list{display:grid;gap:7px;padding:10px 12px 12px;border-top:1px solid #3d454a}.activity-option{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:7px;align-items:center;border:1px solid #3d454a;background:#282e31;border-radius:9px;padding:5px;transition:border-color .12s,background .12s,opacity .12s,transform .12s}.activity-option.selected{border-color:#78907f;background:#2d3832;box-shadow:inset 3px 0 #89a594}.activity-option.dragging{opacity:.38}.activity-option.drag-before{border-top-color:#b2c9ba;box-shadow:0 -3px 0 #8eaa98}.activity-option.drag-after{border-bottom-color:#b2c9ba;box-shadow:0 3px 0 #8eaa98}.activity-drag-handle{display:flex;align-items:center;justify-content:center;width:28px;min-height:34px;border:0;background:transparent;color:#939da2;border-radius:7px;font-size:1.05rem;line-height:1;cursor:grab;user-select:none}.activity-drag-handle:hover{background:#343b3f;color:#e5e9e6}.activity-drag-handle:active{cursor:grabbing}.activity-select{display:flex;align-items:center;gap:9px;min-width:0;border:0;background:transparent;color:var(--ink);text-align:left;padding:7px 8px;border-radius:7px}.activity-select:hover{background:rgba(255,255,255,.035)}.activity-select span:last-child{min-width:0;overflow-wrap:anywhere}.activity-radio{flex:0 0 auto;width:15px;height:15px;border:2px solid #778087;border-radius:50%;position:relative}.activity-option.selected .activity-radio{border-color:#9cb5a4}.activity-option.selected .activity-radio:after{content:'';position:absolute;inset:3px;border-radius:50%;background:#9cb5a4}
+.activity-item-actions{display:flex;gap:3px}.activity-item-actions button{border:0;background:transparent;color:#9fa8ad;border-radius:6px;padding:6px;font-size:.66rem;font-weight:800}.activity-item-actions button:hover{background:#343b3f;color:#eef1ef}.activity-item-actions button.delete:hover{color:#e3aaa4}.activity-empty-group{margin:0;color:var(--muted);font-size:.78rem;font-style:italic;padding:4px}
+@media(max-width:1050px){.activity-category-head{grid-template-columns:1fr auto}.activity-category-copy{grid-column:1/-1}.activity-today{grid-column:1}.activity-category-chevron{grid-column:2;grid-row:2}.activity-groups{grid-template-columns:1fr}}
+@media(max-width:620px){.activity-category-head{grid-template-columns:1fr auto}.activity-category-copy{grid-column:1/-1}.activity-today{grid-column:1}.activity-category-chevron{grid-column:2;grid-row:2}.activity-today strong{white-space:normal}.activity-category-actions{justify-content:flex-start;flex-wrap:wrap}.activity-done{justify-content:flex-start}.activity-option{grid-template-columns:auto minmax(0,1fr)}.activity-item-actions{grid-column:2;justify-content:flex-end;border-top:1px solid #3a4246;padding-top:4px}}
+
+
+/* v2.36 — collapsible major sections */
+.guide-section{
+  margin-top:18px;
+  border:1px solid #454c50;
+  border-radius:16px;
+  background:#2a2f32;
+  box-shadow:0 12px 30px rgba(0,0,0,.18);
+  overflow:hidden;
+}
+.guide-section:first-child{margin-top:0}
+.guide-section>summary{
+  list-style:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  min-height:62px;
+  padding:14px 18px;
+  cursor:pointer;
+  user-select:none;
+  background:#30363a;
+}
+.guide-section>summary::-webkit-details-marker{display:none}
+.guide-section>summary:hover{background:#343a3e}
+.guide-section>summary:after{
+  content:'⌄';
+  flex:0 0 auto;
+  color:#b8c0bc;
+  font-size:1rem;
+  font-weight:900;
+  transition:transform .18s ease;
+}
+.guide-section[open]>summary:after{transform:rotate(180deg)}
+.guide-section[open]>summary{border-bottom:1px solid #454c50}
+.guide-section-summary-copy{min-width:0}
+.guide-section-summary-copy .kicker{margin:0 0 3px;font-size:.63rem}
+.guide-section-summary-copy h2{
+  margin:0;
+  color:#edf0ed;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1.18rem;
+  font-weight:600;
+}
+.guide-section-summary-copy p{margin:4px 0 0;color:#aeb6b2;font-size:.8rem;line-height:1.38}
+.guide-section-body{padding:0}
+.guide-section-body>.card{
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:#272c2f!important;
+}
+.guide-section-body>.vocal-columns,
+.guide-section-body>.vocal-notes-grid{margin:0;padding:18px}
+.guide-section-body>.vocal-columns .card,
+.guide-section-body>.vocal-notes-grid .card{margin-top:0}
+.guide-section-toolbar{display:flex;justify-content:flex-end;margin:0 0 14px}
+.guide-section-summary-metrics{display:flex;align-items:center;gap:9px;margin-left:auto}
+.guide-section-summary-metrics .domain-time-box{min-width:135px;background:#242a2d}
+.foundation-page-grid{grid-template-columns:1fr;gap:0}
+.foundation-page-grid .guide-section{margin-top:18px}
+.work-domain-stack{gap:0}
+.work-domain-stack .guide-section{margin-top:18px}
+.work-domain-stack .guide-section-body>.card{padding-top:18px}
+#work>.guide-section:first-child,#foundations>.guide-section:first-child,#vocal>.guide-section:first-child,#exercise>.guide-section:first-child,#data>.guide-section:first-child{margin-top:0}
+@media(max-width:760px){
+  .guide-section>summary{align-items:flex-start;padding:13px 14px}
+  .guide-section-summary-metrics{display:none}
+  .guide-section-summary-copy h2{font-size:1.05rem}
+  .guide-section-body>.vocal-columns,.guide-section-body>.vocal-notes-grid{padding:12px}
+}
+@media print{
+  details.guide-section>summary{display:none!important}
+  details.guide-section>.guide-section-body{display:block!important}
+  .guide-section{border:0!important;box-shadow:none!important;background:#fff!important;margin-top:12px!important}
+  .guide-section-body>.card{background:#fff!important}
+}
+
+
+/* v2.40 — Acting section heading simplified */
+.donut{--achieved-pct:0%}
+.donut:before{
+  content:"";
+  position:absolute;
+  inset:-7px;
+  border-radius:50%;
+  background:conic-gradient(#e2bd55 0 var(--achieved-pct),rgba(255,255,255,.16) var(--achieved-pct) 100%);
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 4px));
+  mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 4px));
+  pointer-events:none;
+}
+.donut.plan-exceeded:before{background:#e2bd55}
+.workload-row.achieved{color:#f0cf72;font-weight:800}
+.timer-display.timer-input{
+  width:112px;
+  min-width:112px;
+  padding:8px 7px;
+  color:#f4f2eb;
+  background:#1f2528;
+  border-color:#596166;
+  text-align:center;
+  letter-spacing:.03em;
+}
+.timer-display.timer-input:focus{border-color:#e2bd55;box-shadow:0 0 0 3px rgba(226,189,85,.16)}
+.work-activity-row,.work-activity-row.music-row,.work-activity-row.music-row.no-project{
+  grid-template-columns:28px minmax(210px,1.15fr) minmax(180px,.85fr) minmax(300px,1fr) 36px;
+}
+.exercise-movement-card{margin-top:0}
+@media(max-width:1250px){
+ .work-activity-row,.work-activity-row.music-row,.work-activity-row.music-row.no-project{grid-template-columns:28px repeat(2,minmax(170px,1fr)) 36px}
+ .work-activity-row .timer-wrap,.work-activity-row.music-row .timer-wrap{grid-column:2/4}
+ .work-activity-row .row-remove,.work-activity-row.music-row .row-remove{grid-column:4;grid-row:1}
+}
+@media(max-width:620px){
+ .work-activity-row,.work-activity-row.music-row,.work-activity-row.music-row.no-project{grid-template-columns:1fr}
+ .work-activity-row .timer-wrap,.work-activity-row.music-row .timer-wrap,.work-activity-row .row-remove,.work-activity-row.music-row .row-remove{grid-column:auto;grid-row:auto}
+ .timer-box{grid-template-columns:minmax(0,1fr) auto auto}
+ .timer-display.timer-input{width:100%;min-width:0}
+}
+
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to guide</a>
 <header><div class="header-inner">
-  <div class="brand"><div class="brand-mark">R</div><div class="brand-title">Life Guide<span class="brand-sub">Robert Rosina</span></div></div>
-  <nav aria-label="Life Guide sections">
-    <button class="nav-btn active" data-tab="foundations">Foundations</button>
-    <button class="nav-btn" data-tab="work">Daily Work</button>
-    <button class="nav-btn" data-tab="vocal">Vocal Support &amp; Practice</button>
-    <button class="nav-btn" data-tab="life">Exercise &amp; Activities</button>
-    <button class="nav-btn" data-tab="dreams">Dreams</button>
-  </nav>
-  <div class="header-actions"><div class="header-date"><label for="globalDate">Guide date</label><input id="globalDate" type="date"/></div><button class="nav-btn header-tab-btn" data-tab="data">Save &amp; Export</button><button class="icon-btn" id="printBtn">Print</button></div>
+<div class="brand"><div class="brand-mark">R</div><div class="brand-title">Life Planner<span class="brand-sub">Robert Rosina</span></div></div>
+<nav aria-label="Life Planner sections">
+<button class="nav-btn active" data-tab="foundations">Foundations</button>
+<button class="nav-btn" data-tab="work">Work</button>
+<button class="nav-btn" data-tab="vocal">Singing</button>
+<button class="nav-btn" data-tab="exercise">Exercise</button>
+<button class="nav-btn" data-tab="activities">Activities</button>
+<button class="nav-btn" data-tab="dreams">Dreams</button>
+</nav>
+<div class="header-actions"><div class="header-date"><label for="globalDate">Planner date</label><input id="globalDate" type="date"/></div><button class="nav-btn header-tab-btn" data-tab="data">Save &amp; Export</button><button class="icon-btn" id="printBtn">Print</button></div>
 </div></header>
 <main id="main">
-<section class="hero"><p class="kicker">Order the day</p><h1>Robert's Life Guide</h1><p>Keep the foundations, apportion the working hours, and choose the activities that deserve the day.</p><div class="save-line" id="saveStatus">Saved in this browser</div></section>
-
-<section class="card global-season" id="globalSeason"><div class="global-season-inner"><div><p class="kicker">Current season</p><h2>Family-centric schedule</h2><p>Arrange work and activities around caring for Alfie, supporting Debora, and protecting family life. Flexible sequencing and reduced output are part of the plan during this season.</p><span class="season-dates" id="seasonDateLabel"></span></div><div class="season-controls"><div><label for="seasonStart">Starts</label><input id="seasonStart" type="date"></div><div><label for="seasonEnd">Ends</label><input id="seasonEnd" type="date"></div><div><label for="seasonHours">Creative hours preset</label><input id="seasonHours" min="0" max="18" step="0.25" type="number"></div><button class="btn primary" id="applySeasonPreset">Apply to this day</button></div></div></section>
-
+<section class="hero"><h1>Robert's Life Planner</h1></section>
+<section class="card global-season" id="globalSeason"><div class="global-season-inner"><div><p class="kicker">Current season</p><h2>Family-centric schedule</h2><p>Arrange work and activities around caring for Alfie, supporting Debora, and protecting family life. Flexible sequencing and reduced output are part of the plan during this season.</p><span class="season-dates" id="seasonDateLabel"></span></div><div class="season-controls"><div><label for="seasonStart">Starts</label><input id="seasonStart" type="date"/></div><div><label for="seasonEnd">Ends</label><input id="seasonEnd" type="date"/></div><div><label for="seasonHours">Creative hours preset</label><input id="seasonHours" max="18" min="0" step="0.25" type="number"/></div><button class="btn primary" id="applySeasonPreset">Apply to this day</button></div></div></section>
 <section class="tab active" id="foundations">
-  <section class="card orientation-card" aria-labelledby="lifeOrientationHeading">
-    <div class="section-head compact"><div><p class="kicker">Personal values</p><h2 id="lifeOrientationHeading">Life Orientation</h2><p class="orientation-note">Standards by which to judge the shape and spirit of the day.</p></div></div>
-    <div class="orientation-list">
-      <details class="orientation-item"><summary>Shine bright as the sun sets</summary><blockquote>“I shine bright as the sun sets.”</blockquote><p><strong>Its meaning is:</strong></p><ul><li>Stop watching life pass.</li><li>Convert long-developed abilities into real action.</li><li>Choose work and activities that make you feel alive.</li><li>Create things true to your nature.</li><li>Model a courageous and creative life for Alfie.</li><li>Build something worthwhile even amid age, fatigue and responsibility.</li></ul></details>
-      <details class="orientation-item"><summary>Alive and peaceful</summary><p>Value feeling alive and peaceful. Bring passion to the things worth doing. Debora’s expression of this value is: “I don’t go outside the door without passion.”</p></details>
-      <details class="orientation-item"><summary>Excellence, community and resilience</summary><p>Seek excellence in craft, connection in community, pleasure in the moment, and resilience in adversity.</p></details>
-      <details class="orientation-item"><summary>A stable and interesting life</summary><blockquote>“An ordinary man, with hobbies. That’s power. Because it’s a better life. Stable. Full of interesting things. Just a beautiful, simple life.”</blockquote><p>Connect to the God inside others through music, writing, speech and the other tools available to you.</p></details>
-      <details class="orientation-item"><summary>Operating maxims</summary><ul><li>At all times, take the high road.</li><li>Do not neglect your boat; it keeps you afloat.</li><li>Success is what you get to do for work.</li><li>Stand at the helm of your destiny.</li></ul></details>
-    </div>
-  </section>
-  <div class="card"><div class="foundation-page-head"><div><p class="kicker">Daily foundations</p><h2>Foundations</h2></div><button class="btn danger" id="clearFoundationChecks">Clear checks</button></div><div class="foundation-progress"><strong id="foundationPageScore">0/0 core foundations</strong><div class="progress"><span id="foundationPageProgress" style="width:0%"></span></div><span class="foundation-tag" id="foundationSupportScore">0/0 supporting</span><span class="foundation-tag" id="foundationOverallScore">0 marked today</span></div></div>
-  <div class="foundation-page-grid" id="foundationGroups"></div>
-</section>
+<details class="guide-section" data-guide-section="foundations-orientation"><summary><div class="guide-section-summary-copy"><p class="kicker">Personal values</p><h2>Life Orientation</h2></div></summary><div class="guide-section-body"><section aria-labelledby="lifeOrientationHeading" class="card orientation-card">
 
+<div class="orientation-list">
+<details class="orientation-item"><summary>Operating maxim</summary><blockquote>“I shine bright as the sun sets.”</blockquote><p><strong>Its meaning is:</strong></p><ul><li>Stop watching life pass.</li><li>Convert long-developed abilities into real action.</li><li>Choose work and activities that make you feel alive.</li><li>Create things true to your nature.</li><li>Model a courageous and creative life for Alfie.</li><li>Build something worthwhile even amid age, fatigue and responsibility.</li></ul></details>
+<details class="orientation-item"><summary>Creative and loving</summary><p>Value creativity and love in the way you live, work and relate to others.</p></details>
+<details class="orientation-item"><summary>Supporting maxims</summary><ul><li>At all times, take the high road.</li><li>Do not neglect your boat; it keeps you afloat.</li><li>Success is what you get to do for work.</li><li>Stand at the helm of your destiny.</li></ul></details>
+</div>
+</section></div></details>
+<div class="card foundation-summary-card"><div class="foundation-page-head"><div><p class="kicker">Daily foundations</p><h2>Foundations</h2></div><button class="btn danger" id="clearFoundationChecks">Clear checks</button></div><div class="foundation-progress"><strong id="foundationPageScore">0/0 core foundations</strong><div class="progress"><span id="foundationPageProgress" style="width:0%"></span></div><span class="foundation-tag" id="foundationSupportScore">0/0 supporting</span><span class="foundation-tag" id="foundationOverallScore">0 marked today</span></div></div>
+<div class="foundation-page-grid" id="foundationGroups"></div>
+</section>
 <section class="tab" id="work">
-  <div class="card allocation-card">
-    <div class="allocation-controls"><div class="section-head compact"><div><p class="kicker">Daily apportionment</p><h2>Allocate the Working Day</h2></div></div><div class="allocation-top"><div><label for="dailyHours">Creative work hours today</label><input id="dailyHours" min="0" max="18" step="0.25" type="number"/></div></div><div class="allocation-table"><div class="allocation-header"><span>Area</span><span>Share</span><span>Target</span></div><div id="allocationRows"></div></div><div class="preset-row"><button class="preset" data-preset="music">Music focus</button><button class="preset" data-preset="writing">Writing focus</button><button class="preset" data-preset="balanced">Balanced</button></div></div>
-    <aside class="allocation-summary"><div class="donut" id="allocationDonut"><div class="donut-center"><strong id="allocationTotal">100%</strong><span>allocated</span></div></div><div class="allocation-legend" id="allocationLegend"></div><div class="workload-summary"><div class="workload-row"><span>Creative work</span><strong id="creativeHoursSummary">0h</strong></div><div class="workload-row"><span>Supporting duties</span><strong id="supportHoursSummary">0h</strong></div><div class="workload-row total"><span>Total planned work</span><strong id="totalHoursSummary">0h</strong></div></div><div class="total-message" id="allocationMessage"></div></aside>
-  </div>
-  <div class="work-domain-stack" id="workDomainCards"></div>
-  <div class="card"><div class="section-head"><div><p class="kicker">Supporting duties</p><h2>Supporting Duties</h2><p>Choose a category and a common duty, then edit the wording to match the actual work.</p></div><button class="btn primary" id="addSupportBlock">+ Add duty</button></div><div class="support-list" id="supportList"></div></div>
-  <div class="card"><div class="section-head compact"><div><h2>Close the Day</h2></div></div><div class="grid two"><div><label for="dayWin">Daily progress report — quick bullets</label><textarea id="dayWin" placeholder="Everything completed or meaningfully advanced today"></textarea></div><div><label for="tomorrowFirst">Tomorrow’s first actions — choose from Trello</label><textarea id="tomorrowFirst" placeholder="Name the first one or two actions to begin tomorrow"></textarea></div></div><div style="margin-top:12px"><label for="dayNotes">Notes, interruptions and lessons</label><textarea id="dayNotes"></textarea></div></div>
+<details class="guide-section" data-guide-section="work-allocation"><summary><div class="guide-section-summary-copy"><p class="kicker">Work</p><h2>Allocate the Working Day</h2></div></summary><div class="guide-section-body"><div class="card allocation-card">
+<div class="allocation-controls"><div class="allocation-top"><div><label for="dailyHours">Creative work hours today</label><input id="dailyHours" max="18" min="0" step="0.25" type="number"/></div></div><div class="allocation-table"><div class="allocation-header"><span>Area</span><span>Share</span><span>Target</span></div><div id="allocationRows"></div></div><div class="preset-row"><button class="preset" data-preset="music">Music focus</button><button class="preset" data-preset="writing">Writing focus</button><button class="preset" data-preset="balanced">Balanced</button></div></div>
+<aside class="allocation-summary"><div class="donut" id="allocationDonut"><div class="donut-center"><strong id="allocationTotal">100%</strong><span>allocated</span></div></div><div class="allocation-legend" id="allocationLegend"></div><div class="workload-summary"><div class="workload-row"><span>Planned work</span><strong id="creativeHoursSummary">0h</strong></div><div class="workload-row achieved"><span>Achieved today</span><strong id="achievedHoursSummary">0h</strong></div><div class="workload-row total"><span>Remaining</span><strong id="remainingHoursSummary">0h</strong></div></div><div class="total-message" id="allocationMessage"></div></aside>
+</div></div></details>
+<div class="work-domain-stack" id="workDomainCards"></div>
+<details class="guide-section" data-guide-section="work-close"><summary><div class="guide-section-summary-copy"><p class="kicker">Review</p><h2>Close the Day</h2></div></summary><div class="guide-section-body"><div class="card"><div class="grid two"><div><label for="dayWin">Daily progress report — quick bullets</label><textarea id="dayWin" placeholder="Everything completed or meaningfully advanced today"></textarea></div><div><label for="tomorrowFirst">Tomorrow’s first actions — choose from Trello</label><textarea id="tomorrowFirst" placeholder="Name the first one or two actions to begin tomorrow"></textarea></div></div><div style="margin-top:12px"><label for="dayNotes">Notes, interruptions and lessons</label><textarea id="dayNotes"></textarea></div></div></div></details>
 </section>
-
-
 <section class="tab" id="vocal">
-  <section class="card vocal-reference">
-    <div class="section-head compact"><div><p class="kicker">Technique reference</p><h2>Current Cumulative Vocal Technique</h2><p>Use this as the current organising reference for support and practice. It is not itself a completion checklist.</p></div></div>
-    <div class="vocal-technique-grid">
-      <article class="vocal-phase">
-        <h3>Inhale</h3>
-        <ul>
-          <li><strong>Traps open to Adam’s Apple</strong><span class="vocal-check-note">Maintained during exhale.</span></li>
-          <li><strong>Concurrent</strong>
-            <ol class="substeps">
-              <li>Shock inhale to ping-pong balls at the obliques.</li>
-              <li>Stretch the perineum to the floor until the lower back straightens, directed to the ping-pong balls at the obliques.</li>
-            </ol>
-          </li>
-          <li><strong>Then — chest:</strong> hands either side of the sternum.</li>
-        </ul>
-      </article>
-      <article class="vocal-phase">
-        <h3>Between</h3>
-        <ul><li><strong>Clench the perineum and press the obliques to the floor</strong><span class="vocal-check-note">Maintained during exhale.</span></li></ul>
-      </article>
-      <article class="vocal-phase">
-        <h3>Exhale</h3>
-        <ul><li><strong>Resonate the cheekbones.</strong></li></ul>
-      </article>
-    </div>
-  </section>
+<details class="guide-section" data-guide-section="singing-technique"><summary><div class="guide-section-summary-copy"><p class="kicker">Technique reference</p><h2>Current Cumulative Vocal Technique</h2><p>Use this as the current organising reference for support and practice.</p></div></summary><div class="guide-section-body"><section class="card vocal-reference">
 
-  <section class="card vocal-support-reference">
-    <div class="section-head compact"><div><p class="kicker">Use as necessary</p><h2>Support Techniques</h2><p>Optional coordinations and interpretive tools to apply where the phrase, range or sound requires them.</p></div></div>
-    <div class="vocal-support-grid">
-      <article class="vocal-support-card">
-        <h3>Release and emotion</h3>
-        <ul>
-          <li><strong>Relax:</strong> rear tongue.</li>
-          <li><strong>Emotion / compressor:</strong>
-            <ol class="substeps">
-              <li>Bliss / feel the truth of it; keep the emotion moving even on held notes.</li>
-              <li>Method singing: take on the character and mood; play a part “like a kitty cat.”</li>
-            </ol>
-          </li>
-        </ul>
-      </article>
-      <article class="vocal-support-card">
-        <h3>Breath</h3>
-        <ul>
-          <li><strong>Legato:</strong> sing the line on one breath rather than treating every note individually; feel the whole smooth line.</li>
-          <li><strong>Breathiness:</strong> use a “haa” feeling.</li>
-        </ul>
-      </article>
-      <article class="vocal-support-card">
-        <h3>Vowels and onset</h3>
-        <ul>
-          <li>Move quickly from the consonant to the vowel; train each vowel and train on “ah.”</li>
-          <li>Use almost non-existent diphthongs and modify or darken vowels as needed.</li>
-          <li>Separate plosives during training—for example, K (quick) — ids—then join them.</li>
-          <li><strong>Caution:</strong> avoid guttural or weak starts; the voice begins exactly with the breath.</li>
-        </ul>
-      </article>
-      <article class="vocal-support-card">
-        <h3>Vibrato</h3>
-        <ul>
-          <li>Gentle pitch variation, not tremolo.</li>
-          <li><strong>Submersion, as needed:</strong> submerge the sternum for vibrato.</li>
-        </ul>
-      </article>
-      <article class="vocal-support-card">
-        <h3>Gesture and crescendo</h3>
-        <ul>
-          <li><strong>Gesture:</strong> gesture the idea each phrase or every other phrase, including through the eyes.</li>
-          <li><strong>Crescendo:</strong> bring more power to the top notes.</li>
-        </ul>
-      </article>
-      <article class="vocal-support-card">
-        <h3>Tension and naturalness</h3>
-        <ul>
-          <li>No bodily or mental tension, especially around high A and above.</li>
-          <li>Retain the capacity to turn the head loosely and walk comfortably.</li>
-          <li>Keep it natural and use the mirror to check.</li>
-        </ul>
-      </article>
-      <article class="vocal-support-card wide">
-        <h3>Baggage across the range</h3>
-        <p>Allow the sound and effort to change appropriately as the pitch rises.</p>
-        <div class="vocal-range-scale">
-          <span><strong>Low notes</strong><small>Light volume; gentle.</small></span>
-          <span class="range-arrow">→</span>
-          <span><strong>Top notes</strong><small>Let everything go.</small></span>
-        </div>
-      </article>
-    </div>
-  </section>
+<div class="vocal-technique-grid">
+<article class="vocal-phase">
+<h3>Inhale</h3>
+<ul>
+<li><strong>Traps open to Adam’s Apple</strong><span class="vocal-check-note">Maintained during exhale.</span></li>
+<li><strong>Concurrent</strong>
+<ol class="substeps">
+<li>Shock inhale to ping-pong balls at the obliques.</li>
+<li>Stretch the perineum to the floor until the lower back straightens, directed to the ping-pong balls at the obliques.</li>
+</ol>
+</li>
+<li><strong>Then — chest:</strong> hands either side of the sternum.</li>
+</ul>
+</article>
+<article class="vocal-phase">
+<h3>Between</h3>
+<ul><li><strong>Clench the perineum and press the obliques to the floor</strong><span class="vocal-check-note">Maintained during exhale.</span></li></ul>
+</article>
+<article class="vocal-phase">
+<h3>Exhale</h3>
+<ul><li><strong>Resonate the cheekbones.</strong></li></ul>
+</article>
+</div>
+</section></div></details>
+<details class="guide-section" data-guide-section="singing-support-techniques"><summary><div class="guide-section-summary-copy"><p class="kicker">Use as necessary</p><h2>Support Techniques</h2><p>Optional coordinations and interpretive tools for the phrase, range or sound.</p></div></summary><div class="guide-section-body"><section class="card vocal-support-reference">
 
-  <div class="vocal-columns">
-    <section class="card"><div class="section-head"><div><p class="kicker">Voice development</p><h2>Practice</h2><p>Specific exercises for building vocal strength and coordination.</p><div class="vocal-score"><span class="foundation-tag" id="vocalPracticeScore">0/0 completed</span></div></div></div><div class="vocal-list" id="vocalPracticeList"></div></section>
-    <section class="card"><div class="section-head"><div><p class="kicker">Daily conditions</p><h2>Daily Support</h2><p>Breathing, release, posture, hydration and physical practices that support the voice.</p><div class="vocal-score"><span class="foundation-tag" id="vocalSupportScore">0/0 completed</span></div></div><button class="btn danger" id="clearVocalDay">Clear checks</button></div><div class="vocal-list" id="vocalSupportList"></div></section>
-  </div>
-
-  <div class="vocal-notes-grid">
-    <section class="card vocal-note-box"><h3>Reference and development notes</h3><ul><li>Cold water is fine.</li><li>Development question: rest AA / first area on the floor?</li></ul></section>
-    <section class="card vocal-note-box"><p class="vocal-affirmation">“Beauty and uniqueness are the great qualities of a voice that you’re either born with or not, and I have it.”</p></section>
-  </div>
-
-  <section class="card"><label for="vocalNotes">Practice notes for the day</label><textarea id="vocalNotes" placeholder="What changed, released, strengthened or needs attention next time?"></textarea></section>
+<div class="vocal-support-grid">
+<article class="vocal-support-card">
+<h3>Release and emotion</h3>
+<ul>
+<li><strong>Relax:</strong> rear tongue.</li>
+<li><strong>Emotion / compressor:</strong>
+<ol class="substeps">
+<li>Bliss / feel the truth of it; keep the emotion moving even on held notes.</li>
+<li>Method singing: take on the character and mood; play a part “like a kitty cat.”</li>
+</ol>
+</li>
+</ul>
+</article>
+<article class="vocal-support-card">
+<h3>Breath</h3>
+<ul>
+<li><strong>Legato:</strong> sing the line on one breath rather than treating every note individually; feel the whole smooth line.</li>
+<li><strong>Breathiness:</strong> use a “haa” feeling.</li>
+</ul>
+</article>
+<article class="vocal-support-card">
+<h3>Vowels and onset</h3>
+<ul>
+<li>Move quickly from the consonant to the vowel; train each vowel and train on “ah.”</li>
+<li>Use almost non-existent diphthongs and modify or darken vowels as needed.</li>
+<li>Separate plosives during training—for example, K (quick) — ids—then join them.</li>
+<li><strong>Caution:</strong> avoid guttural or weak starts; the voice begins exactly with the breath.</li>
+</ul>
+</article>
+<article class="vocal-support-card">
+<h3>Vibrato</h3>
+<ul>
+<li>Gentle pitch variation, not tremolo.</li>
+<li><strong>Submersion, as needed:</strong> submerge the sternum for vibrato.</li>
+</ul>
+</article>
+<article class="vocal-support-card">
+<h3>Gesture and crescendo</h3>
+<ul>
+<li><strong>Gesture:</strong> gesture the idea each phrase or every other phrase, including through the eyes.</li>
+<li><strong>Crescendo:</strong> bring more power to the top notes.</li>
+</ul>
+</article>
+<article class="vocal-support-card">
+<h3>Tension and naturalness</h3>
+<ul>
+<li>No bodily or mental tension, especially around high A and above.</li>
+<li>Retain the capacity to turn the head loosely and walk comfortably.</li>
+<li>Keep it natural and use the mirror to check.</li>
+</ul>
+</article>
+<article class="vocal-support-card wide">
+<h3>Baggage across the range</h3>
+<p>Allow the sound and effort to change appropriately as the pitch rises.</p>
+<div class="vocal-range-scale">
+<span><strong>Low notes</strong><small>Light volume; gentle.</small></span>
+<span class="range-arrow">→</span>
+<span><strong>Top notes</strong><small>Let everything go.</small></span>
+</div>
+</article>
+</div>
+</section></div></details>
+<details class="guide-section" data-guide-section="singing-practice-support"><summary><div class="guide-section-summary-copy"><p class="kicker">Daily singing work</p><h2>Practice and Daily Support</h2></div></summary><div class="guide-section-body"><div class="vocal-columns">
+<section class="card"><div class="section-head"><div><p class="kicker">Voice development</p><h2>Practice</h2><p>Specific exercises for building vocal strength and coordination.</p><div class="vocal-score"><span class="foundation-tag" id="vocalPracticeScore">0/0 completed</span></div></div></div><div class="vocal-list" id="vocalPracticeList"></div></section>
+<section class="card"><div class="section-head"><div><p class="kicker">Daily conditions</p><h2>Daily Support</h2><p>Breathing, release, posture, hydration and physical practices that support the voice.</p><div class="vocal-score"><span class="foundation-tag" id="vocalSupportScore">0/0 completed</span></div></div><button class="btn danger" id="clearVocalDay">Clear checks</button></div><div class="vocal-list" id="vocalSupportList"></div></section>
+</div></div></details>
+<details class="guide-section" data-guide-section="singing-reference-notes"><summary><div class="guide-section-summary-copy"><p class="kicker">Singing</p><h2>Reference and Development Notes</h2></div></summary><div class="guide-section-body"><div class="vocal-notes-grid">
+<section class="card vocal-note-box"><h3>Reference and development notes</h3><ul><li>Cold water is fine.</li><li>Development question: rest AA / first area on the floor?</li></ul></section>
+<section class="card vocal-note-box"><p class="vocal-affirmation">“Beauty and uniqueness are the great qualities of a voice that you’re either born with or not, and I have it.”</p></section>
+</div></div></details>
+<details class="guide-section" data-guide-section="singing-practice-notes"><summary><div class="guide-section-summary-copy"><p class="kicker">Singing</p><h2>Practice Notes</h2></div></summary><div class="guide-section-body"><section class="card"><label for="vocalNotes">Practice notes for the day</label><textarea id="vocalNotes" placeholder="What changed, released, strengthened or needs attention next time?"></textarea></section></div></details>
 </section>
-
-<section class="tab" id="life">
-  <div class="card"><div class="section-head"><div><p class="kicker">Physical activity</p><h2>Movement Requirements</h2><p>Today’s choice is recorded against the selected date. Weekly frequency totals are calculated from the completed daily records.</p></div></div><div class="movement-list" id="movementRows"></div></div>
-  <div class="card"><div class="section-head compact"><div><p class="kicker">Choose for today</p><h2>Activities</h2></div><button class="btn danger" id="clearLifeDay">Clear day</button></div><div class="activity-ladder" id="activityLadder"></div></div>
-  <div class="card"><label for="lifeNotes">Notes for the day</label><textarea id="lifeNotes" placeholder="Place, booking, person, preparation or object that will help today’s choices happen"></textarea></div>
+<section class="tab" id="exercise">
+<div class="card exercise-movement-card"><div class="section-head compact"><div><p class="kicker">Physical activity</p><h2>Movement Requirements</h2></div><button class="btn danger" id="clearExerciseDay">Clear exercise</button></div><div class="movement-list" id="movementRows"></div></div>
 </section>
-
+<section class="tab" id="activities">
+<div class="card"><div class="section-head compact"><div><p class="kicker">Choose for today</p><h2>Activities</h2></div><button class="btn danger" id="clearActivitiesDay">Clear activities</button></div><div class="activity-ladder" id="activityLadder"></div></div>
+<details class="guide-section" data-guide-section="activities-notes"><summary><div class="guide-section-summary-copy"><p class="kicker">Activities</p><h2>Notes for the Day</h2></div></summary><div class="guide-section-body"><div class="card"><label for="lifeNotes">Notes for the day</label><textarea id="lifeNotes" placeholder="Place, booking, person, preparation or object that will help today’s choices happen"></textarea></div></div></details>
+</section>
 <section class="tab" id="dreams">
-  <div class="card dreams-intro"><div><p class="kicker">Long horizon</p><h2>Dreams</h2><p>Keep the larger hopes visible, give each one a next step, and let them mature without turning them into daily obligations.</p></div><button class="btn primary" id="addDream">+ Add dream</button></div>
-  <div class="dream-grid" id="dreamGrid"></div>
-  <details class="dream-section-details" id="dreamAchievedWrap"><summary id="dreamAchievedSummary">Achieved dreams</summary><div class="dream-grid" id="dreamAchievedGrid"></div></details>
-  <details class="dream-section-details" id="dreamArchivedWrap"><summary id="dreamArchivedSummary">Archived dreams</summary><div class="dream-grid" id="dreamArchivedGrid"></div></details>
+<div class="card dreams-intro"><div><p class="kicker">Long horizon</p><h2>Dreams</h2><p>Keep the larger hopes visible, give each one a next step, and let them mature without turning them into daily obligations.</p></div><button class="btn primary" id="addDream">+ Add dream</button></div>
+<section class="card dream-overview-card"><div class="section-head compact"><div><p class="kicker">At a glance</p><h2>Dream summary</h2><p>See the active dreams, their present status, target date and next step without opening the full records.</p></div></div><div class="dream-overview-stats" id="dreamOverviewStats"></div><div class="dream-overview-list" id="dreamOverviewList"></div></section>
+<div class="dream-grid" id="dreamGrid"></div>
+<details class="dream-section-details" id="dreamAchievedWrap"><summary id="dreamAchievedSummary">Achieved dreams</summary><div class="dream-grid" id="dreamAchievedGrid"></div></details>
+<details class="dream-section-details" id="dreamArchivedWrap"><summary id="dreamArchivedSummary">Archived dreams</summary><div class="dream-grid" id="dreamArchivedGrid"></div></details>
 </section>
-
 <section class="tab" id="edit">
-  <div class="card"><div class="section-head"><div><p class="kicker">Editable libraries</p><h2>Edit Lists</h2><p>Changes here immediately alter the selectable work, project, cultural and supporting-duty choices throughout the guide.</p></div></div></div>
-  <div class="editor-grid" id="editorGrid"></div>
+<details class="guide-section" data-guide-section="edit-intro"><summary><div class="guide-section-summary-copy"><p class="kicker">Editable libraries</p><h2>Edit Lists</h2></div></summary><div class="guide-section-body"><div class="card"></div></div></details>
+<details class="guide-section" data-guide-section="edit-libraries"><summary><div class="guide-section-summary-copy"><p class="kicker">Edit Lists</p><h2>Editable Lists</h2></div></summary><div class="guide-section-body"><div class="editor-grid" id="editorGrid"></div></div></details>
 </section>
-
 <section class="tab" id="data">
-  <div class="card"><div class="section-head"><div><h2>Save, Export &amp; Restore</h2><p>The guide autosaves in this browser. Export a JSON backup before moving to another computer or replacing the file.</p></div></div><div class="data-tools"><div class="data-box"><h3>Export backup</h3><p>Download the season, allocations, daily work, timers, foundations, vocal practice, activities, dreams and editable lists.</p><button class="btn primary" id="exportBtn">Export JSON</button></div><div class="data-box"><h3>Import backup</h3><p>Restore a backup created by this guide. Existing browser data will be replaced.</p><button class="btn" id="importBtn">Choose JSON</button><input accept="application/json" hidden id="importFile" type="file"/></div><div class="data-box"><h3>Print or save as PDF</h3><p>Print the guide using the browser’s print settings.</p><button class="btn" id="printBtn2">Print guide</button></div><div class="data-box"><h3>Reset</h3><p>Return to the seeded structure while clearing browser entries.</p><button class="btn danger" id="resetAll">Reset all browser data</button></div></div></div>
-  <div class="card"><h2>Source record</h2><p>Trello remains the live task and appointment record. Enduring business work and recreation libraries from Trello are available here as selectable activities; ordinary errands and changing tasks remain in Trello.</p></div>
+<details class="guide-section" data-guide-section="data-save"><summary><div class="guide-section-summary-copy"><p class="kicker">Data</p><h2>Save, Export &amp; Restore</h2><p>Back up, restore, print or reset the guide.</p></div></summary><div class="guide-section-body"><div class="card"><div class="data-tools"><div class="data-box"><h3>Export backup</h3><p>Download the season, allocations, work, timers, foundations, singing practice, exercise, activities, dreams and editable lists.</p><button class="btn primary" id="exportBtn">Export JSON</button></div><div class="data-box"><h3>Import backup</h3><p>Restore a backup created by this planner. Existing browser data will be replaced.</p><button class="btn" id="importBtn">Choose JSON</button><input accept="application/json" hidden="" id="importFile" type="file"/></div><div class="data-box"><h3>Print or save as PDF</h3><p>Print the planner using the browser’s print settings.</p><button class="btn" id="printBtn2">Print planner</button></div><div class="data-box"><h3>Reset</h3><p>Return to the seeded structure while clearing browser entries.</p><button class="btn danger" id="resetAll">Reset all browser data</button></div></div></div></div></details>
+<details class="guide-section" data-guide-section="data-source"><summary><div class="guide-section-summary-copy"><p class="kicker">Data</p><h2>Source Record</h2></div></summary><div class="guide-section-body"><div class="card"><p>Trello remains the live task and appointment record. Enduring business work and recreation libraries from Trello are available here as selectable activities; ordinary errands and changing tasks remain in Trello.</p></div></div></details>
 </section>
 </main>
-<footer><div class="footer-line"><span>Life Guide v2.21 · self-contained browser file</span><span>Autosaves locally · export JSON for backup</span></div></footer>
+<footer><div class="footer-line"><span>Life Planner v2.40 · self-contained browser file</span><span>Autosaves locally · export JSON for backup</span></div></footer>
 <div class="toast" id="toast"></div>
 <script>
 const STORAGE_KEY='robert-life-guide-v1';
@@ -311,7 +868,7 @@ const VOCAL_SUPPORT=[
 const OUTCOME_DEFAULTS={
  Music:{target:'2–3 bookings/week ($1,100–$2,500/week)',phase:'Complete the offer and enter the market',progress:20,due:'2027-01-31',proof:'Maintain two to three paid bookings a week for four consecutive weeks.'},
  Writing:{target:'1 asset shipped/quarter',phase:'Complete the first quarterly release',progress:80,due:'2026-09-30',proof:'A finished asset is published, printed, submitted, or placed into a sale-ready catalogue.'},
- Acting:{target:'One controlled professional test → limited continuation and/or private catalogue',phase:'Prepare and execute the two-scene test',progress:50,due:'2026-09-30',proof:'Record both scenes, complete submissions and the response period, then record the continuation decision.'}
+ Acting:{target:'One controlled professional test → limited continuation and/or private catalogue',phase:'Prepare and execute the acting reel test',progress:50,due:'2026-09-30',proof:'Record both scenes, complete submissions and the response period, then record the continuation decision.'}
 };
 const DREAM_DEFAULTS=[
  {id:'family-home',icon:'⌂',title:'A family home in nature',summary:'A large home with room for family life and a backyard for Alfred.',details:['A substantial house to live in.','A safe backyard where Alfred can play and grow.','Away from heavy pollution.','Nature, trees and open space around the home.'],status:'Dream',due:'',next:'',notes:'',archived:false},
@@ -322,31 +879,27 @@ const DREAM_DEFAULTS=[
  {id:'palmi-heritage',icon:'⌂',title:'Take Alfie to Palmi and show him his family heritage',summary:'Bring Alfie to Palmi, Calabria, and connect him with the place and history from which part of his family comes.',details:['Visit Palmi as a family.','Show Alfie the family place of origin and the surrounding culture.','Connect the visit to the wider European family holiday where practical.'],status:'Dream',due:'',next:'',notes:'',archived:false}
 ];
 const DEFAULT_PRACTICES=[
-{id:'p-meditate',text:'Meditate',note:'A deliberate period of stillness, breathing and attention while Alfie is sleeping or feeding in your arms.',frequency:'Daily',alfie:true,timing:'Throughout the day',tier:'supporting'},
 {id:'p-water',text:'Drink 2 litres of water',note:'Keep water close through the working day. Dehydration is a common source of exhaustion.',frequency:'Daily',alfie:true,timing:'Throughout the day',tier:'core'},
 {id:'p-medication',text:'Finasteride, vitamin C, rutin and multivitamin',note:'Take the established daily medicines and vitamins according to the chosen regimen and product directions.',frequency:'Daily',alfie:true,timing:'Morning',tier:'core'},
 {id:'p-posture',text:'Restore posture throughout the day',note:'Imagine the body stretching upward infinitely; use the vine-appendage growth image.',frequency:'Daily',alfie:false,timing:'Throughout the day',tier:'supporting'},
-{id:'p-kriya-orans',text:'Kriya Orans',note:'Complete KKP, enter the Orans posture at the end, finish the second half of the exhale, and direct the hands toward the chosen centre. Use this as a brief reset intended to recur hourly through the day.',frequency:'Daily',alfie:false,timing:'Throughout the day',tier:'supporting'},
-{id:'p-orans-love',text:'Orans and love',note:'Practise Orans with love as the energy that moves. Use the short form during the day; longer Yamnaya-oriented practice or Viking-style submersion belongs under Exercise & Activities.',frequency:'Daily',alfie:false,timing:'Throughout the day',tier:'supporting'},
-{id:'p-voice',text:'Breathing maintenance',note:'Complete gentle breathing and breath-release work. This can be done while holding Alfie.',frequency:'Daily',alfie:true,timing:'Throughout the day',tier:'supporting'},
-{id:'p-vocal',text:'Vocal maintenance',note:'Complete the day’s vocal exercises with free hands and enough attention to technique.',frequency:'Daily',alfie:false,timing:'Throughout the day',tier:'supporting'},
-{id:'p-alfie',text:'Give Alfie undistracted, affectionate and developmental time',note:'Read, sing, talk, make faces, play, use floor time and share music. Protect warm attention centred on Alfie.',frequency:'Daily',alfie:true,timing:'Throughout the day',tier:'core'},
+{id:'p-kriya-orans',text:'Kriya Orans',note:'Kriya Yoga is “very good” and I should do it. Complete KKP, enter the Orans posture at the end, finish the second half of the exhale, and direct the hands toward the chosen centre. Use this as a brief reset intended to recur hourly through the day.',frequency:'Daily',alfie:false,timing:'Throughout the day',tier:'core'},
+{id:'p-trello',text:'Work through the current Trello to-do list',note:'Use Trello as the live task and appointment record; complete the current priority actions.',frequency:'Daily',alfie:false,timing:'Throughout the day',tier:'core'},
+{id:'p-orans-love',text:'Orans and love',note:'Practise Orans with love as the energy that moves. Use the short form during the day; longer Yamnaya-oriented practice belongs under Activities.',frequency:'Daily',alfie:false,timing:'Throughout the day',tier:'supporting'},
+{id:'p-voice',text:'Breathing maintenance',note:'Refer to the Daily Support section of the Singing tab and do the breathing component of the singing technique.',frequency:'Daily',alfie:true,timing:'Throughout the day',tier:'supporting'},
+{id:'p-vocal',text:'Vocal maintenance',note:'Complete the day’s vocal exercises with free hands and enough attention to technique.',frequency:'Daily',alfie:false,timing:'Throughout the day',tier:'core'},
+{id:'p-alfie',text:'Give Alfie undistracted, affectionate and developmental time',note:'See Activities.',frequency:'Daily',alfie:true,timing:'Throughout the day',tier:'core'},
 {id:'p-debora',text:'Give Debora undistracted time',note:'Protect warmth, attention and household stability with Debora.',frequency:'Daily',alfie:false,timing:'Evening',tier:'core'},
-{id:'p-screen-boundary',text:'Keep social media and television within the chosen limit',note:'Use designated hours and avoid unchosen drift throughout the day.',frequency:'Daily',alfie:false,timing:'Throughout the day',tier:'supporting'},
+{id:'p-screen-boundary',text:'Keep computer, social media and television within the chosen limit',note:'Use designated windows—such as 12:00–1:00 pm and 7:00–9:00 pm—and avoid unchosen drift throughout the day.',frequency:'Daily',alfie:false,timing:'Throughout the day',tier:'supporting'},
 {id:'p-mum',text:'Support Mum concerning alcohol',note:'“I love myself unconditionally. That means no alcohol.”',frequency:'As needed',alfie:true,timing:'As needed',tier:'optional'},
 {id:'p-food',text:'Choose supportive food and drink',note:'Vegetable soup or juices, water or green tea, and Omega-3 according to the established routine.',frequency:'Daily',alfie:false,timing:'Throughout the day',tier:'core'},
-{id:'p-minox-1',text:'Minoxidil — first application',note:'First of the two daily applications.',frequency:'Daily',alfie:true,timing:'Morning',tier:'supporting'},
+{id:'p-minox-1',text:'Minoxidil — first application',note:'First of the two daily applications. On Saturdays only, complete hair needling first, following the established 0.75 mm regimen.',frequency:'Daily',alfie:true,timing:'Morning',tier:'supporting'},
 {id:'p-eye-care',text:'Protect eye health and use the 20-20-20 rhythm',note:'Use eye massage, larger text, lower brightness or inverted colours, and eye drops where useful. Every 20 minutes, look about 20 feet away for 20 seconds.',frequency:'Daily',alfie:false,timing:'Throughout the day',tier:'supporting'},
 {id:'p-neck',text:'Stretching and support-muscle relaxation',note:'Stretch and strengthen; deliberately relax the support muscles; roll the shoulders and neck; massage areas carrying tension. Use this practice for tinnitus, neck and back care.',frequency:'Daily',alfie:true,timing:'Throughout the day',tier:'supporting'},
 {id:'p-reset',text:'Complete the minimum household reset',note:'After the Alfie handover, complete the essential bottles, dishes, rubbish, washing, surfaces or the day’s minimum practical need.',frequency:'Daily',alfie:false,timing:'After Alfie handover',tier:'core'},
-{id:'p-journal',text:'Journal',note:'Record what matters, clarify thought and answer unhelpful self-talk.',frequency:'Daily',alfie:false,timing:'Evening',tier:'supporting'},
+{id:'p-journal',text:'Journal',note:'Converse with myself for guidance and wisdom.',frequency:'Daily',alfie:false,timing:'Evening',tier:'core'},
 {id:'p-minox-2',text:'Minoxidil — second application',note:'Second of the two daily applications.',frequency:'Daily',alfie:false,timing:'Evening',tier:'supporting'},
-{id:'p-mouth',text:'Mouth hygiene and whitening',note:'Complete the day’s oral-care routine.',frequency:'Daily',alfie:true,timing:'Morning or evening',tier:'supporting'},
-{id:'p-skin',text:'Moisturising and skin treatments',note:'Complete the established skin-care routine.',frequency:'Daily',alfie:true,timing:'Morning or evening',tier:'supporting'},
-{id:'p-sleep',text:'Protect 7–9 hours of sleep',note:'In the evening, keep bed and wake times consistent; avoid heavy meals within three hours of bed; keep screens out of the final hour and out of bed.',frequency:'Daily',alfie:false,timing:'Evening',tier:'core'},
-{id:'p-needling',text:'Hair needling',note:'Saturday; follow the established 0.75 mm regimen.',frequency:'Saturday',alfie:true,timing:'Saturday',tier:'optional'},
-{id:'p-presentation',text:'Practise presentation and social presence',note:'Record a self-presentation to camera and observe speech, bearing and connection.',frequency:'Regular',alfie:false,timing:'Focused practice',tier:'optional'},
-{id:'p-friendliness',text:'Study and practise friendliness',note:'Record the practice to camera. Reference models: Trevor Devall, Michael K Vaughan, Rick Beato, Charlie Puth, Cleavant Derricks, James Rolfe, Nancy Cartwright and Steve Martin.',frequency:'Regular',alfie:false,timing:'Focused practice',tier:'optional'},
+{id:'p-personal-care',text:'Mouth hygiene, whitening, moisturising and skin treatments',note:'Complete the established oral-care, whitening, moisturising and skin-treatment routine.',frequency:'Daily',alfie:true,timing:'Morning or evening',tier:'supporting'},
+{id:'p-sleep',text:'Protect 7–9 hours of sleep',note:'In the evening, keep bed and wake times consistent; avoid heavy meals within three hours of bed; keep screens out of the final hour and out of bed.',frequency:'Daily',alfie:false,timing:'Evening',tier:'supporting'},
 {id:'p-sun-protection',text:'Protect the reconstructed nose and skin from sun exposure',note:'When going outdoors, wear the Macpac UV pullover or another protective garment; use the established sun-protection routine; follow the dermatologist’s or surgeon’s guidance; and account for the day’s UV conditions.',frequency:'As needed',alfie:false,timing:'Before going outdoors',tier:'optional'}
 ];
 const DEFAULT_LIBRARY={
@@ -364,11 +917,7 @@ const DEFAULT_LIBRARY={
   {id:'follow-up',label:'Follow up existing leads',group:'Sales and pipeline',alfie:false,result:''},
   {id:'quote-proposal',label:'Prepare a quote or proposal',group:'Sales and pipeline',alfie:false,result:''}
  ],
- musicProjects:[
-  {id:'project-demos',label:'Complete the musician demo portfolio'},
-  {id:'project-bragi',label:'Complete the Bragi video demo and pitch materials'},
-  {id:'project-psalmody',label:'Produce a finished Psalmody recording',note:'Complete when the arrangement is settled, the range is corrected, instrumental or notation work is complete, vocals are recorded, and the final version is mixed and exported.'}
- ],
+ musicProjects:[],
  musicOffers:[
   {id:'contemporary',label:'Contemporary guitar and voice'},
   {id:'weddings',label:'Wedding music'},
@@ -388,7 +937,7 @@ const DEFAULT_LIBRARY={
   {id:'childrens-book',label:'Owl Fred and the Giant'},
   {id:'magus-yeshua',label:'The Magus Yeshua'}
  ],
- actingProjectTitle:'Two-scene Acting Test',
+ actingProjectTitle:'Acting',
  actingStages:[
   {id:'learn-lines',label:'Learn lines',alfie:true,result:''},
   {id:'prepare',label:'Prepare scene or materials',alfie:false,result:''},
@@ -397,12 +946,8 @@ const DEFAULT_LIBRARY={
   {id:'playback',label:'Playback review and edit materials',alfie:false,result:''},
   {id:'submit-follow-up',label:'Submit or follow up',alfie:false,result:''}
  ],
- actingMaterials:[{id:'emma',label:'Emma — Mr Knightley'},{id:'few-good-men',label:'A Few Good Men — drunk scene'}],
+ actingMaterials:[{id:'emma',label:'Emma — Mr Knightley'},{id:'few-good-men',label:'A Few Good Men — drunk scene'},{id:'odda-younger',label:'Odda the Younger — The Last Kingdom'}],
  culturalSpiritualActivities:[
-  {id:'orans-practice',label:'Orans practice'},
-  {id:'extended-kriya-orans',label:'Extended Kriya Orans'},
-  {id:'viking-submersion',label:'Viking-style submersion'},
-  {id:'psalmody-practice',label:'Sing or practise Psalmody'},
   {id:'inherited-music',label:'Yamnaya and inherited music'},
   {id:'recreationist-practice',label:'Recreationist cultural practice'}
  ],
@@ -424,49 +969,61 @@ const DEFAULT_LIBRARY={
  ]
 };
 const ACTIVITY_LEVELS=[
- {id:'recreation',name:'Recreation',description:'Choose a game, book, audiobook, film or series for the day.',groups:[
+ {id:'recreation',name:'Recreation',description:'Choose a game, book, learning activity, creative pursuit, film or series for the day.',groups:[
    {label:'Games and tabletop',items:['Switch games','Board game — Brass','Improv RPG','Divinity: Original Sin II','Arcade','Board or card games']},
    {label:'Books and audiobooks',items:['Lovecraft','Fantasy or science-fiction audiobook','Jonathan Strange','The Lord of the Rings — extended film, audiobook or music','Home library or other audiobook']},
+   {label:'Quiet learning',items:['Portuguese study','Dual-language Edda reading','History study','General reading']},
+   {label:'Craft and observation',items:['Wildlife photography practice','Amateur astronomy study']},
    {label:'Films and series',items:['Angel','Sherlock','Mr Church','Classic adventure film — such as Indiana Jones','Total Recall','Demolition Man','Sphere','Gattaca','Séance','Blackadder','The Last Kingdom','The Sopranos','Film or live entertainment']}
  ]},
  {id:'alfie-family',name:'Alfie and family',description:'Choose one shared ritual, play activity or family outing.',groups:[
    {label:'At home together',items:['Saturday morning family ritual — cuddles, songs, books and floor play','Read and sing to Alfie','Read nursery rhymes or Lovecraft to Alfie','Talk to Alfie, make faces and copy his sounds','Music with Dad — singing, guitar and family favourites','Dance together','Tummy time']},
    {label:'Out together',items:['Family walk','Longer family outing','Weekend away as a family','Zoo, aquarium, gardens, beach or children’s concert']}
  ]},
- {id:'couple-household',name:'Couple and household time',description:'Choose intentional time for shared enjoyment, direction or recovery with Debora and within the household.',groups:[
-   {label:'Shared enjoyment',items:['Date night','Cooking night','Music night','Reading night','Game night','Cultural night']},
-   {label:'Shared direction',items:['Planning night','Relationship reflection','Household-alignment conversation']},
-   {label:'Shared recovery',items:['Wellness night','Stretching and quiet recovery','Early-rest evening']}
- ]},
  {id:'outings',name:'Outings and travel',description:'Choose a simple outing, social or cultural event, or a larger journey and adventure.',groups:[
    {label:'Simple outings',items:['Cafe visit','Beach','Bush walk','Clarke’s Point','Picnic or barbecue','Shopping trip or city sightseeing','Spa']},
    {label:'Dining and social outings',items:['Restaurant','Kong Korean BBQ — Macquarie Centre','Brazilian barbecue — BahBQ','Sfogliatelle — Trovatino','NEL restaurant','Pub night or drinks out','Dinner party with friends']},
-   {label:'Cultural outings and entertainment',items:['Orpheum cinema','Museum of Sydney','The Oaks comedy night','Brazilian Community Centre — Marrickville','Festival or market','Art gallery or cultural event','Opera or symphony']},
+   {label:'Cultural outings and entertainment',items:['Orpheum cinema','Museum of Sydney','The Oaks comedy night','Brazilian Community Centre — Marrickville','Festival or market','Art gallery or cultural event','Opera or symphony','Blacksmithing at Eveleigh Works']},
    {label:'Active outings',items:['Cockatoo Island camping','9 Degrees Lane Cove','Beginner archery — Sydney Olympic Park','Axe throwing — Glenworth Valley','Horse riding — Glenworth Valley','Cycling or fitness outing','Camping']},
    {label:'Plan a journey or larger experience',items:['Plan the family heritage trip to Palmi','Plan the Spain and England trip — Devon and Cornwall','Plan a Universal Epic Universe visit','Plan a weekend away','Plan a road trip or heritage tour']},
    {label:'Travel and adventure',items:['Weekend away','Road trip','Heritage tour','Camping trip','Cooking class or wine course','Hot-air ballooning','Sailing','Skiing','Spelunking or caving','Scuba diving']}
  ]},
- {id:'culture-home',name:'Hygge and household atmosphere',description:'Choose a quiet learning, heritage, creative, cultivation or household-atmosphere activity.',groups:[
-   {label:'Quiet learning',items:['Portuguese study','Icelandic — Anki or make cards','Dual-language Edda reading','History study','Review, refresh or learn poetry','General reading']},
-   {label:'Culture and inheritance',items:['Recreationist clothing','Mediaeval clothing','Traditional or historical food','Heritage or historical visit','Compose or arrange Psalmody']},
-   {label:'Craft and observation',items:['Blacksmithing at Eveleigh Works','Wildlife photography practice','Amateur astronomy study']},
-   {label:'Gardening and preservation',items:['Gardening','Grow herbs, vegetables or mushrooms','Compost, leafmould or soil care','Ferment food or make preserves','Prepare herbal tea']},
-   {label:'Hygge and household atmosphere',items:['Candles or essential oils','Indoor plants or seasonal branches','Arrange natural textures, books or nature artefacts','Set the table or prepare breakfast in bed','Observe a holiday or seasonal tradition','Warm tea or hot chocolate by low light']}
+ {id:'couple-household',name:'Couple and household time',description:'Choose intentional time for shared enjoyment, direction, cultivation or recovery with Debora and within the household.',groups:[
+   {label:'Shared enjoyment',items:['Date night','Cooking night','Music night','Reading night','Game night','Cultural night']},
+   {label:'Shared direction',items:['Planning night','Relationship reflection','Household-alignment conversation']},
+   {label:'Shared recovery',items:['Wellness night','Stretching and quiet recovery','Early-rest evening']},
+   {label:'Household cultivation',items:['Gardening','Grow herbs, vegetables or mushrooms','Compost, leafmould or soil care','Ferment food or make preserves','Prepare herbal tea']},
+   {label:'Household atmosphere',items:['Candles or essential oils','Indoor plants or seasonal branches','Arrange natural textures, books or nature artefacts','Set the table or prepare breakfast in bed','Warm tea or hot chocolate by low light']}
  ]}
 ];
-function activityLevels(lib){const library=lib||(typeof state!=='undefined'&&state.library?state.library:DEFAULT_LIBRARY);return [{id:'cultural-spiritual',name:'Cultural and spiritual practice',description:'Choose a deliberate Orans, submersion, psalmody, inherited-music or recreationist practice.',groups:[{label:'Practices',items:(library.culturalSpiritualActivities||[]).map(x=>x.label)}]},...ACTIVITY_LEVELS]}
+const CULTURAL_ACTIVITY_LEVEL={id:'cultural-spiritual',name:'Cultural and spiritual practice',description:'Choose an inherited, historical or recreationist cultural practice.',groups:[{label:'Practices',items:(DEFAULT_LIBRARY.culturalSpiritualActivities||[]).map(x=>x.label)},{label:'Culture and inheritance',items:['Recreationist clothing','Mediaeval clothing','Traditional or historical food','Heritage or historical visit','Observe a holiday or seasonal tradition']}]};
+const ACTIVITY_SECTION_ORDER=['recreation','alfie-family','outings','couple-household','cultural-spiritual'];
+const DEFAULT_ACTIVITY_LEVELS=[...ACTIVITY_LEVELS,CULTURAL_ACTIVITY_LEVEL];
+DEFAULT_LIBRARY.activityLevels=clone(DEFAULT_ACTIVITY_LEVELS);
+function normaliseActivityLevels(levels){
+ const source=Array.isArray(levels)&&levels.length?levels:DEFAULT_ACTIVITY_LEVELS;
+ const normalised=source.map((level,li)=>({
+  id:String(level?.id||`activity-${li+1}`),
+  name:String(level?.name||`Activity ${li+1}`),
+  description:String(level?.description||''),
+  groups:(Array.isArray(level?.groups)?level.groups:[]).map((group,gi)=>({label:String(group?.label||`Group ${gi+1}`),items:(Array.isArray(group?.items)?group.items:[]).map(x=>String(x)).filter(Boolean)}))
+ }));
+ const rank=new Map(ACTIVITY_SECTION_ORDER.map((id,index)=>[id,index]));
+ return normalised.sort((a,b)=>(rank.get(a.id)??999)-(rank.get(b.id)??999));
+}
+function activityLevels(lib){const library=lib||(typeof state!=='undefined'&&state.library?state.library:DEFAULT_LIBRARY);return normaliseActivityLevels(library.activityLevels)}
 const MOVEMENT_REQUIREMENTS=[
 {id:'light',name:'Light activity',target:7,time:'Several hours across the day',frequency:'Daily; break up prolonged sitting',choices:['Walking and ordinary movement','Cycling','Household movement','Gentle swim','Light calisthenics','Other light activity']},
 {id:'moderate',name:'Moderate or vigorous activity',target:5,time:'30 minutes or more',frequency:'Most days',choices:['Swimming or class','Running','Cycling','Martial arts','Horse riding','Bouldering or climbing','Archery','Fencing','Salsa dancing','Other moderate or vigorous activity']},
 {id:'mobility',name:'Mobility, balance and coordination',target:3,time:'10–30 minutes',frequency:'3 or more days each week',choices:['Yoga','Stretching','Balance and coordination work','Mobility routine']},
-{id:'strength',name:'Muscle strengthening',target:2,time:'30–60 minutes',frequency:'2 or more days each week',choices:['Gym','Calisthenics','Canoeing or kayaking','Stand-up paddleboarding','Other resistance work']}
+{id:'strength',name:'Muscle strengthening',target:2,time:'30–60 minutes',frequency:'2 or more days each week',choices:['Gym','Calisthenics','Canoeing or kayaking','Other resistance work']}
 ];
 function todayISO(){const d=new Date();const off=d.getTimezoneOffset();return new Date(d.getTime()-off*60000).toISOString().slice(0,10)}
 function clone(x){return JSON.parse(JSON.stringify(x))}
 function escapeHTML(s=''){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 function roundQuarter(n){return Math.round((Number(n)||0)*4)/4}
 function formatHours(n){n=Number(n)||0;const h=Math.floor(n);const m=Math.round((n-h)*60);if(!h&&m)return `${m}m`;return `${h}h${m?` ${m}m`:''}`}
-function formatTimer(seconds){seconds=Math.max(0,Math.floor(seconds||0));const h=Math.floor(seconds/3600),m=Math.floor((seconds%3600)/60),s=seconds%60;return h?`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`:`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`}
+function formatTimer(seconds){seconds=Math.max(0,Math.floor(seconds||0));const h=Math.floor(seconds/3600),m=Math.floor((seconds%3600)/60),s=seconds%60;return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`}
 function uid(prefix){return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2,7)}`}
 function blankTimer(){return {elapsed:0,startedAt:null}}
 function defaultAllocation(){return WORK_DOMAINS.map(domain=>({domain,pct:PRESETS.music[domain]}))}
@@ -495,7 +1052,7 @@ function ensureTrelloDuty(log){
 }
 function defaultLifeLog(lib){return {activities:Object.fromEntries(activityLevels(lib).map(x=>[x.id,{choice:'',done:false}])),movement:Object.fromEntries(MOVEMENT_REQUIREMENTS.map(r=>[r.id,{choice:r.choices[0],done:false}])),notes:''}}
 function defaultVocalLog(){return {practice:Object.fromEntries(VOCAL_PRACTICE.map(x=>[x.id,false])),support:Object.fromEntries(VOCAL_SUPPORT.map(x=>[x.id,false])),notes:''}}
-function defaultState(){return {version:21,dailyHours:6,season:clone(DEFAULT_SEASON),allocation:defaultAllocation(),outcomes:clone(OUTCOME_DEFAULTS),dreams:clone(DREAM_DEFAULTS),practices:clone(DEFAULT_PRACTICES),library:clone(DEFAULT_LIBRARY),dailyLogs:{},writingLogs:{},lifeLogs:{},vocalLogs:{}}}
+function defaultState(){return {version:27,dailyHours:6,season:clone(DEFAULT_SEASON),allocation:defaultAllocation(),outcomes:clone(OUTCOME_DEFAULTS),dreams:clone(DREAM_DEFAULTS),practices:clone(DEFAULT_PRACTICES),library:clone(DEFAULT_LIBRARY),dailyLogs:{},writingLogs:{},lifeLogs:{},vocalLogs:{}}}
 function mergeLibrary(raw,oldVersion=0){
  const out=clone(DEFAULT_LIBRARY);
  if(!raw||typeof raw!=='object')return out;
@@ -513,6 +1070,12 @@ function mergeLibrary(raw,oldVersion=0){
   if(Array.isArray(out[k])&&Array.isArray(raw[k])&&raw[k].length)out[k]=raw[k].map(x=>({...x}));
   else if(typeof out[k]==='string'&&typeof raw[k]==='string')out[k]=raw[k]
  });
+ if(!Array.isArray(raw.activityLevels)){
+  const cultural=out.activityLevels.find(x=>x.id==='cultural-spiritual');
+  const practices=cultural&&cultural.groups.find(g=>g.label==='Practices');
+  if(practices&&Array.isArray(raw.culturalSpiritualActivities)&&raw.culturalSpiritualActivities.length)practices.items=raw.culturalSpiritualActivities.map(x=>String(x.label||'')).filter(Boolean)
+ }
+ out.activityLevels=normaliseActivityLevels(out.activityLevels);
  const legacy={
   musicActivities:new Set(['project-demos','project-pipeline','repertoire','repertoire-review','vocal-technique','guitar-technique','performance-run','record-demo','edit-demo','backings-binders','website-offer','find-leads','send-enquiries','follow-up','quote-proposal','contemporary','weddings','funeral','jazz','bragi']),
   writingStages:new Set(['plan','draft','edit','publishing']),
@@ -529,14 +1092,20 @@ function mergeLibrary(raw,oldVersion=0){
   const rehearse=out.actingStages.find(x=>x.id==='rehearse');if(rehearse)rehearse.alfie='both';
   if(!out.supportDuties.some(x=>x.id==='trello'))out.supportDuties.unshift(clone(DEFAULT_LIBRARY.supportDuties.find(x=>x.id==='trello')))
  }
- if(oldVersion<18&&!out.musicProjects.some(x=>x.id==='project-psalmody'))out.musicProjects.push(clone(DEFAULT_LIBRARY.musicProjects.find(x=>x.id==='project-psalmody')));
  if(oldVersion<19){
   const updates={
-   culturalSpiritualActivities:{'psalmody-practice':{label:'Sing or practise Psalmody'}},
    supportDuties:{'alfred-care':{group:'Alfie'},'alfred-play':{group:'Alfie'},'alfred-walk':{group:'Alfie',label:'Walk or outing with Alfie'},'alfred-settle':{group:'Alfie'}}
   };
   Object.entries(updates).forEach(([key,map])=>Object.entries(map).forEach(([id,patch])=>{const item=(out[key]||[]).find(x=>x.id===id);if(item)Object.assign(item,patch)}));
  }
+ if(oldVersion<23&&!out.actingMaterials.some(x=>x.id==='odda-younger'))out.actingMaterials.push(clone(DEFAULT_LIBRARY.actingMaterials.find(x=>x.id==='odda-younger')));
+ if(oldVersion<24){
+  const retainedCulturalIds=new Set(['inherited-music','recreationist-practice']);
+  out.culturalSpiritualActivities=(out.culturalSpiritualActivities||[]).filter(x=>retainedCulturalIds.has(x.id));
+  if(!out.culturalSpiritualActivities.length)out.culturalSpiritualActivities=clone(DEFAULT_LIBRARY.culturalSpiritualActivities);
+ }
+ out.musicProjects=[];
+ out.actingProjectTitle='Acting';
  return out
 }
 function normalisePractice(p){const fallback=DEFAULT_PRACTICES.find(x=>x.id===p.id);return {...(fallback||{}),...p,alfie:typeof p.alfie==='boolean'?p.alfie:(fallback?fallback.alfie:false),tier:(fallback&&fallback.tier)||p.tier||'supporting'}}
@@ -545,7 +1114,7 @@ function migrateMusicId(v,lib){const map={'music-repertoire':'repertoire','reper
 function migrateWritingStage(v,lib){const map={'Plan':'plan','Draft':'draft','Edit':'edit','Publishing':'publishing','writing-1000':'draft','writing-outline':'plan','writing-edit':'edit','writing-publish':'publishing'};const id=map[v]||String(v||'').toLowerCase().replace(/\s+/g,'-');return lib.writingStages.some(x=>x.id===id)?id:firstItem(lib.writingStages).id}
 function migrateWritingProject(v,lib){const map={'Thy Eternal Winter':'thy-eternal-winter',"Children's book":'childrens-book','project:project-thy-eternal-winter':'thy-eternal-winter','project:project-owl-fred-giant':'childrens-book'};const id=map[v]||v;return lib.writingProjects.some(x=>x.id===id)?id:firstItem(lib.writingProjects).id}
 function migrateActingStage(v,lib){const map={'Prepare':'prepare','Learn lines':'learn-lines','Rehearse':'rehearse','Record':'record','Playback review':'playback','Edit materials':'playback','Submit or follow up':'submit-follow-up','acting-playback':'playback','acting-submit':'submit-follow-up','edit-materials':'playback'};const id=map[v]||String(v||'').toLowerCase().replace(/\s+/g,'-');return lib.actingStages.some(x=>x.id===id)?id:firstItem(lib.actingStages).id}
-function migrateActingMaterial(v,lib){const map={'Two-scene acting test':'emma','Emma — Mr Knightley':'emma','A Few Good Men — drunk scene':'few-good-men','acting-emma':'emma','acting-few-good-men':'few-good-men','acting-test':'emma','project:project-acting-test':'emma'};const id=map[v]||v;return lib.actingMaterials.some(x=>x.id===id)?id:firstItem(lib.actingMaterials).id}
+function migrateActingMaterial(v,lib){const map={'Two-scene acting test':'emma','Emma — Mr Knightley':'emma','A Few Good Men — drunk scene':'few-good-men','acting-emma':'emma','acting-few-good-men':'few-good-men','acting-test':'emma','project:project-acting-test':'emma','Odda the Younger — The Last Kingdom':'odda-younger','acting-odda':'odda-younger'};const id=map[v]||v;return lib.actingMaterials.some(x=>x.id===id)?id:firstItem(lib.actingMaterials).id}
 function migrateWorkRow(domain,row,lib){const timer=row.timer||blankTimer();if(domain==='Music'){
   const old=row.activity||'',projectIds=new Set((lib.musicProjects||[]).map(x=>x.id)),offerIds=new Set((lib.musicOffers||[]).map(x=>x.id));
   let project=row.project||'',offer=row.offer||'',activity=old;
@@ -559,7 +1128,7 @@ function migrateWorkRow(domain,row,lib){const timer=row.timer||blankTimer();if(d
  const stage=migrateActingStage(row.stage||row.activity||'prepare',lib),item=lib.actingStages.find(x=>x.id===stage)||firstItem(lib.actingStages);return {id:row.id||uid('a'),stage,material:migrateActingMaterial(row.material||row.project||row.activity||'emma',lib),context:normaliseContext(row.context,item),result:row.result||row.note||'',duration:Number(row.duration)||0,done:!!row.done,timer}
 }
 function findActivityChoice(choice,lib){for(const level of activityLevels(lib))for(const group of level.groups)if(group.items.includes(choice))return level.id;return null}
-function migrateLifeLog(old,lib){const fresh=defaultLifeLog(lib);if(!old||typeof old!=='object')return fresh;const pool=[];if(Array.isArray(old.activities))old.activities.forEach(x=>pool.push(x));else if(old.activities&&typeof old.activities==='object')Object.values(old.activities).forEach(x=>pool.push(x));const older=old.interests||old.pursuits||[];if(Array.isArray(older))older.forEach(x=>pool.push(x));pool.forEach(x=>{if(!x||!x.choice)return;let choice=x.choice;if(choice==='Poetry memorisation')choice='Review, refresh or learn poetry';if(choice==='Psalmody')choice='Sing or practise Psalmody';const id=findActivityChoice(choice,lib);if(id)fresh.activities[id]={choice,done:!!x.done}});if(old.movement)fresh.movement=clone(old.movement);fresh.notes=old.notes||'';return fresh}
+function migrateLifeLog(old,lib){const fresh=defaultLifeLog(lib);if(!old||typeof old!=='object')return fresh;const pool=[];if(Array.isArray(old.activities))old.activities.forEach(x=>pool.push(x));else if(old.activities&&typeof old.activities==='object')Object.values(old.activities).forEach(x=>pool.push(x));const older=old.interests||old.pursuits||[];if(Array.isArray(older))older.forEach(x=>pool.push(x));pool.forEach(x=>{if(!x||!x.choice)return;let choice=x.choice;if(choice==='Poetry memorisation')choice='Review, refresh or learn poetry';const id=findActivityChoice(choice,lib);if(id)fresh.activities[id]={choice,done:!!x.done}});if(old.movement)fresh.movement=clone(old.movement);MOVEMENT_REQUIREMENTS.forEach(r=>{if(!fresh.movement[r.id])fresh.movement[r.id]={choice:r.choices[0],done:false};if(!r.choices.includes(fresh.movement[r.id].choice))fresh.movement[r.id].choice=r.choices[0]});fresh.notes=old.notes||'';return fresh}
 function mergeDreams(rawDreams){
  const list=Array.isArray(rawDreams)?rawDreams.filter(x=>x&&x.id):[],map=new Map(list.map(x=>[x.id,x])),legacy=map.get('debora-gifts');
  const seeded=DREAM_DEFAULTS.map(seed=>{let saved=map.get(seed.id)||{};if(!Object.keys(saved).length&&legacy&&['engagement-ring','alfred-pendant'].includes(seed.id))saved=legacy;return {...clone(seed),...saved,id:seed.id,details:Array.isArray(saved.details)?saved.details:clone(seed.details),archived:!!saved.archived}});
@@ -568,14 +1137,15 @@ function mergeDreams(rawDreams){
  return seeded.concat(extras)
 }
 function mergeState(raw){const d=defaultState();if(!raw||typeof raw!=='object')return d;const oldVersion=Number(raw.version)||0,library=mergeLibrary(raw.library,oldVersion);const oldPractices=Array.isArray(raw.practices)?raw.practices:[];const pmap=new Map(oldPractices.map(p=>[p.id,p]));const practices=DEFAULT_PRACTICES.map(p=>normalisePractice(pmap.has(p.id)?{...pmap.get(p.id),...p}:p));if(!pmap.has('p-medication')){const oldFin=pmap.get('p-finasteride');if(oldFin)practices.find(p=>p.id==='p-medication').note=DEFAULT_PRACTICES.find(p=>p.id==='p-medication').note}
- const dailyLogs={};Object.entries(raw.dailyLogs||{}).forEach(([date,old])=>{const oldFoundations=old.foundations||{},foundations={...oldFoundations};if(oldFoundations['p-voice']&&!('p-vocal' in foundations))foundations['p-vocal']=false;if(oldFoundations['p-family']&&!('p-debora' in foundations))foundations['p-debora']=false;if(oldFoundations['p-family'])foundations['p-alfie']=true;delete foundations['p-family'];const log={hours:Number(old.hours)||Number(raw.dailyHours)||6,activities:{Music:[],Writing:[],Acting:[]},support:[],foundations,win:old.win||'',tomorrow:old.tomorrow||'',notes:old.notes||''};if(old.activities){WORK_DOMAINS.forEach(domain=>(old.activities[domain]||[]).forEach(row=>log.activities[domain].push(migrateWorkRow(domain,row,library))))}else if(Array.isArray(old.blocks)){old.blocks.forEach(row=>{if(WORK_DOMAINS.includes(row.domain))log.activities[row.domain].push(migrateWorkRow(row.domain,row,library));else if(row.domain==='Administration')log.support.push(defaultSupportRow())})}WORK_DOMAINS.forEach(domain=>{if(!log.activities[domain].length)log.activities[domain]=[defaultWorkRow(domain)]});(old.support||[]).forEach(row=>{const category=row.category||row.type||'Admin';const match=library.supportDuties.find(x=>x.id===row.duty)||lookupByLabel(library.supportDuties,row.detail||row.result)||library.supportDuties.find(x=>x.group===category)||firstItem(library.supportDuties);log.support.push({id:row.id||uid('s'),category:match.group,duty:match.id,detail:row.detail||row.result||match.label,duration:Number(row.duration)||.5,done:!!row.done,timer:row.timer||blankTimer(),locked:match.id==='trello'})});ensureTrelloDuty(log);dailyLogs[date]=log});
+ const dailyLogs={};Object.entries(raw.dailyLogs||{}).forEach(([date,old])=>{const oldFoundations=old.foundations||{},foundations={...oldFoundations};if(oldFoundations['p-voice']&&!('p-vocal' in foundations))foundations['p-vocal']=false;if(oldFoundations['p-family']&&!('p-debora' in foundations))foundations['p-debora']=false;if(oldFoundations['p-family'])foundations['p-alfie']=true;if((oldFoundations['p-mouth']||oldFoundations['p-skin'])&&!('p-personal-care' in foundations))foundations['p-personal-care']=true;delete foundations['p-family'];delete foundations['p-mouth'];delete foundations['p-skin'];if(oldFoundations['p-needling']&&!('p-minox-1' in foundations))foundations['p-minox-1']=true;delete foundations['p-needling'];delete foundations['p-presentation'];delete foundations['p-friendliness'];delete foundations['p-meditate'];const oldTrello=(old.support||[]).find(row=>row&&((row.duty==='trello')||String(row.detail||row.result||'').includes('current Trello to-do list')));if(oldTrello&&oldTrello.done&&!('p-trello' in foundations))foundations['p-trello']=true;const log={hours:Number(old.hours)||Number(raw.dailyHours)||6,activities:{Music:[],Writing:[],Acting:[]},support:[],foundations,win:old.win||'',tomorrow:old.tomorrow||'',notes:old.notes||''};if(old.activities){WORK_DOMAINS.forEach(domain=>(old.activities[domain]||[]).forEach(row=>log.activities[domain].push(migrateWorkRow(domain,row,library))))}else if(Array.isArray(old.blocks)){old.blocks.forEach(row=>{if(WORK_DOMAINS.includes(row.domain))log.activities[row.domain].push(migrateWorkRow(row.domain,row,library));else if(row.domain==='Administration')log.support.push(defaultSupportRow())})}WORK_DOMAINS.forEach(domain=>{if(!log.activities[domain].length)log.activities[domain]=[defaultWorkRow(domain)]});(old.support||[]).forEach(row=>{const category=row.category||row.type||'Admin';const match=library.supportDuties.find(x=>x.id===row.duty)||lookupByLabel(library.supportDuties,row.detail||row.result)||library.supportDuties.find(x=>x.group===category)||firstItem(library.supportDuties);log.support.push({id:row.id||uid('s'),category:match.group,duty:match.id,detail:row.detail||row.result||match.label,duration:Number(row.duration)||.5,done:!!row.done,timer:row.timer||blankTimer(),locked:match.id==='trello'})});dailyLogs[date]=log});
  if(oldVersion<12){const legacyDefaults=new Set([...DEFAULT_LIBRARY.musicActivities.map(x=>x.result),...DEFAULT_LIBRARY.writingStages.map(x=>x.result),...DEFAULT_LIBRARY.actingStages.map(x=>x.result)].filter(Boolean));Object.values(dailyLogs).forEach(log=>WORK_DOMAINS.forEach(domain=>(log.activities[domain]||[]).forEach(row=>{if(legacyDefaults.has(row.result))row.result=''})))}
  const writingLogs={};Object.entries(raw.writingLogs&&typeof raw.writingLogs==='object'?raw.writingLogs:{}).forEach(([date,entry])=>{const item={...entry};if(!item.method||(oldVersion<13&&item.method==='Outline + TTGs + Mythic'))item.method='Free drafting';item.target=Math.max(0,Number(item.target)||1000);writingLogs[date]=item});
  const lifeLogs={};Object.entries(raw.lifeLogs||{}).forEach(([date,old])=>lifeLogs[date]=migrateLifeLog(old,library));
  const vocalLogs={};Object.entries(raw.vocalLogs||{}).forEach(([date,old])=>{const fresh=defaultVocalLog();if(old&&typeof old==='object'){VOCAL_PRACTICE.forEach(x=>fresh.practice[x.id]=!!old.practice?.[x.id]);VOCAL_SUPPORT.forEach(x=>fresh.support[x.id]=!!old.support?.[x.id]);fresh.notes=String(old.notes||'')}vocalLogs[date]=fresh});
  const outcomes=clone(OUTCOME_DEFAULTS);WORK_DOMAINS.forEach(domain=>{const source=raw.outcomes&&raw.outcomes[domain];if(source&&typeof source==='object')outcomes[domain]={...outcomes[domain],...source,progress:Math.max(0,Math.min(100,Number(source.progress??outcomes[domain].progress)||0))}});
  const dreams=mergeDreams(raw.dreams);const season={...clone(DEFAULT_SEASON),...(raw.season&&typeof raw.season==='object'?raw.season:{})};season.hours=Math.max(0,Number(season.hours)||DEFAULT_SEASON.hours);
- return {...d,version:21,dailyHours:Number(raw.dailyHours??((Number(raw.weeklyHours)||30)/5))||6,season,allocation:WORK_DOMAINS.map(domain=>({domain,pct:Number(((raw.allocation||[]).find(a=>a.domain===domain)||{}).pct??PRESETS.music[domain])||0})),outcomes,dreams,practices,library,dailyLogs,writingLogs,lifeLogs,vocalLogs}
+ if(oldVersion<27){outcomes.Acting.phase='Prepare and execute the acting reel test'}
+ return {...d,version:27,dailyHours:Number(raw.dailyHours??((Number(raw.weeklyHours)||30)/5))||6,season,allocation:WORK_DOMAINS.map(domain=>({domain,pct:Number(((raw.allocation||[]).find(a=>a.domain===domain)||{}).pct??PRESETS.music[domain])||0})),outcomes,dreams,practices,library,dailyLogs,writingLogs,lifeLogs,vocalLogs}
 }
 function loadState(){try{return mergeState(JSON.parse(localStorage.getItem(STORAGE_KEY)))}catch(e){return defaultState()}}
 let state=loadState(),activeDate=todayISO(),saveTimer;
@@ -590,7 +1160,7 @@ function ensureOutcome(domain){if(!state.outcomes||typeof state.outcomes!=='obje
 function renderOutcome(domain){const row=ensureOutcome(domain),progress=Math.round(row.progress);return `<details class="outcome-details"><summary><div class="outcome-summary-copy"><strong>Outcome and current phase</strong><span>${escapeHTML(row.target)} · ${escapeHTML(row.phase)}</span></div></summary><div class="outcome-target"><div><label>Outcome target</label><input data-outcome-field="${domain}|target" value="${escapeHTML(row.target)}"></div><div><label>Current phase</label><input data-outcome-field="${domain}|phase" value="${escapeHTML(row.phase)}"></div><div class="outcome-progress-wrap"><label>Estimated progress</label><div class="outcome-progress-line"><div class="progress"><span style="width:${progress}%"></span></div><input type="number" min="0" max="100" step="5" data-outcome-progress="${domain}" value="${progress}"></div></div><div><label>Target date</label><input type="date" data-outcome-field="${domain}|due" value="${escapeHTML(row.due)}"></div><div class="outcome-proof"><strong>Achieved when</strong><input data-outcome-field="${domain}|proof" value="${escapeHTML(row.proof)}"></div></div></details>`}
 function bindOutcomeControls(){document.querySelectorAll('[data-outcome-field]').forEach(el=>el.oninput=()=>{const [domain,field]=el.dataset.outcomeField.split('|');ensureOutcome(domain)[field]=el.value;saveState()});document.querySelectorAll('[data-outcome-progress]').forEach(el=>el.onchange=()=>{ensureOutcome(el.dataset.outcomeProgress).progress=Math.max(0,Math.min(100,Number(el.value)||0));saveState();renderWork()})}
 function ensureWritingLog(date){if(!state.writingLogs[date])state.writingLogs[date]={words:0,target:1000,method:'Free drafting',note:''};const row=state.writingLogs[date];row.target=Math.max(0,Number(row.target)||1000);return row}
-function ensureLog(date){if(!state.dailyLogs[date])state.dailyLogs[date]={hours:state.dailyHours,activities:{Music:[defaultWorkRow('Music','alfie',state.library)],Writing:[defaultWorkRow('Writing','alfie',state.library)],Acting:[defaultWorkRow('Acting','free',state.library)]},support:[trelloSupportRow()],foundations:{},win:'',tomorrow:'',notes:''};const log=state.dailyLogs[date];if(!log.activities)log.activities={};WORK_DOMAINS.forEach(d=>{if(!Array.isArray(log.activities[d])||!log.activities[d].length)log.activities[d]=[defaultWorkRow(d,null,state.library)];log.activities[d].forEach(r=>{ensureTimer(r);if(d==='Music'){if(typeof r.project!=='string')r.project='';if(typeof r.offer!=='string')r.offer=''}ensureWorkContext(d,r)})});if(!Array.isArray(log.support))log.support=[];log.support.forEach(r=>{if(!r.category)r.category='Admin';if(!r.duty)r.duty='messages';if(typeof r.detail!=='string')r.detail='';ensureTimer(r)});ensureTrelloDuty(log);if(!log.foundations)log.foundations={};['win','tomorrow','notes'].forEach(k=>{if(typeof log[k]!=='string')log[k]=''});return log}
+function ensureLog(date){if(!state.dailyLogs[date])state.dailyLogs[date]={hours:state.dailyHours,activities:{Music:[defaultWorkRow('Music','alfie',state.library)],Writing:[defaultWorkRow('Writing','alfie',state.library)],Acting:[defaultWorkRow('Acting','free',state.library)]},support:[],foundations:{},win:'',tomorrow:'',notes:''};const log=state.dailyLogs[date];if(!log.activities)log.activities={};WORK_DOMAINS.forEach(d=>{if(!Array.isArray(log.activities[d])||!log.activities[d].length)log.activities[d]=[defaultWorkRow(d,null,state.library)];log.activities[d].forEach(r=>{ensureTimer(r);if(d==='Music'){if(typeof r.project!=='string')r.project='';if(typeof r.offer!=='string')r.offer=''}ensureWorkContext(d,r)})});if(!Array.isArray(log.support))log.support=[];log.support.forEach(r=>ensureTimer(r));if(!log.foundations)log.foundations={};['win','tomorrow','notes'].forEach(k=>{if(typeof log[k]!=='string')log[k]=''});return log}
 function ensureLifeLog(date){if(!state.lifeLogs[date])state.lifeLogs[date]=defaultLifeLog(state.library);const log=state.lifeLogs[date];if(!log.activities||Array.isArray(log.activities))log.activities=defaultLifeLog(state.library).activities;activityLevels(state.library).forEach(x=>{if(!log.activities[x.id])log.activities[x.id]={choice:'',done:false}});if(!log.movement)log.movement=defaultLifeLog(state.library).movement;MOVEMENT_REQUIREMENTS.forEach(r=>{if(!log.movement[r.id])log.movement[r.id]={choice:r.choices[0],done:false}});if(typeof log.notes!=='string')log.notes='';return log}
 function selectedLibraryItem(domain,row){if(domain==='Music')return state.library.musicActivities.find(x=>x.id===row.activity)||firstItem(state.library.musicActivities);if(domain==='Writing')return state.library.writingStages.find(x=>x.id===row.stage)||firstItem(state.library.writingStages);return state.library.actingStages.find(x=>x.id===row.stage)||firstItem(state.library.actingStages)}
 function domainPlanned(log,domain){return roundQuarter((log.activities[domain]||[]).reduce((s,r)=>s+(Number(r.duration)||0),0))}
@@ -605,19 +1175,27 @@ function normaliseContext(context,item){const value=compatibilityValue(item);if(
 function workItems(domain,lib=state.library){return domain==='Music'?lib.musicActivities:(domain==='Writing'?lib.writingStages:lib.actingStages)}
 function rowWorkItem(domain,row,lib=state.library){const items=workItems(domain,lib),id=domain==='Music'?row.activity:row.stage;return items.find(x=>x.id===id)||firstItem(items)}
 function ensureWorkContext(domain,row){const item=rowWorkItem(domain,row);row.context=normaliseContext(row.context,item);return row.context}
-function contextWorkOptions(items,selected,context,useGroups=false){const matches=items.filter(x=>contextCompatible(x,context));if(useGroups){const names=[...new Set(matches.map(x=>x.group||'Other'))];return names.map(name=>`<optgroup label="${escapeHTML(name)}">${matches.filter(x=>(x.group||'Other')===name).map(x=>`<option value="${escapeHTML(x.id)}" ${x.id===selected?'selected':''}>${escapeHTML(x.label)}</option>`).join('')}</optgroup>`).join('')}return matches.map(x=>`<option value="${escapeHTML(x.id)}" ${x.id===selected?'selected':''}>${escapeHTML(x.label)}</option>`).join('')}
+function contextWorkOptions(items,selected,context,useGroups=false){const optionLabel=x=>`${x.label}${compatibilityValue(x)!=='no'?' [A]':''}`;if(useGroups){const names=[...new Set(items.map(x=>x.group||'Other'))];return names.map(name=>`<optgroup label="${escapeHTML(name)}">${items.filter(x=>(x.group||'Other')===name).map(x=>`<option value="${escapeHTML(x.id)}" ${x.id===selected?'selected':''}>${escapeHTML(optionLabel(x))}</option>`).join('')}</optgroup>`).join('')}return items.map(x=>`<option value="${escapeHTML(x.id)}" ${x.id===selected?'selected':''}>${escapeHTML(optionLabel(x))}</option>`).join('')}
 function groupedCompatibilityOptions(items,selected,prefixGroup=true){const groups=[{label:'Can do with Alfie in your arms',value:'yes'},{label:'Can do with or without Alfie',value:'both'},{label:'Needs free hands or separate attention',value:'no'}];return groups.map(g=>{const matches=items.filter(x=>compatibilityValue(x)===g.value);if(!matches.length)return'';return `<optgroup label="${g.label}">${matches.map(x=>`<option value="${escapeHTML(x.id)}" ${x.id===selected?'selected':''}>${escapeHTML(prefixGroup&&x.group?`${x.group} — ${x.label}`:x.label)}</option>`).join('')}</optgroup>`}).join('')}
 function flatOptions(items,selected){return items.map(x=>`<option value="${escapeHTML(x.id)}" ${x.id===selected?'selected':''}>${escapeHTML(x.label)}</option>`).join('')}
 function flatOptionsOptional(items,selected,emptyLabel){return `<option value="" ${!selected?'selected':''}>${escapeHTML(emptyLabel)}</option>`+flatOptions(items,selected)}
 function selectedMusicProjectNote(id){const item=state.library.musicProjects.find(x=>x.id===id);return item&&item.note?`<small class="selection-note">${escapeHTML(item.note)}</small>`:''}
-function renderTimer(row,key){ensureTimer(row);const running=!!row.timer.startedAt;return `<div class="timer-box"><span class="timer-display" data-timer-display="${key}">${formatTimer(timerSeconds(row))}</span><button class="timer-button ${running?'running':''}" data-timer-toggle="${key}">${running?'Pause':'Start'}</button><button class="timer-button" data-timer-reset="${key}">Reset</button></div>`}
+function renderTimer(row,key){ensureTimer(row);const running=!!row.timer.startedAt;return `<div class="timer-box"><input class="timer-display timer-input" data-timer-display="${key}" data-timer-input="${key}" value="${formatTimer(timerSeconds(row))}" inputmode="numeric" aria-label="Recorded time in hours, minutes and seconds" title="Type time as HH:MM:SS" spellcheck="false"><button class="timer-button ${running?'running':''}" data-timer-toggle="${key}">${running?'Pause':'Start'}</button><button class="timer-button" data-timer-reset="${key}">Reset</button></div>`}
 function timerSeconds(row){ensureTimer(row);return row.timer.elapsed+(row.timer.startedAt?Math.floor((Date.now()-row.timer.startedAt)/1000):0)}
+function parseTimerInput(value){
+ const raw=String(value||'').trim().toLowerCase();if(!raw)return 0;
+ const suffix=raw.match(/^(?:(\d+(?:\.\d+)?)\s*h)?\s*(?:(\d+(?:\.\d+)?)\s*m)?\s*(?:(\d+(?:\.\d+)?)\s*s)?$/);
+ if(suffix&&(suffix[1]||suffix[2]||suffix[3]))return Math.max(0,Math.round((Number(suffix[1])||0)*3600+(Number(suffix[2])||0)*60+(Number(suffix[3])||0)));
+ if(raw.includes(':')){const parts=raw.split(':').map(x=>Number(x.trim()));if(parts.some(x=>!Number.isFinite(x)||x<0))return null;if(parts.length===3)return Math.round(parts[0]*3600+parts[1]*60+parts[2]);if(parts.length===2)return Math.round(parts[0]*60+parts[1]);return null}
+ const minutes=Number(raw);return Number.isFinite(minutes)&&minutes>=0?Math.round(minutes*60):null
+}
+function setTimerFromInput(key,value){const row=rowFromTimerKey(key),seconds=parseTimerInput(value);if(!row||seconds===null){toast('Enter time as HH:MM:SS');return false}ensureTimer(row);row.timer.elapsed=seconds;if(row.timer.startedAt)row.timer.startedAt=Date.now();saveState();updateWorkProgress();return true}
 function rowFromTimerKey(key){const [kind,a,b]=key.split('|');const log=ensureLog(activeDate);if(kind==='work')return log.activities[a]?.[Number(b)];if(kind==='support')return log.support[Number(a)];return null}
 function pauseAllTimers(except=null){const now=Date.now();Object.values(state.dailyLogs||{}).forEach(log=>{const rows=[...WORK_DOMAINS.flatMap(d=>log.activities?.[d]||[]),...(log.support||[])];rows.forEach(row=>{ensureTimer(row);if(row!==except&&row.timer.startedAt){row.timer.elapsed+=Math.floor((now-row.timer.startedAt)/1000);row.timer.startedAt=null}})})}
 function toggleTimer(key){const row=rowFromTimerKey(key);if(!row)return;ensureTimer(row);if(row.timer.startedAt){row.timer.elapsed+=Math.floor((Date.now()-row.timer.startedAt)/1000);row.timer.startedAt=null}else{pauseAllTimers(row);row.timer.startedAt=Date.now()}saveState();renderWork()}
 function resetTimer(key){const row=rowFromTimerKey(key);if(!row)return;row.timer=blankTimer();saveState();renderWork()}
-function updateTimerDisplays(){document.querySelectorAll('[data-timer-display]').forEach(el=>{const row=rowFromTimerKey(el.dataset.timerDisplay);if(row)el.textContent=formatTimer(timerSeconds(row))})}
-function foundationItemHTML(p,log){const tier=p.tier||'supporting',tierLabel=tier==='core'?'Core':tier==='optional'?'Regular / as needed':'Supporting';return `<div class="foundation-item ${log.foundations[p.id]?'done':''}" data-foundation-item="${p.id}"><div class="foundation-main"><input type="checkbox" data-foundation-check="${p.id}" ${log.foundations[p.id]?'checked':''}><span class="foundation-text">${escapeHTML(p.text)}</span><span class="foundation-meta"><span class="foundation-tier ${tier}">${tierLabel}</span><span class="foundation-tag">${escapeHTML(p.frequency)}</span><span class="foundation-tag">${escapeHTML(p.timing||'As needed')}</span></span><button class="foundation-info-toggle" data-foundation-toggle="${p.id}" aria-label="Show more information">⌄</button></div><div class="foundation-detail">${escapeHTML(p.note)}</div></div>`}
+function updateTimerDisplays(){document.querySelectorAll('[data-timer-display]').forEach(el=>{const row=rowFromTimerKey(el.dataset.timerDisplay);if(row&&document.activeElement!==el)el.value=formatTimer(timerSeconds(row))});updateWorkProgress()}
+function foundationItemHTML(p,log){return `<div class="foundation-item ${log.foundations[p.id]?'done':''}" data-foundation-item="${p.id}"><div class="foundation-main"><input type="checkbox" data-foundation-check="${p.id}" ${log.foundations[p.id]?'checked':''}><span class="foundation-text">${escapeHTML(p.text)}</span><button class="foundation-info-toggle" data-foundation-toggle="${p.id}" aria-label="Show more information">⌄</button></div><div class="foundation-detail">${escapeHTML(p.note)}</div></div>`}
 function renderSeason(){
  if(!state.season||typeof state.season!=='object')state.season=clone(DEFAULT_SEASON);
  const season=state.season,host=document.getElementById('globalSeason');if(!host)return;
@@ -632,10 +1210,11 @@ function renderFoundations(){
  document.getElementById('foundationSupportScore').textContent=`${doneSupporting}/${supporting.length} supporting`;
  document.getElementById('foundationOverallScore').textContent=`${allDone} marked today`;
  const timingOrder=['Morning','Before going outdoors','Throughout the day','After Alfie handover','Morning or evening','Evening with film','Evening','Saturday','Focused practice','As needed'];
- const tierInfo=[['core','Core foundations','The minimum standard that defines a sound day.'],['supporting','Supporting practices','Useful daily practices that strengthen health, craft and order.'],['optional','Regular or as needed','Practices used on their relevant day or when circumstances call for them.']];
- const sideHTML=(items)=>tierInfo.map(([id,title,note])=>{const rows=items.filter(p=>(p.tier||'supporting')===id).sort((a,b)=>timingOrder.indexOf(a.timing)-timingOrder.indexOf(b.timing));return rows.length?`<div class="foundation-tier-section"><div class="foundation-tier-heading"><h3>${title}</h3><span>${note}</span></div><div class="foundation-list">${rows.map(p=>foundationItemHTML(p,log)).join('')}</div></div>`:''}).join('');
+ const tierInfo=[['core','Core foundations','The minimum standard that defines a sound day.'],['supporting','Supporting practices',''],['optional','Regular or as needed','']];
+ const sideHTML=(items)=>tierInfo.map(([id,title,note])=>{const rows=items.filter(p=>(p.tier||'supporting')===id).sort((a,b)=>timingOrder.indexOf(a.timing)-timingOrder.indexOf(b.timing));return rows.length?`<div class="foundation-tier-section"><div class="foundation-tier-heading"><h3>${title}</h3>${note?`<span>${note}</span>`:''}</div><div class="foundation-list">${rows.map(p=>foundationItemHTML(p,log)).join('')}</div></div>`:''}).join('');
  const withAlfie=state.practices.filter(p=>p.alfie),free=state.practices.filter(p=>!p.alfie);
- document.getElementById('foundationGroups').innerHTML=`<section class="card foundation-group-card"><div class="section-head compact"><div><span class="alfie-badge">With Alfie</span><h2>Can be done with Alfie in your arms</h2><p>Practices workable while holding, carrying or sitting with Alfie.</p></div></div>${sideHTML(withAlfie)}</section><section class="card foundation-group-card"><div class="section-head compact"><div><span class="alfie-badge">Free hands</span><h2>Needs free hands or separate attention</h2><p>Practices requiring both hands, preparation or separate concentration.</p></div></div>${sideHTML(free)}</section>`;
+ document.getElementById('foundationGroups').innerHTML=`<details class="guide-section foundation-guide-section" data-guide-section="foundations-alfie"${guideSectionOpenAttr('foundations-alfie')}><summary><div class="guide-section-summary-copy"><p class="kicker">Foundations</p><h2>Can be done with Alfie in your arms</h2></div></summary><div class="guide-section-body"><section class="card foundation-group-card">${sideHTML(withAlfie)}</section></div></details><details class="guide-section foundation-guide-section" data-guide-section="foundations-free"${guideSectionOpenAttr('foundations-free')}><summary><div class="guide-section-summary-copy"><p class="kicker">Foundations</p><h2>Needs free hands or separate attention</h2></div></summary><div class="guide-section-body"><section class="card foundation-group-card">${sideHTML(free)}</section></div></details>`;
+ bindGuideSections(document.getElementById('foundationGroups'));
  document.querySelectorAll('[data-foundation-check]').forEach(el=>el.onchange=()=>{log.foundations[el.dataset.foundationCheck]=el.checked;saveState();renderFoundations()});
  document.querySelectorAll('[data-foundation-toggle]').forEach(el=>el.onclick=()=>document.querySelector(`[data-foundation-item="${el.dataset.foundationToggle}"]`).classList.toggle('open'))
 }
@@ -661,49 +1240,107 @@ function renderVocal(){
  document.getElementById('vocalNotes').value=log.notes;
  document.querySelectorAll('[data-vocal-check]').forEach(el=>el.onchange=()=>{const [kind,id]=el.dataset.vocalCheck.split('|');ensureVocalLog(activeDate)[kind][id]=el.checked;saveState();renderVocal()})
 }
-function renderAllocation(){const log=ensureLog(activeDate),rows=document.getElementById('allocationRows');rows.innerHTML=WORK_DOMAINS.map(domain=>`<div class="allocation-row"><strong>${domain}</strong><select data-allocation="${domain}">${Array.from({length:21},(_,i)=>i*5).map(v=>`<option value="${v}" ${v===allocationPct(domain)?'selected':''}>${v}%</option>`).join('')}</select><span class="allocation-hours">${formatHours(targetHours(domain))}</span></div>`).join('');rows.querySelectorAll('[data-allocation]').forEach(el=>el.onchange=()=>{state.allocation.find(a=>a.domain===el.dataset.allocation).pct=Number(el.value);rebalanceAll();saveState();renderWork()});const total=WORK_DOMAINS.reduce((sum,d)=>sum+allocationPct(d),0);document.getElementById('allocationTotal').textContent=total+'%';let start=0,parts=[];WORK_DOMAINS.forEach(d=>{const p=allocationPct(d),end=start+p;parts.push(`${DOMAIN_COLOURS[d]} ${start}% ${end}%`);start=end});if(total<100)parts.push(`#53645d ${total}% 100%`);document.getElementById('allocationDonut').style.background=`conic-gradient(${parts.join(',')})`;document.getElementById('allocationLegend').innerHTML=WORK_DOMAINS.map(d=>`<div class="legend-row"><span class="legend-dot" style="background:${DOMAIN_COLOURS[d]}"></span><span>${d}</span><strong>${allocationPct(d)}% · ${formatHours(targetHours(d))}</strong></div>`).join('');const support=supportPlanned(log),creative=currentDailyHours(),planned=creative+support;document.getElementById('creativeHoursSummary').textContent=formatHours(creative)||'0h';document.getElementById('supportHoursSummary').textContent=formatHours(support)||'0h';document.getElementById('totalHoursSummary').textContent=formatHours(planned)||'0h';const msg=document.getElementById('allocationMessage');msg.className='total-message '+(total===100?'good':'warn');msg.textContent=total===100?'The full creative-work allocation is assigned.':total<100?`${100-total}% of creative work remains unallocated.`:`Creative-work allocation exceeds the day by ${total-100}%.`}
-function renderWorkRow(domain,row,index,context){const key=`work|${domain}|${index}`,common=`<input type="checkbox" data-work-done="${domain}|${index}" ${row.done?'checked':''}>`;if(domain==='Music')return `<div class="work-activity-row music-row ${row.done?'done':''}">${common}<div class="activity-wrap"><span class="row-label">Activity</span><select data-work-activity="${domain}|${index}">${contextWorkOptions(state.library.musicActivities,row.activity,context,true)}</select></div><div class="project-wrap"><span class="row-label">Headline project</span><select data-work-music-project="${index}">${flatOptionsOptional(state.library.musicProjects,row.project,'No headline project')}</select>${selectedMusicProjectNote(row.project)}</div><div class="offer-wrap"><span class="row-label">Offer</span><select data-work-music-offer="${index}">${flatOptionsOptional(state.library.musicOffers,row.offer,'No offer selected')}</select></div><div class="result-wrap"><span class="row-label">Concrete result</span><input class="result-input" data-work-result="${domain}|${index}" value="${escapeHTML(row.result||'')}" placeholder="What will be finished or advanced?"></div><div class="duration-wrap"><span class="row-label">Duration goal</span><select data-work-duration="${domain}|${index}">${durationOptions(row.duration)}</select></div><div class="timer-wrap"><span class="row-label">Timer</span>${renderTimer(row,key)}</div><button class="row-remove" data-work-remove="${domain}|${index}" title="Remove">×</button></div>`;const stages=domain==='Writing'?state.library.writingStages:state.library.actingStages,projects=domain==='Writing'?state.library.writingProjects:state.library.actingMaterials,selectedProject=domain==='Writing'?row.project:row.material;return `<div class="work-activity-row ${row.done?'done':''}">${common}<div class="activity-wrap"><span class="row-label">${domain==='Writing'?'Stage':'Activity'}</span><select data-work-stage="${domain}|${index}">${contextWorkOptions(stages,row.stage,context,false)}</select></div><div class="project-wrap"><span class="row-label">${domain==='Writing'?'Project':'Material'}</span><select data-work-project="${domain}|${index}">${flatOptions(projects,selectedProject)}</select></div><div class="result-wrap"><span class="row-label">Concrete result</span><input class="result-input" data-work-result="${domain}|${index}" value="${escapeHTML(row.result||'')}" placeholder="What will be finished or advanced?"></div><div class="duration-wrap"><span class="row-label">Duration goal</span><select data-work-duration="${domain}|${index}">${durationOptions(row.duration)}</select></div><div class="timer-wrap"><span class="row-label">Timer</span>${renderTimer(row,key)}</div><button class="row-remove" data-work-remove="${domain}|${index}" title="Remove">×</button></div>`}
-function renderWorkContext(domain,rows,context){const isAlfie=context==='alfie',title=isAlfie?'With Alfie':'Free hands',note=isAlfie?'Work that can be done while holding, feeding or settling Alfie.':'Work requiring both hands, equipment, a computer or separate concentration.';return `<section class="work-context-column ${isAlfie?'alfie-column':'free-column'}"><div class="work-context-head"><div><h3>${title}</h3><p>${note}</p></div><span class="work-context-badge">${isAlfie?'Alfie-compatible':'Separate attention'}</span></div><div class="work-activity-list">${rows.length?rows.map(({row,index})=>renderWorkRow(domain,row,index,context)).join(''):'<div class="work-context-empty">No activity selected for this side of the day.</div>'}</div><div class="work-context-actions"><button class="btn primary small" data-add-work="${domain}|${context}">+ Add activity</button></div></section>`}
-function domainHeading(domain){return domain==='Acting'?state.library.actingProjectTitle:`${domain} Today`}
+function workTimerSeconds(log=ensureLog(activeDate)){return WORK_DOMAINS.reduce((total,domain)=>total+(log.activities[domain]||[]).reduce((sum,row)=>sum+timerSeconds(row),0),0)}
+function updateWorkProgress(){const donut=document.getElementById('allocationDonut'),plannedEl=document.getElementById('creativeHoursSummary'),achievedEl=document.getElementById('achievedHoursSummary'),remainingEl=document.getElementById('remainingHoursSummary');if(!donut||!plannedEl||!achievedEl||!remainingEl)return;const planned=currentDailyHours(),achieved=workTimerSeconds()/3600,remaining=Math.max(0,planned-achieved),pct=planned?Math.min(100,Math.max(0,achieved/planned*100)):0;plannedEl.textContent=formatHours(planned)||'0h';achievedEl.textContent=formatHours(achieved)||'0h';remainingEl.textContent=formatHours(remaining)||'0h';donut.style.setProperty('--achieved-pct',pct+'%');donut.classList.toggle('plan-exceeded',planned>0&&achieved>planned)}
+function renderAllocation(){const rows=document.getElementById('allocationRows');rows.innerHTML=WORK_DOMAINS.map(domain=>`<div class="allocation-row"><strong>${domain}</strong><select data-allocation="${domain}">${Array.from({length:21},(_,i)=>i*5).map(v=>`<option value="${v}" ${v===allocationPct(domain)?'selected':''}>${v}%</option>`).join('')}</select><span class="allocation-hours">${formatHours(targetHours(domain))}</span></div>`).join('');rows.querySelectorAll('[data-allocation]').forEach(el=>el.onchange=()=>{state.allocation.find(a=>a.domain===el.dataset.allocation).pct=Number(el.value);saveState();renderWork()});const total=WORK_DOMAINS.reduce((sum,d)=>sum+allocationPct(d),0);document.getElementById('allocationTotal').textContent=total+'%';let start=0,parts=[];WORK_DOMAINS.forEach(d=>{const p=allocationPct(d),end=start+p;parts.push(`${DOMAIN_COLOURS[d]} ${start}% ${end}%`);start=end});if(total<100)parts.push(`#53645d ${total}% 100%`);document.getElementById('allocationDonut').style.background=`conic-gradient(${parts.join(',')})`;document.getElementById('allocationLegend').innerHTML=WORK_DOMAINS.map(d=>`<div class="legend-row"><span class="legend-dot" style="background:${DOMAIN_COLOURS[d]}"></span><span>${d}</span><strong>${allocationPct(d)}% · ${formatHours(targetHours(d))}</strong></div>`).join('');updateWorkProgress();const msg=document.getElementById('allocationMessage');msg.className='total-message '+(total===100?'good':'warn');msg.textContent=total===100?'':total<100?`${100-total}% of creative work remains unallocated.`:`Creative-work allocation exceeds the day by ${total-100}%.`}
+function renderWorkRow(domain,row,index){const key=`work|${domain}|${index}`,common=`<input type="checkbox" data-work-done="${domain}|${index}" ${row.done?'checked':''}>`;if(domain==='Music')return `<div class="work-activity-row music-row no-project ${row.done?'done':''}">${common}<div class="activity-wrap"><span class="row-label">Activity</span><select data-work-activity="${domain}|${index}">${contextWorkOptions(state.library.musicActivities,row.activity,null,true)}</select></div><div class="offer-wrap"><span class="row-label">Project</span><select data-work-music-offer="${index}">${flatOptionsOptional(state.library.musicOffers,row.offer,'No project selected')}</select></div><div class="timer-wrap"><span class="row-label">Timer — type HH:MM:SS or use Start</span>${renderTimer(row,key)}</div><button class="row-remove" data-work-remove="${domain}|${index}" title="Remove">×</button></div>`;const stages=domain==='Writing'?state.library.writingStages:state.library.actingStages,projects=domain==='Writing'?state.library.writingProjects:state.library.actingMaterials,selectedProject=domain==='Writing'?row.project:row.material;return `<div class="work-activity-row ${row.done?'done':''}">${common}<div class="activity-wrap"><span class="row-label">${domain==='Writing'?'Stage':'Activity'}</span><select data-work-stage="${domain}|${index}">${contextWorkOptions(stages,row.stage,null,false)}</select></div><div class="project-wrap"><span class="row-label">${domain==='Writing'?'Project':'Material'}</span><select data-work-project="${domain}|${index}">${flatOptions(projects,selectedProject)}</select></div><div class="timer-wrap"><span class="row-label">Timer — type HH:MM:SS or use Start</span>${renderTimer(row,key)}</div><button class="row-remove" data-work-remove="${domain}|${index}" title="Remove">×</button></div>`}
+function renderWorkContext(domain,rows){return `<section class="combined-work-block"><div class="combined-work-head"><span>[A] = can be done with Alfie</span></div><div class="work-activity-list combined-work-list">${rows.map(({row,index})=>renderWorkRow(domain,row,index)).join('')}</div><div class="work-context-actions"><button class="btn primary small" data-add-work="${domain}">+ Add activity</button></div></section>`}
+function domainHeading(domain){return domain==='Acting'?state.library.actingProjectTitle:domain}
 function renderWritingTracker(log,writing,target){
  if(target<=0)return '<div class="writing-tracker-inactive">Writing receives no creative-work time today. The word target is inactive.</div>';
  const drafting=(log.activities.Writing||[]).some(row=>row.stage==='draft');
- if(!drafting)return '<div class="writing-tracker-inactive">The word target is inactive for planning, editing and publishing work. Measure the session through the Concrete result field.</div>';
+ if(!drafting)return '<div class="writing-tracker-inactive">The word target is inactive for planning, editing and publishing work. Use the timer and completion check to measure the session.</div>';
  const goal=Math.max(0,Number(writing.target)||1000),words=Math.max(0,Number(writing.words)||0),pct=goal?Math.min(100,Math.round(words/goal*100)):0;
  return `<div class="writing-tracker"><div><label for="wordsWritten">Words written</label><input id="wordsWritten" type="number" min="0" step="50" value="${words}"></div><div><label for="writingTarget">Word target</label><input id="writingTarget" type="number" min="0" step="100" value="${goal}"></div><div><label for="writingMethod">Drafting method</label><select id="writingMethod">${['Free drafting','Outline','TTGs','Mythic','Outline + TTGs','Outline + Mythic','TTGs + Mythic','Outline + TTGs + Mythic'].map(x=>`<option ${x===writing.method?'selected':''}>${x}</option>`).join('')}</select></div><div><label for="writingNote">Writing result</label><input id="writingNote" value="${escapeHTML(writing.note||'')}" placeholder="Chapter, scene or problem advanced"></div><div class="writing-meter"><strong id="writingWordTotal">${words.toLocaleString('en-AU')} / ${goal.toLocaleString('en-AU')}</strong><div class="progress"><span id="writingWordProgress" style="width:${pct}%"></span></div><span class="foundation-tag" id="writingWordStatus">${goal&&words>=goal?'Daily standard met':'Drafting standard open'}</span></div></div>`
 }
-function renderWork(){const log=ensureLog(activeDate),writing=ensureWritingLog(activeDate);WORK_DOMAINS.forEach(d=>{if(Math.abs(domainPlanned(log,d)-targetHours(d))>.001)rebalanceDomain(d)});document.getElementById('dailyHours').value=log.hours;document.getElementById('dayWin').value=log.win;document.getElementById('tomorrowFirst').value=log.tomorrow;document.getElementById('dayNotes').value=log.notes;renderAllocation();const host=document.getElementById('workDomainCards');host.innerHTML='';WORK_DOMAINS.forEach(domain=>{const target=targetHours(domain),planned=domainPlanned(log,domain),status=Math.abs(planned-target)<.001?'good':'warn',card=document.createElement('section'),indexed=log.activities[domain].map((row,index)=>({row,index,context:ensureWorkContext(domain,row)})),alfieRows=indexed.filter(x=>x.context==='alfie'),freeRows=indexed.filter(x=>x.context==='free');card.className='card work-domain-card';card.innerHTML=`<div class="work-domain-head"><div><p class="kicker">${domain}</p><h2>${escapeHTML(domainHeading(domain))}</h2></div><div class="domain-time-box"><span>Allocated target</span><strong>${formatHours(target)}</strong></div><div class="domain-time-box ${status}"><span>Duration goals</span><strong>${formatHours(planned)}</strong>${status==='warn'?`<small>${formatHours(Math.abs(target-planned))} difference</small>`:''}</div></div>${renderOutcome(domain)}<div class="work-context-grid">${renderWorkContext(domain,alfieRows,'alfie')}${renderWorkContext(domain,freeRows,'free')}</div>${domain==='Writing'?renderWritingTracker(log,writing,target):''}`;host.appendChild(card)});bindWorkControls();bindOutcomeControls();renderSupport(log);renderAllocation()}
-function bindWorkControls(){const log=ensureLog(activeDate);document.querySelectorAll('[data-add-work]').forEach(el=>el.onclick=()=>{const [domain,context]=el.dataset.addWork.split('|');log.activities[domain].push(defaultWorkRow(domain,context,state.library));rebalanceDomain(domain);saveState();renderWork()});document.querySelectorAll('[data-work-done]').forEach(el=>el.onchange=()=>{const [d,i]=el.dataset.workDone.split('|'),row=log.activities[d][Number(i)];row.done=el.checked;if(row.done&&row.timer.startedAt){row.timer.elapsed+=Math.floor((Date.now()-row.timer.startedAt)/1000);row.timer.startedAt=null}saveState();renderWork()});document.querySelectorAll('[data-work-activity]').forEach(el=>el.onchange=()=>{const [d,i]=el.dataset.workActivity.split('|'),row=log.activities[d][Number(i)];row.activity=el.value;row.context=normaliseContext(row.context,rowWorkItem(d,row));row.result='';saveState();renderWork()});document.querySelectorAll('[data-work-music-project]').forEach(el=>el.onchange=()=>{log.activities.Music[Number(el.dataset.workMusicProject)].project=el.value;saveState();renderWork()});document.querySelectorAll('[data-work-music-offer]').forEach(el=>el.onchange=()=>{log.activities.Music[Number(el.dataset.workMusicOffer)].offer=el.value;saveState()});document.querySelectorAll('[data-work-stage]').forEach(el=>el.onchange=()=>{const [d,i]=el.dataset.workStage.split('|'),row=log.activities[d][Number(i)];row.stage=el.value;row.context=normaliseContext(row.context,rowWorkItem(d,row));row.result='';saveState();renderWork()});document.querySelectorAll('[data-work-project]').forEach(el=>el.onchange=()=>{const [d,i]=el.dataset.workProject.split('|'),row=log.activities[d][Number(i)];if(d==='Writing')row.project=el.value;else row.material=el.value;saveState()});document.querySelectorAll('[data-work-result]').forEach(el=>el.oninput=()=>{const [d,i]=el.dataset.workResult.split('|');log.activities[d][Number(i)].result=el.value;saveState()});document.querySelectorAll('[data-work-duration]').forEach(el=>el.onchange=()=>{const [d,i]=el.dataset.workDuration.split('|');setDurationAndBalance(d,Number(i),Number(el.value));saveState();renderWork()});document.querySelectorAll('[data-work-remove]').forEach(el=>el.onclick=()=>{const [d,i]=el.dataset.workRemove.split('|');if(log.activities[d].length===1){toast('Keep at least one activity in each area');return}log.activities[d].splice(Number(i),1);rebalanceDomain(d);saveState();renderWork()});document.querySelectorAll('[data-timer-toggle]').forEach(el=>el.onclick=()=>toggleTimer(el.dataset.timerToggle));document.querySelectorAll('[data-timer-reset]').forEach(el=>el.onclick=()=>resetTimer(el.dataset.timerReset));const updateWritingMeter=()=>{const w=ensureWritingLog(activeDate),words=Math.max(0,Number(w.words)||0),goal=Math.max(0,Number(w.target)||0),pct=goal?Math.min(100,Math.round(words/goal*100)):0,total=document.getElementById('writingWordTotal'),bar=document.getElementById('writingWordProgress'),status=document.getElementById('writingWordStatus');if(total)total.textContent=words.toLocaleString('en-AU')+' / '+goal.toLocaleString('en-AU');if(bar)bar.style.width=pct+'%';if(status)status.textContent=goal&&words>=goal?'Daily standard met':'Drafting standard open'};const words=document.getElementById('wordsWritten');if(words)words.oninput=e=>{ensureWritingLog(activeDate).words=Math.max(0,Number(e.target.value)||0);updateWritingMeter();saveState()};const wordTarget=document.getElementById('writingTarget');if(wordTarget)wordTarget.oninput=e=>{ensureWritingLog(activeDate).target=Math.max(0,Number(e.target.value)||0);updateWritingMeter();saveState()};const method=document.getElementById('writingMethod');if(method)method.onchange=e=>{ensureWritingLog(activeDate).method=e.target.value;saveState()};const note=document.getElementById('writingNote');if(note)note.oninput=e=>{ensureWritingLog(activeDate).note=e.target.value;saveState()}}
+function renderWork(){const log=ensureLog(activeDate),writing=ensureWritingLog(activeDate);document.getElementById('dailyHours').value=log.hours;document.getElementById('dayWin').value=log.win;document.getElementById('tomorrowFirst').value=log.tomorrow;document.getElementById('dayNotes').value=log.notes;renderAllocation();const host=document.getElementById('workDomainCards');host.innerHTML='';WORK_DOMAINS.forEach(domain=>{const target=targetHours(domain),key=`work-${domain.toLowerCase()}`,details=document.createElement('details'),indexed=log.activities[domain].map((row,index)=>({row,index}));details.className='guide-section work-guide-section';details.dataset.guideSection=key;if(openGuideSections.has(key))details.open=true;details.innerHTML=`<summary><div class="guide-section-summary-copy"><h2>${escapeHTML(domainHeading(domain))}</h2></div><div class="guide-section-summary-metrics"><div class="domain-time-box"><span>Allocated target</span><strong>${formatHours(target)}</strong></div></div></summary><div class="guide-section-body"><section class="card work-domain-card">${renderOutcome(domain)}${renderWorkContext(domain,indexed)}${domain==='Writing'?renderWritingTracker(log,writing,target):''}</section></div>`;host.appendChild(details)});bindGuideSections(host);bindWorkControls();bindOutcomeControls();renderAllocation()}
+function bindWorkControls(){const log=ensureLog(activeDate);document.querySelectorAll('[data-add-work]').forEach(el=>el.onclick=()=>{const domain=el.dataset.addWork;log.activities[domain].push(defaultWorkRow(domain,null,state.library));rebalanceDomain(domain);saveState();renderWork()});document.querySelectorAll('[data-work-done]').forEach(el=>el.onchange=()=>{const [d,i]=el.dataset.workDone.split('|'),row=log.activities[d][Number(i)];row.done=el.checked;if(row.done&&row.timer.startedAt){row.timer.elapsed+=Math.floor((Date.now()-row.timer.startedAt)/1000);row.timer.startedAt=null}saveState();renderWork()});document.querySelectorAll('[data-work-activity]').forEach(el=>el.onchange=()=>{const [d,i]=el.dataset.workActivity.split('|'),row=log.activities[d][Number(i)];row.activity=el.value;row.context=normaliseContext(row.context,rowWorkItem(d,row));row.result='';saveState();renderWork()});document.querySelectorAll('[data-work-music-offer]').forEach(el=>el.onchange=()=>{log.activities.Music[Number(el.dataset.workMusicOffer)].offer=el.value;saveState()});document.querySelectorAll('[data-work-stage]').forEach(el=>el.onchange=()=>{const [d,i]=el.dataset.workStage.split('|'),row=log.activities[d][Number(i)];row.stage=el.value;row.context=normaliseContext(row.context,rowWorkItem(d,row));row.result='';saveState();renderWork()});document.querySelectorAll('[data-work-project]').forEach(el=>el.onchange=()=>{const [d,i]=el.dataset.workProject.split('|'),row=log.activities[d][Number(i)];if(d==='Writing')row.project=el.value;else row.material=el.value;saveState()});document.querySelectorAll('[data-work-result]').forEach(el=>el.oninput=()=>{const [d,i]=el.dataset.workResult.split('|');log.activities[d][Number(i)].result=el.value;saveState()});document.querySelectorAll('[data-work-remove]').forEach(el=>el.onclick=()=>{const [d,i]=el.dataset.workRemove.split('|');if(log.activities[d].length===1){toast('Keep at least one activity in each area');return}log.activities[d].splice(Number(i),1);rebalanceDomain(d);saveState();renderWork()});document.querySelectorAll('[data-timer-input]').forEach(el=>{el.onchange=()=>{if(setTimerFromInput(el.dataset.timerInput,el.value))el.value=formatTimer(timerSeconds(rowFromTimerKey(el.dataset.timerInput)))};el.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();el.blur()}}});document.querySelectorAll('[data-timer-toggle]').forEach(el=>el.onclick=()=>toggleTimer(el.dataset.timerToggle));document.querySelectorAll('[data-timer-reset]').forEach(el=>el.onclick=()=>resetTimer(el.dataset.timerReset));const updateWritingMeter=()=>{const w=ensureWritingLog(activeDate),words=Math.max(0,Number(w.words)||0),goal=Math.max(0,Number(w.target)||0),pct=goal?Math.min(100,Math.round(words/goal*100)):0,total=document.getElementById('writingWordTotal'),bar=document.getElementById('writingWordProgress'),status=document.getElementById('writingWordStatus');if(total)total.textContent=words.toLocaleString('en-AU')+' / '+goal.toLocaleString('en-AU');if(bar)bar.style.width=pct+'%';if(status)status.textContent=goal&&words>=goal?'Daily standard met':'Drafting standard open'};const words=document.getElementById('wordsWritten');if(words)words.oninput=e=>{ensureWritingLog(activeDate).words=Math.max(0,Number(e.target.value)||0);updateWritingMeter();saveState()};const wordTarget=document.getElementById('writingTarget');if(wordTarget)wordTarget.oninput=e=>{ensureWritingLog(activeDate).target=Math.max(0,Number(e.target.value)||0);updateWritingMeter();saveState()};const method=document.getElementById('writingMethod');if(method)method.onchange=e=>{ensureWritingLog(activeDate).method=e.target.value;saveState()};const note=document.getElementById('writingNote');if(note)note.oninput=e=>{ensureWritingLog(activeDate).note=e.target.value;saveState()}}
 function supportGroups(){return [...new Set(state.library.supportDuties.map(x=>x.group))]}
 function supportDutyOptions(category,selected){const items=state.library.supportDuties.filter(x=>x.group===category),groups=[{label:'Can do with Alfie in your arms',value:'yes'},{label:'Can do with or without Alfie',value:'both'},{label:'Needs free hands or separate attention',value:'no'}];return groups.map(g=>{const matches=items.filter(x=>compatibilityValue(x)===g.value);return matches.length?`<optgroup label="${g.label}">${matches.map(x=>`<option value="${escapeHTML(x.id)}" ${x.id===selected?'selected':''}>${escapeHTML(x.label)}</option>`).join('')}</optgroup>`:''}).join('')}
 function renderSupport(log){ensureTrelloDuty(log);const host=document.getElementById('supportList');host.innerHTML=log.support.map((row,i)=>{const key=`support|${i}|0`,locked=row.duty==='trello';if(!state.library.supportDuties.some(x=>x.id===row.duty)){const first=state.library.supportDuties.find(x=>x.group===row.category)||firstItem(state.library.supportDuties);row.category=first.group;row.duty=first.id}return `<div class="support-row ${row.done?'done':''}"><input type="checkbox" data-support-done="${i}" ${row.done?'checked':''}>${locked?`<div><span class="row-label">Category</span><div class="locked-value">Admin</div></div><div><span class="row-label">Duty</span><div class="locked-value">Work through the current Trello to-do list</div></div>`:`<div><span class="row-label">Category</span><select data-support-category="${i}">${supportGroups().map(x=>`<option ${x===row.category?'selected':''}>${escapeHTML(x)}</option>`).join('')}</select></div><div><span class="row-label">Duty</span><select data-support-duty="${i}">${supportDutyOptions(row.category,row.duty)}</select></div>`}<div><span class="row-label">Editable wording</span><input data-support-detail="${i}" value="${escapeHTML(row.detail||'')}" placeholder="Name the actual work"></div><div><span class="row-label">Duration goal</span><select data-support-duration="${i}">${durationOptions(row.duration)}</select></div><div class="timer-wrap"><span class="row-label">Timer</span>${renderTimer(row,key)}</div>${locked?'<span></span>':`<button class="row-remove" data-support-remove="${i}">×</button>`}</div>`}).join('');host.querySelectorAll('[data-support-done]').forEach(el=>el.onchange=()=>{const row=log.support[Number(el.dataset.supportDone)];row.done=el.checked;if(row.done&&row.timer.startedAt){row.timer.elapsed+=Math.floor((Date.now()-row.timer.startedAt)/1000);row.timer.startedAt=null}saveState();renderWork()});host.querySelectorAll('[data-support-category]').forEach(el=>el.onchange=()=>{const row=log.support[Number(el.dataset.supportCategory)],first=state.library.supportDuties.find(x=>x.group===el.value&&x.id!=='trello')||state.library.supportDuties.find(x=>x.group===el.value)||firstItem(state.library.supportDuties);row.category=el.value;row.duty=first.id;row.detail=first.label;saveState();renderWork()});host.querySelectorAll('[data-support-duty]').forEach(el=>el.onchange=()=>{const row=log.support[Number(el.dataset.supportDuty)],item=state.library.supportDuties.find(x=>x.id===el.value);row.duty=el.value;if(item){row.category=item.group;row.detail=item.label}saveState();renderWork()});host.querySelectorAll('[data-support-detail]').forEach(el=>el.oninput=()=>{log.support[Number(el.dataset.supportDetail)].detail=el.value;saveState()});host.querySelectorAll('[data-support-duration]').forEach(el=>el.onchange=()=>{log.support[Number(el.dataset.supportDuration)].duration=Number(el.value);saveState();renderAllocation()});host.querySelectorAll('[data-support-remove]').forEach(el=>el.onclick=()=>{const i=Number(el.dataset.supportRemove);if(log.support[i]?.duty==='trello')return;log.support.splice(i,1);saveState();renderWork()});host.querySelectorAll('[data-timer-toggle]').forEach(el=>el.onclick=()=>toggleTimer(el.dataset.timerToggle));host.querySelectorAll('[data-timer-reset]').forEach(el=>el.onclick=()=>resetTimer(el.dataset.timerReset))}
-function timeRequirement(choice){const c=String(choice||'').toLowerCase();if(!c)return 'None selected';if(/extended kriya|orans practice/.test(c))return '5–20 minutes';if(/submersion/.test(c))return '10–30 minutes';if(/yamnaya|inherited music|recreationist cultural/.test(c))return '15–90 minutes';if(/undertake|weekend away$|road trip$|heritage tour$|camping trip|hot-air|sailing|skiing|spelu|caving|scuba/.test(c))return 'Half day to several days';if(/^plan |plan the |plan a /.test(c))return '30–90 minutes';if(/date night|cooking night|music night|reading night|game night|cultural night|planning night|relationship reflection|household-alignment|wellness night|stretching and quiet recovery|early-rest evening/.test(c))return '45–180 minutes';if(/restaurant|barbecue —|korean bbq|sfogliatelle|nel restaurant|orpheum|museum|comedy|community centre|festival|market|opera|symphony|pub night|dinner party|spa/.test(c))return '1½–4 hours';if(/clarke|cockatoo|lane cove|archery|axe throwing|horse riding|cycling or fitness|camping$|beach|bush walk|picnic|shopping trip/.test(c))return '1–4 hours';if(/film|series|angel|sherlock|mr church|total recall|demolition man|sphere|gattaca|séance|blackadder|indiana|divinity|switch games|board game|improv rpg|lovecraft|audiobook|jonathan strange|lord of the rings|home library/.test(c))return '30–180 minutes';if(/alfie|family ritual|dance together|tummy time/.test(c))return '15–90 minutes';if(/gardening|grow herbs|compost|ferment|preserves|blacksmithing|photography|astronomy|clothing/.test(c))return '45–120 minutes';if(/psalmody/.test(c))return '5–60 minutes';return '15–60 minutes'}
-function groupedActivityOptions(level,selected){return `<option value="">No activity selected</option>`+level.groups.map(g=>`<optgroup label="${escapeHTML(g.label)}">${g.items.map(x=>`<option ${x===selected?'selected':''}>${escapeHTML(x)}</option>`).join('')}</optgroup>`).join('')}
 function mondayKey(date){const d=new Date(date+'T12:00:00'),day=(d.getDay()+6)%7;d.setDate(d.getDate()-day);return d.toISOString().slice(0,10)}
 function addDaysISO(date,n){const d=new Date(date+'T12:00:00');d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)}
 function weekMovementCount(id,date){const monday=mondayKey(date);let n=0;for(let i=0;i<7;i++){const d=addDaysISO(monday,i);if(state.lifeLogs[d]?.movement?.[id]?.done)n++}return n}
-function renderLife(){const log=ensureLifeLog(activeDate),move=document.getElementById('movementRows');document.getElementById('lifeNotes').value=log.notes;move.innerHTML=MOVEMENT_REQUIREMENTS.map(r=>{const row=log.movement[r.id],count=weekMovementCount(r.id,activeDate);return `<div class="movement-row"><div class="movement-name"><strong>${r.name}</strong><span>${r.frequency}</span></div><div><label>Today’s activity</label><select data-movement-choice="${r.id}">${r.choices.map(x=>`<option ${x===row.choice?'selected':''}>${escapeHTML(x)}</option>`).join('')}</select></div><div class="time-requirement"><span>Required time</span><strong>${r.time}</strong><span class="week-progress">This week: ${count}/${r.target}</span></div><label class="day-done"><input type="checkbox" data-movement-done="${r.id}" ${row.done?'checked':''}><span>Done today</span></label></div>`}).join('');move.querySelectorAll('[data-movement-choice]').forEach(el=>el.onchange=()=>{log.movement[el.dataset.movementChoice].choice=el.value;saveState()});move.querySelectorAll('[data-movement-done]').forEach(el=>el.onchange=()=>{log.movement[el.dataset.movementDone].done=el.checked;saveState();renderLife()});const host=document.getElementById('activityLadder');host.innerHTML=activityLevels(state.library).map(level=>{const row=log.activities[level.id];return `<div class="activity-level"><div class="activity-name"><strong>${level.name}</strong><span>${level.description}</span></div><div><label>Today’s activity</label><select data-life-choice="${level.id}">${groupedActivityOptions(level,row.choice)}</select></div><div class="time-requirement"><span>Typical time</span><strong>${timeRequirement(row.choice)}</strong></div><label class="day-done"><input type="checkbox" data-life-done="${level.id}" ${row.done?'checked':''}><span>Done today</span></label></div>`}).join('');host.querySelectorAll('[data-life-choice]').forEach(el=>el.onchange=()=>{log.activities[el.dataset.lifeChoice].choice=el.value;saveState();renderLife()});host.querySelectorAll('[data-life-done]').forEach(el=>el.onchange=()=>{log.activities[el.dataset.lifeDone].done=el.checked;saveState()})}
+function activityItemExists(level,name,except=''){const value=String(name||'').trim().toLowerCase();return level.groups.some(group=>group.items.some(item=>item!==except&&String(item).trim().toLowerCase()===value))}
+function renameActivityChoice(levelId,oldName,newName){Object.values(state.lifeLogs||{}).forEach(log=>{const row=log.activities?.[levelId];if(row&&row.choice===oldName)row.choice=newName})}
+function clearDeletedActivityChoice(levelId,name){Object.values(state.lifeLogs||{}).forEach(log=>{const row=log.activities?.[levelId];if(row&&row.choice===name){row.choice='';row.done=false}})}
+const openGuideSections=new Set();
+function guideSectionOpenAttr(key){return openGuideSections.has(key)?' open':''}
+function bindGuideSections(root=document){root.querySelectorAll('details[data-guide-section]').forEach(el=>{el.ontoggle=()=>{const key=el.dataset.guideSection;if(el.open)openGuideSections.add(key);else openGuideSections.delete(key)}})}
+const openActivityCategories=new Set();
+const openActivityGroups=new Set();
+let draggedActivityItem=null;
+function clearActivityDragStyles(host=document){host.querySelectorAll('.activity-option.dragging,.activity-option.drag-before,.activity-option.drag-after').forEach(el=>el.classList.remove('dragging','drag-before','drag-after'))}
+function reorderActivityItem(sourceKey,targetKey,placeBefore){
+ const [sourceLevel,sourceGroup,sourceIndex]=sourceKey.split('|').map(Number),[targetLevel,targetGroup,targetIndex]=targetKey.split('|').map(Number);
+ if(sourceLevel!==targetLevel||sourceGroup!==targetGroup||sourceIndex===targetIndex)return false;
+ const items=state.library.activityLevels?.[sourceLevel]?.groups?.[sourceGroup]?.items;if(!items)return false;
+ const [item]=items.splice(sourceIndex,1);let insertion=targetIndex+(placeBefore?0:1);if(sourceIndex<insertion)insertion--;items.splice(Math.max(0,Math.min(insertion,items.length)),0,item);return true
+}
+function bindActivityReordering(host){
+ host.querySelectorAll('[data-activity-drag]').forEach(handle=>{
+  handle.ondragstart=event=>{draggedActivityItem=handle.dataset.activityDrag;event.dataTransfer.effectAllowed='move';event.dataTransfer.setData('text/plain',draggedActivityItem);requestAnimationFrame(()=>handle.closest('.activity-option')?.classList.add('dragging'))};
+  handle.ondragend=()=>{draggedActivityItem=null;clearActivityDragStyles(host)}
+ });
+ host.querySelectorAll('[data-activity-drop]').forEach(target=>{
+  target.ondragover=event=>{if(!draggedActivityItem)return;const source=draggedActivityItem.split('|'),destination=target.dataset.activityDrop.split('|');if(source[0]!==destination[0]||source[1]!==destination[1]||draggedActivityItem===target.dataset.activityDrop)return;event.preventDefault();event.dataTransfer.dropEffect='move';host.querySelectorAll('.activity-option.drag-before,.activity-option.drag-after').forEach(el=>el.classList.remove('drag-before','drag-after'));const rect=target.getBoundingClientRect(),before=event.clientY<rect.top+rect.height/2;target.classList.add(before?'drag-before':'drag-after')};
+  target.ondragleave=event=>{if(!target.contains(event.relatedTarget))target.classList.remove('drag-before','drag-after')};
+  target.ondrop=event=>{if(!draggedActivityItem)return;event.preventDefault();const rect=target.getBoundingClientRect(),before=event.clientY<rect.top+rect.height/2,moved=reorderActivityItem(draggedActivityItem,target.dataset.activityDrop,before);draggedActivityItem=null;clearActivityDragStyles(host);if(moved){saveState();renderLife();toast('Activity order saved')}}
+ })
+}
+function renderActivityCategory(level,levelIndex,row){
+ const selected=row.choice||'',categoryOpen=openActivityCategories.has(level.id);
+ const today=selected?`<span class="activity-today"><small>Today</small><strong>${escapeHTML(selected)}</strong></span>`:`<span class="activity-today empty"><small>Today</small><strong>Nothing selected</strong></span>`;
+ const groups=level.groups.map((group,groupIndex)=>{const groupKey=`${level.id}|${groupIndex}`,isOpen=openActivityGroups.has(groupKey);return `<details class="activity-option-group" data-activity-group="${escapeHTML(groupKey)}" ${isOpen?'open':''}><summary class="activity-group-head"><h3>${escapeHTML(group.label)}</h3><span class="activity-group-controls"><button type="button" class="activity-add" data-activity-add="${levelIndex}|${groupIndex}" title="Add an activity" aria-label="Add an activity under ${escapeHTML(group.label)}">+</button><span class="activity-group-chevron" aria-hidden="true">⌄</span></span></summary><div class="activity-option-list">${group.items.length?group.items.map((item,itemIndex)=>{const isSelected=item===selected,key=`${levelIndex}|${groupIndex}|${itemIndex}`;return `<div class="activity-option ${isSelected?'selected':''}" data-activity-drop="${key}"><button type="button" class="activity-drag-handle" draggable="true" data-activity-drag="${key}" title="Drag within this heading to reorder" aria-label="Drag ${escapeHTML(item)} to reorder">⠿</button><button type="button" class="activity-select" data-activity-select="${key}" aria-pressed="${isSelected?'true':'false'}"><span class="activity-radio" aria-hidden="true"></span><span>${escapeHTML(item)}</span></button><div class="activity-item-actions"><button type="button" data-activity-rename="${key}">Rename</button><button type="button" class="delete" data-activity-delete="${key}">Delete</button></div></div>`}).join(''):'<p class="activity-empty-group">No activities in this group.</p>'}</div></details>`}).join('');
+ return `<details class="activity-category" data-activity-category="${escapeHTML(level.id)}" ${categoryOpen?'open':''}><summary class="activity-category-head"><div class="activity-category-copy"><h2>${escapeHTML(level.name)}</h2><p>${escapeHTML(level.description)}</p></div>${today}<span class="activity-category-chevron" aria-hidden="true">⌄</span></summary><div class="activity-category-body"><div class="activity-category-actions"><label class="activity-done"><input type="checkbox" data-life-done="${escapeHTML(level.id)}" ${row.done?'checked':''}><span>Done today</span></label><button type="button" class="activity-clear" data-activity-clear="${escapeHTML(level.id)}" ${selected?'':'disabled'}>Clear</button></div><div class="activity-groups">${groups}</div></div></details>`
+}
+function renderLife(){
+ const log=ensureLifeLog(activeDate),move=document.getElementById('movementRows');
+ document.getElementById('lifeNotes').value=log.notes;
+ move.innerHTML=MOVEMENT_REQUIREMENTS.map(r=>{const row=log.movement[r.id],count=weekMovementCount(r.id,activeDate);return `<div class="movement-row"><div class="movement-name"><strong>${r.name}</strong><span>${r.frequency}</span></div><div><label>Today’s activity</label><select data-movement-choice="${r.id}">${r.choices.map(x=>`<option ${x===row.choice?'selected':''}>${escapeHTML(x)}</option>`).join('')}</select></div><div class="time-requirement"><span>Required time</span><strong>${r.time}</strong><span class="week-progress">This week: ${count}/${r.target}</span></div><label class="day-done"><input type="checkbox" data-movement-done="${r.id}" ${row.done?'checked':''}><span>Done today</span></label></div>`}).join('');
+ move.querySelectorAll('[data-movement-choice]').forEach(el=>el.onchange=()=>{log.movement[el.dataset.movementChoice].choice=el.value;saveState()});
+ move.querySelectorAll('[data-movement-done]').forEach(el=>el.onchange=()=>{log.movement[el.dataset.movementDone].done=el.checked;saveState();renderLife()});
+ const host=document.getElementById('activityLadder'),levels=activityLevels(state.library);
+ host.innerHTML=levels.map((level,index)=>renderActivityCategory(level,index,log.activities[level.id])).join('');
+ host.querySelectorAll('[data-activity-category]').forEach(el=>el.ontoggle=()=>{const key=el.dataset.activityCategory;if(el.open)openActivityCategories.add(key);else openActivityCategories.delete(key)});
+ host.querySelectorAll('[data-activity-group]').forEach(el=>el.ontoggle=()=>{const key=el.dataset.activityGroup;if(el.open)openActivityGroups.add(key);else openActivityGroups.delete(key)});
+ bindActivityReordering(host);
+ host.querySelectorAll('[data-activity-select]').forEach(el=>el.onclick=()=>{const [li,gi,ii]=el.dataset.activitySelect.split('|').map(Number),level=state.library.activityLevels[li],item=level.groups[gi].items[ii],row=log.activities[level.id];row.choice=item;row.done=false;saveState();renderLife()});
+ host.querySelectorAll('[data-life-done]').forEach(el=>el.onchange=()=>{log.activities[el.dataset.lifeDone].done=el.checked;saveState();renderLife()});
+ host.querySelectorAll('[data-activity-clear]').forEach(el=>el.onclick=()=>{const row=log.activities[el.dataset.activityClear];row.choice='';row.done=false;saveState();renderLife()});
+ host.querySelectorAll('[data-activity-add]').forEach(el=>el.onclick=event=>{event.preventDefault();event.stopPropagation();const [li,gi]=el.dataset.activityAdd.split('|').map(Number),level=state.library.activityLevels[li],group=level.groups[gi],name=prompt(`Add an activity under ${group.label}`);if(!name||!name.trim())return;const value=name.trim();if(activityItemExists(level,value)){toast('That activity is already in this section');return}group.items.push(value);saveState();renderLife()});
+ host.querySelectorAll('[data-activity-rename]').forEach(el=>el.onclick=()=>{const [li,gi,ii]=el.dataset.activityRename.split('|').map(Number),level=state.library.activityLevels[li],group=level.groups[gi],oldName=group.items[ii],name=prompt('Rename this activity',oldName);if(!name||!name.trim())return;const value=name.trim();if(activityItemExists(level,value,oldName)){toast('That activity is already in this section');return}group.items[ii]=value;renameActivityChoice(level.id,oldName,value);saveState();renderLife()});
+ host.querySelectorAll('[data-activity-delete]').forEach(el=>el.onclick=()=>{const [li,gi,ii]=el.dataset.activityDelete.split('|').map(Number),level=state.library.activityLevels[li],group=level.groups[gi],name=group.items[ii];if(!confirm(`Delete “${name}”?`))return;group.items.splice(ii,1);clearDeletedActivityChoice(level.id,name);saveState();renderLife()})
+}
 function ensureDreams(){state.dreams=mergeDreams(state.dreams);return state.dreams}
 function dreamStatusOptions(selected){return ['Dream','Exploring','Planning','Saving','Booked or scheduled','In progress','Achieved'].map(x=>`<option ${x===selected?'selected':''}>${x}</option>`).join('')}
 function dreamCard(d,mode='active'){
  const action=mode==='archived'?`<button class="btn small" data-dream-restore="${escapeHTML(d.id)}">Restore</button>`:`<button class="btn small" data-dream-archive="${escapeHTML(d.id)}">Archive</button>`;
- return `<article class="card dream-card"><div class="dream-card-head"><div class="dream-icon">${escapeHTML(d.icon||'✦')}</div><div><h2>${escapeHTML(d.title)}</h2><p>${escapeHTML(d.summary)}</p></div></div><div class="dream-fields"><div class="wide"><label>Dream</label><input data-dream-field="${escapeHTML(d.id)}|title" value="${escapeHTML(d.title)}"></div><div class="wide"><label>Meaning or vision</label><input data-dream-field="${escapeHTML(d.id)}|summary" value="${escapeHTML(d.summary)}"></div><div><label>Status</label><select data-dream-field="${escapeHTML(d.id)}|status">${dreamStatusOptions(d.status)}</select></div><div><label>Target date</label><input type="date" data-dream-field="${escapeHTML(d.id)}|due" value="${escapeHTML(d.due)}"></div><div class="wide"><label>Next step</label><input data-dream-field="${escapeHTML(d.id)}|next" value="${escapeHTML(d.next)}" placeholder="Name the next concrete step when the time is right"></div><div class="wide"><label>Notes</label><textarea data-dream-field="${escapeHTML(d.id)}|notes" placeholder="Cost, research, decisions, preparation or meaning">${escapeHTML(d.notes)}</textarea></div></div>${(d.details||[]).length?`<details class="dream-details"><summary>Vision and details</summary><div class="dream-detail-body"><ul>${d.details.map(x=>`<li>${escapeHTML(x)}</li>`).join('')}</ul></div></details>`:''}<div class="dream-card-actions">${action}</div></article>`
+ return `<details class="card dream-card"><summary class="dream-card-head"><div class="dream-icon">${escapeHTML(d.icon||'✦')}</div><div class="dream-card-title"><h2>${escapeHTML(d.title)}</h2><p>${escapeHTML(d.summary)}</p></div><span class="dream-card-status">${escapeHTML(d.status||'Dream')}</span><span class="dream-expand" aria-hidden="true">⌄</span></summary><div class="dream-card-body"><div class="dream-fields"><div class="wide"><label>Dream</label><input data-dream-field="${escapeHTML(d.id)}|title" value="${escapeHTML(d.title)}"></div><div class="wide"><label>Meaning or vision</label><input data-dream-field="${escapeHTML(d.id)}|summary" value="${escapeHTML(d.summary)}"></div><div><label>Status</label><select data-dream-field="${escapeHTML(d.id)}|status">${dreamStatusOptions(d.status)}</select></div><div><label>Target date</label><input type="date" data-dream-field="${escapeHTML(d.id)}|due" value="${escapeHTML(d.due)}"></div><div class="wide"><label>Next step</label><input data-dream-field="${escapeHTML(d.id)}|next" value="${escapeHTML(d.next)}" placeholder="Name the next concrete step when the time is right"></div><div class="wide"><label>Notes</label><textarea data-dream-field="${escapeHTML(d.id)}|notes" placeholder="Cost, research, decisions, preparation or meaning">${escapeHTML(d.notes)}</textarea></div></div>${(d.details||[]).length?`<details class="dream-details"><summary>Vision and details</summary><div class="dream-detail-body"><ul>${d.details.map(x=>`<li>${escapeHTML(x)}</li>`).join('')}</ul></div></details>`:''}<div class="dream-card-actions">${action}</div></div></details>`
+}
+function dreamSummaryDate(value){if(!value)return 'No target date';const d=new Date(`${value}T00:00:00`);return Number.isNaN(d.getTime())?value:d.toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'})}
+function renderDreamOverview(active,achieved,archived){
+ const statusCounts=active.reduce((acc,d)=>{const key=d.status||'Dream';acc[key]=(acc[key]||0)+1;return acc},{});
+ const statusText=Object.entries(statusCounts).map(([status,count])=>`${count} ${escapeHTML(status.toLowerCase())}`).join(' · ')||'No active dreams';
+ document.getElementById('dreamOverviewStats').innerHTML=`<div><strong>${active.length}</strong><span>Active</span></div><div><strong>${achieved.length}</strong><span>Achieved</span></div><div><strong>${archived.length}</strong><span>Archived</span></div><p>${statusText}</p>`;
+ document.getElementById('dreamOverviewList').innerHTML=active.length?active.map(d=>`<div class="dream-overview-row"><div class="dream-overview-name"><span class="dream-status-dot"></span><strong>${escapeHTML(d.title)}</strong><small>${escapeHTML(d.summary||'No summary entered')}</small></div><span class="dream-overview-status">${escapeHTML(d.status||'Dream')}</span><span class="dream-overview-date">${escapeHTML(dreamSummaryDate(d.due))}</span><span class="dream-overview-next">${escapeHTML(d.next||'No next step entered')}</span></div>`).join(''):'<div class="notice">No active dreams. Add one or restore an archived dream.</div>';
 }
 function renderDreams(){
  const dreams=ensureDreams(),active=dreams.filter(d=>!d.archived&&d.status!=='Achieved'),achieved=dreams.filter(d=>!d.archived&&d.status==='Achieved'),archived=dreams.filter(d=>d.archived);
+ renderDreamOverview(active,achieved,archived);
  document.getElementById('dreamGrid').innerHTML=active.map(d=>dreamCard(d)).join('')||'<div class="notice">No active dreams. Add one or restore an archived dream.</div>';
  document.getElementById('dreamAchievedGrid').innerHTML=achieved.map(d=>dreamCard(d)).join('');document.getElementById('dreamAchievedSummary').textContent=`Achieved dreams (${achieved.length})`;document.getElementById('dreamAchievedWrap').style.display=achieved.length?'block':'none';
  document.getElementById('dreamArchivedGrid').innerHTML=archived.map(d=>dreamCard(d,'archived')).join('');document.getElementById('dreamArchivedSummary').textContent=`Archived dreams (${archived.length})`;document.getElementById('dreamArchivedWrap').style.display=archived.length?'block':'none';
- document.querySelectorAll('[data-dream-field]').forEach(el=>{const event=el.tagName==='SELECT'||el.type==='date'?'change':'input';el.addEventListener(event,()=>{const split=el.dataset.dreamField.split('|'),id=split.shift(),field=split.join('|'),row=ensureDreams().find(x=>x.id===id);if(!row)return;row[field]=el.value;saveState();if(field==='status')renderDreams()})});
+ document.querySelectorAll('[data-dream-field]').forEach(el=>{const event=el.tagName==='SELECT'||el.type==='date'?'change':'input';el.addEventListener(event,()=>{const split=el.dataset.dreamField.split('|'),id=split.shift(),field=split.join('|'),row=ensureDreams().find(x=>x.id===id);if(!row)return;row[field]=el.value;saveState();if(field==='status')renderDreams();else if(['title','summary','due','next'].includes(field)){const all=ensureDreams(),active=all.filter(d=>!d.archived&&d.status!=='Achieved'),achieved=all.filter(d=>!d.archived&&d.status==='Achieved'),archived=all.filter(d=>d.archived);renderDreamOverview(active,achieved,archived)}})});
  document.querySelectorAll('[data-dream-archive]').forEach(el=>el.onclick=()=>{const row=ensureDreams().find(x=>x.id===el.dataset.dreamArchive);if(row){row.archived=true;saveState();renderDreams()}});document.querySelectorAll('[data-dream-restore]').forEach(el=>el.onclick=()=>{const row=ensureDreams().find(x=>x.id===el.dataset.dreamRestore);if(row){row.archived=false;saveState();renderDreams()}})
 }
-function renderEditorList(title,key,kind){const list=state.library[key],id=`edit-${key}`,isSimple=kind==='simple',isSupport=kind==='support';return `<section class="card"><div class="section-head compact"><div><h2>${title}</h2></div><button class="btn primary small" data-editor-add="${key}|${kind}">+ Add</button></div><div class="editor-list" id="${id}">${list.map((x,i)=>{if(isSimple)return `<div class="editor-row simple"><div><span class="row-label">Name</span><input data-editor-field="${key}|${i}|label" value="${escapeHTML(x.label)}"></div><button class="row-remove" data-editor-remove="${key}|${i}">×</button></div>`;const compat=compatibilityValue(x);if(isSupport)return `<div class="editor-row"><div><span class="row-label">Category</span><input data-editor-field="${key}|${i}|group" value="${escapeHTML(x.group)}"></div><div><span class="row-label">Duty</span><input data-editor-field="${key}|${i}|label" value="${escapeHTML(x.label)}"></div><div><span class="row-label">Alfie compatibility</span><select data-editor-alfie="${key}|${i}"><option value="yes" ${compat==='yes'?'selected':''}>Can do with Alfie</option><option value="both" ${compat==='both'?'selected':''}>With or without Alfie</option><option value="no" ${compat==='no'?'selected':''}>Needs free hands</option></select></div><button class="row-remove" data-editor-remove="${key}|${i}">×</button></div>`;return `<div class="editor-row"><div><span class="row-label">Activity</span><input data-editor-field="${key}|${i}|label" value="${escapeHTML(x.label)}"></div><div><span class="row-label">Alfie compatibility</span><select data-editor-alfie="${key}|${i}"><option value="yes" ${compat==='yes'?'selected':''}>Can do with Alfie</option><option value="both" ${compat==='both'?'selected':''}>With or without Alfie</option><option value="no" ${compat==='no'?'selected':''}>Needs free hands</option></select></div><div><span class="row-label">${key==='musicActivities'?'Group':'Default result'}</span><input data-editor-field="${key}|${i}|${key==='musicActivities'?'group':'result'}" value="${escapeHTML(key==='musicActivities'?x.group:(x.result||''))}"></div><button class="row-remove" data-editor-remove="${key}|${i}">×</button>${key==='musicActivities'?`<div style="grid-column:1/-2"><span class="row-label">Default result</span><input data-editor-field="${key}|${i}|result" value="${escapeHTML(x.result||'')}"></div>`:''}</div>`}).join('')}</div></section>`}
-function renderEditor(){document.getElementById('editorGrid').innerHTML=`${renderEditorList('Music activities','musicActivities','activity')}${renderEditorList('Music headline projects','musicProjects','simple')}${renderEditorList('Music offers','musicOffers','simple')}${renderEditorList('Writing stages','writingStages','activity')}${renderEditorList('Writing projects','writingProjects','simple')}<section class="card"><div class="section-head compact"><div><h2>Acting project heading</h2></div></div><label for="actingProjectTitle">Heading shown in Daily Work</label><input id="actingProjectTitle" value="${escapeHTML(state.library.actingProjectTitle)}"></section>${renderEditorList('Acting activities','actingStages','activity')}${renderEditorList('Acting materials','actingMaterials','simple')}${renderEditorList('Cultural and spiritual activities','culturalSpiritualActivities','simple')}${renderEditorList('Supporting duty choices','supportDuties','support')}`;document.querySelectorAll('[data-editor-field]').forEach(el=>el.oninput=()=>{const [key,i,field]=el.dataset.editorField.split('|'),item=state.library[key][Number(i)],oldValue=item[field];item[field]=el.value;if(key==='culturalSpiritualActivities'&&field==='label'){Object.values(state.lifeLogs).forEach(log=>{const row=log.activities&&log.activities['cultural-spiritual'];if(row&&row.choice===oldValue)row.choice=el.value});renderLife()}saveState()});document.querySelectorAll('[data-editor-alfie]').forEach(el=>el.onchange=()=>{const [key,i]=el.dataset.editorAlfie.split('|');state.library[key][Number(i)].alfie=el.value==='both'?'both':el.value==='yes';saveState()});document.querySelectorAll('[data-editor-remove]').forEach(el=>el.onclick=()=>{const [key,i]=el.dataset.editorRemove.split('|');if(state.library[key].length===1){toast('Keep at least one option in each list');return}if(key==='supportDuties'&&state.library[key][Number(i)]?.id==='trello'){toast('The permanent Trello duty cannot be deleted');return}state.library[key].splice(Number(i),1);repairRowsAfterLibraryChange();saveState();renderEditor();renderWork();renderLife()});document.querySelectorAll('[data-editor-add]').forEach(el=>el.onclick=()=>{const [key,kind]=el.dataset.editorAdd.split('|'),id=uid(key.slice(0,2));if(kind==='simple')state.library[key].push({id,label:'New item'});else if(kind==='support')state.library[key].push({id,group:'Other',label:'New duty',alfie:false});else state.library[key].push({id,label:'New activity',group:key==='musicActivities'?'Other':'',alfie:false,result:''});saveState();renderEditor();renderWork();renderLife()});document.getElementById('actingProjectTitle').oninput=e=>{state.library.actingProjectTitle=e.target.value||'Acting';saveState();renderWork()}}
-function repairRowsAfterLibraryChange(){const culturalChoices=new Set((state.library.culturalSpiritualActivities||[]).map(x=>x.label));Object.values(state.lifeLogs||{}).forEach(log=>{const row=log.activities&&log.activities['cultural-spiritual'];if(row&&row.choice&&!culturalChoices.has(row.choice)){row.choice='';row.done=false}});Object.values(state.dailyLogs).forEach(log=>{(log.activities?.Music||[]).forEach(r=>{if(!state.library.musicActivities.some(x=>x.id===r.activity))r.activity=firstItem(state.library.musicActivities).id;if(r.project&&!state.library.musicProjects.some(x=>x.id===r.project))r.project='';if(r.offer&&!state.library.musicOffers.some(x=>x.id===r.offer))r.offer=''});(log.activities?.Writing||[]).forEach(r=>{if(!state.library.writingStages.some(x=>x.id===r.stage))r.stage=firstItem(state.library.writingStages).id;if(!state.library.writingProjects.some(x=>x.id===r.project))r.project=firstItem(state.library.writingProjects).id});(log.activities?.Acting||[]).forEach(r=>{if(!state.library.actingStages.some(x=>x.id===r.stage))r.stage=firstItem(state.library.actingStages).id;if(!state.library.actingMaterials.some(x=>x.id===r.material))r.material=firstItem(state.library.actingMaterials).id});(log.support||[]).forEach(r=>{if(!state.library.supportDuties.some(x=>x.id===r.duty)){const x=state.library.supportDuties.find(x=>x.id!=='trello')||firstItem(state.library.supportDuties);r.duty=x.id;r.category=x.group;r.detail=x.label}});ensureTrelloDuty(log)})}
-function bindStatic(){document.querySelectorAll('.nav-btn').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.id===btn.dataset.tab));if(btn.dataset.tab==='edit')renderEditor()});document.getElementById('globalDate').onchange=e=>{pauseAllTimers();saveState();activeDate=e.target.value||todayISO();ensureLog(activeDate);ensureLifeLog(activeDate);rebalanceAll();renderAll()};document.getElementById('dailyHours').onchange=e=>{const hours=Math.max(0,Number(e.target.value)||0);state.dailyHours=hours;ensureLog(activeDate).hours=hours;rebalanceAll();saveState();renderWork()};document.getElementById('seasonStart').onchange=e=>{state.season.start=e.target.value;saveState();renderSeason()};document.getElementById('seasonEnd').onchange=e=>{state.season.end=e.target.value;saveState();renderSeason()};document.getElementById('seasonHours').onchange=e=>{state.season.hours=Math.max(0,Number(e.target.value)||0);saveState()};document.getElementById('applySeasonPreset').onclick=()=>{const hours=Math.max(0,Number(state.season.hours)||0);state.dailyHours=hours;ensureLog(activeDate).hours=hours;rebalanceAll();saveState();renderWork();toast('Family-season hours applied to this day')};document.getElementById('dayWin').oninput=e=>{ensureLog(activeDate).win=e.target.value;saveState()};document.getElementById('tomorrowFirst').oninput=e=>{ensureLog(activeDate).tomorrow=e.target.value;saveState()};document.getElementById('dayNotes').oninput=e=>{ensureLog(activeDate).notes=e.target.value;saveState()};document.getElementById('addSupportBlock').onclick=()=>{const log=ensureLog(activeDate);log.support.push(defaultSupportRow());ensureTrelloDuty(log);saveState();renderWork()};document.getElementById('lifeNotes').oninput=e=>{ensureLifeLog(activeDate).notes=e.target.value;saveState()};document.getElementById('vocalNotes').oninput=e=>{ensureVocalLog(activeDate).notes=e.target.value;saveState()};document.getElementById('clearVocalDay').onclick=()=>{if(confirm('Clear every vocal practice and support check for this date?')){state.vocalLogs[activeDate]=defaultVocalLog();saveState();renderVocal()}};document.getElementById('clearFoundationChecks').onclick=()=>{if(confirm('Clear every foundation check for this date?')){ensureLog(activeDate).foundations={};saveState();renderFoundations()}};document.getElementById('clearLifeDay').onclick=()=>{if(confirm('Clear every Exercise & Activities choice for this date?')){state.lifeLogs[activeDate]=defaultLifeLog(state.library);saveState();renderLife()}};document.querySelectorAll('[data-preset]').forEach(el=>el.onclick=()=>{const p=PRESETS[el.dataset.preset];WORK_DOMAINS.forEach(d=>state.allocation.find(a=>a.domain===d).pct=p[d]);rebalanceAll();saveState();renderWork()});document.getElementById('addDream').onclick=()=>{const title=prompt('Name the dream');if(!title)return;ensureDreams().push({id:uid('dream'),icon:'✦',title:title.trim(),summary:'',details:[],status:'Dream',due:'',next:'',notes:'',archived:false,custom:true});saveState();renderDreams()};document.getElementById('printBtn').onclick=()=>window.print();document.getElementById('printBtn2').onclick=()=>window.print();document.getElementById('exportBtn').onclick=exportData;document.getElementById('importBtn').onclick=()=>document.getElementById('importFile').click();document.getElementById('importFile').onchange=importData;document.getElementById('resetAll').onclick=()=>{if(confirm('Reset the entire guide?')){pauseAllTimers();state=defaultState();activeDate=todayISO();ensureLog(activeDate);rebalanceAll();saveState();renderAll();renderEditor()}}}
-function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Robert-Life-Guide-backup-'+activeDate+'.json';a.click();URL.revokeObjectURL(a.href)}
-function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{state=mergeState(JSON.parse(r.result));repairRowsAfterLibraryChange();rebalanceAll();saveState();renderAll();renderEditor();toast('Backup restored')}catch(err){alert('This file could not be read as a Life Guide backup.')}};r.readAsText(f);e.target.value=''}
-function renderAll(){document.getElementById('globalDate').value=activeDate;ensureLog(activeDate);ensureLifeLog(activeDate);ensureVocalLog(activeDate);ensureDreams();rebalanceAll();renderSeason();renderFoundations();renderWork();renderVocal();renderLife();renderDreams()}
+function renderEditorList(title,key,kind){const list=state.library[key],id=`edit-${key}`,isSimple=kind==='simple',isSupport=kind==='support';return `<section class="card"><div class="section-head compact"><div><h2>${title}</h2></div><button class="btn primary small" data-editor-add="${key}|${kind}">+</button></div><div class="editor-list" id="${id}">${list.map((x,i)=>{if(isSimple)return `<div class="editor-row simple"><div><span class="row-label">Name</span><input data-editor-field="${key}|${i}|label" value="${escapeHTML(x.label)}"></div><button class="row-remove" data-editor-remove="${key}|${i}">×</button></div>`;const compat=compatibilityValue(x);if(isSupport)return `<div class="editor-row"><div><span class="row-label">Category</span><input data-editor-field="${key}|${i}|group" value="${escapeHTML(x.group)}"></div><div><span class="row-label">Duty</span><input data-editor-field="${key}|${i}|label" value="${escapeHTML(x.label)}"></div><div><span class="row-label">Alfie compatibility</span><select data-editor-alfie="${key}|${i}"><option value="yes" ${compat==='yes'?'selected':''}>Can do with Alfie</option><option value="both" ${compat==='both'?'selected':''}>With or without Alfie</option><option value="no" ${compat==='no'?'selected':''}>Needs free hands</option></select></div><button class="row-remove" data-editor-remove="${key}|${i}">×</button></div>`;return `<div class="editor-row"><div><span class="row-label">Activity</span><input data-editor-field="${key}|${i}|label" value="${escapeHTML(x.label)}"></div><div><span class="row-label">Alfie compatibility</span><select data-editor-alfie="${key}|${i}"><option value="yes" ${compat==='yes'?'selected':''}>Can do with Alfie</option><option value="both" ${compat==='both'?'selected':''}>With or without Alfie</option><option value="no" ${compat==='no'?'selected':''}>Needs free hands</option></select></div><div><span class="row-label">${key==='musicActivities'?'Group':'Default result'}</span><input data-editor-field="${key}|${i}|${key==='musicActivities'?'group':'result'}" value="${escapeHTML(key==='musicActivities'?x.group:(x.result||''))}"></div><button class="row-remove" data-editor-remove="${key}|${i}">×</button>${key==='musicActivities'?`<div style="grid-column:1/-2"><span class="row-label">Default result</span><input data-editor-field="${key}|${i}|result" value="${escapeHTML(x.result||'')}"></div>`:''}</div>`}).join('')}</div></section>`}
+function renderEditor(){document.getElementById('editorGrid').innerHTML=`${renderEditorList('Music activities','musicActivities','activity')}${renderEditorList('Music projects','musicOffers','simple')}${renderEditorList('Writing stages','writingStages','activity')}${renderEditorList('Writing projects','writingProjects','simple')}<section class="card"><div class="section-head compact"><div><h2>Acting project heading</h2></div></div><label for="actingProjectTitle">Heading shown in Work</label><input id="actingProjectTitle" value="${escapeHTML(state.library.actingProjectTitle)}"></section>${renderEditorList('Acting activities','actingStages','activity')}${renderEditorList('Acting materials','actingMaterials','simple')}${renderEditorList('Cultural and spiritual activities','culturalSpiritualActivities','simple')}`;document.querySelectorAll('[data-editor-field]').forEach(el=>el.oninput=()=>{const [key,i,field]=el.dataset.editorField.split('|'),item=state.library[key][Number(i)],oldValue=item[field];item[field]=el.value;if(key==='culturalSpiritualActivities'&&field==='label'){Object.values(state.lifeLogs).forEach(log=>{const row=log.activities&&log.activities['cultural-spiritual'];if(row&&row.choice===oldValue)row.choice=el.value});renderLife()}saveState()});document.querySelectorAll('[data-editor-alfie]').forEach(el=>el.onchange=()=>{const [key,i]=el.dataset.editorAlfie.split('|');state.library[key][Number(i)].alfie=el.value==='both'?'both':el.value==='yes';saveState()});document.querySelectorAll('[data-editor-remove]').forEach(el=>el.onclick=()=>{const [key,i]=el.dataset.editorRemove.split('|');if(state.library[key].length===1){toast('Keep at least one option in each list');return}state.library[key].splice(Number(i),1);repairRowsAfterLibraryChange();saveState();renderEditor();renderWork();renderLife()});document.querySelectorAll('[data-editor-add]').forEach(el=>el.onclick=()=>{const [key,kind]=el.dataset.editorAdd.split('|'),id=uid(key.slice(0,2));if(kind==='simple')state.library[key].push({id,label:'New item'});else if(kind==='support')state.library[key].push({id,group:'Other',label:'New duty',alfie:false});else state.library[key].push({id,label:'New activity',group:key==='musicActivities'?'Other':'',alfie:false,result:''});saveState();renderEditor();renderWork();renderLife()});document.getElementById('actingProjectTitle').oninput=e=>{state.library.actingProjectTitle=e.target.value||'Acting';saveState();renderWork()}}
+function repairRowsAfterLibraryChange(){const culturalChoices=new Set((state.library.culturalSpiritualActivities||[]).map(x=>x.label));Object.values(state.lifeLogs||{}).forEach(log=>{const row=log.activities&&log.activities['cultural-spiritual'];if(row&&row.choice&&!culturalChoices.has(row.choice)){row.choice='';row.done=false}});Object.values(state.dailyLogs).forEach(log=>{(log.activities?.Music||[]).forEach(r=>{if(!state.library.musicActivities.some(x=>x.id===r.activity))r.activity=firstItem(state.library.musicActivities).id;if(r.project&&!state.library.musicProjects.some(x=>x.id===r.project))r.project='';if(r.offer&&!state.library.musicOffers.some(x=>x.id===r.offer))r.offer=''});(log.activities?.Writing||[]).forEach(r=>{if(!state.library.writingStages.some(x=>x.id===r.stage))r.stage=firstItem(state.library.writingStages).id;if(!state.library.writingProjects.some(x=>x.id===r.project))r.project=firstItem(state.library.writingProjects).id});(log.activities?.Acting||[]).forEach(r=>{if(!state.library.actingStages.some(x=>x.id===r.stage))r.stage=firstItem(state.library.actingStages).id;if(!state.library.actingMaterials.some(x=>x.id===r.material))r.material=firstItem(state.library.actingMaterials).id});(log.support||[]).forEach(r=>{if(!state.library.supportDuties.some(x=>x.id===r.duty)){const x=state.library.supportDuties.find(x=>x.id!=='trello')||firstItem(state.library.supportDuties);r.duty=x.id;r.category=x.group;r.detail=x.label}})})}
+function bindStatic(){document.querySelectorAll('.nav-btn').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.id===btn.dataset.tab));if(btn.dataset.tab==='edit')renderEditor()});document.getElementById('globalDate').onchange=e=>{pauseAllTimers();saveState();activeDate=e.target.value||todayISO();ensureLog(activeDate);ensureLifeLog(activeDate);rebalanceAll();renderAll()};document.getElementById('dailyHours').onchange=e=>{const hours=Math.max(0,Number(e.target.value)||0);state.dailyHours=hours;ensureLog(activeDate).hours=hours;rebalanceAll();saveState();renderWork()};document.getElementById('seasonStart').onchange=e=>{state.season.start=e.target.value;saveState();renderSeason()};document.getElementById('seasonEnd').onchange=e=>{state.season.end=e.target.value;saveState();renderSeason()};document.getElementById('seasonHours').onchange=e=>{state.season.hours=Math.max(0,Number(e.target.value)||0);saveState()};document.getElementById('applySeasonPreset').onclick=()=>{const hours=Math.max(0,Number(state.season.hours)||0);state.dailyHours=hours;ensureLog(activeDate).hours=hours;rebalanceAll();saveState();renderWork();toast('Family-season hours applied to this day')};document.getElementById('dayWin').oninput=e=>{ensureLog(activeDate).win=e.target.value;saveState()};document.getElementById('tomorrowFirst').oninput=e=>{ensureLog(activeDate).tomorrow=e.target.value;saveState()};document.getElementById('dayNotes').oninput=e=>{ensureLog(activeDate).notes=e.target.value;saveState()};document.getElementById('lifeNotes').oninput=e=>{ensureLifeLog(activeDate).notes=e.target.value;saveState()};document.getElementById('vocalNotes').oninput=e=>{ensureVocalLog(activeDate).notes=e.target.value;saveState()};document.getElementById('clearVocalDay').onclick=()=>{if(confirm('Clear every vocal practice and support check for this date?')){state.vocalLogs[activeDate]=defaultVocalLog();saveState();renderVocal()}};document.getElementById('clearFoundationChecks').onclick=()=>{if(confirm('Clear every foundation check for this date?')){ensureLog(activeDate).foundations={};saveState();renderFoundations()}};document.getElementById('clearExerciseDay').onclick=()=>{if(confirm('Clear every exercise choice for this date?')){const log=ensureLifeLog(activeDate);log.movement=defaultLifeLog(state.library).movement;saveState();renderLife()}};document.getElementById('clearActivitiesDay').onclick=()=>{if(confirm('Clear every activity choice for this date?')){const log=ensureLifeLog(activeDate);log.activities=defaultLifeLog(state.library).activities;log.notes='';saveState();renderLife()}};document.querySelectorAll('[data-preset]').forEach(el=>el.onclick=()=>{const p=PRESETS[el.dataset.preset];WORK_DOMAINS.forEach(d=>state.allocation.find(a=>a.domain===d).pct=p[d]);rebalanceAll();saveState();renderWork()});document.getElementById('addDream').onclick=()=>{const title=prompt('Name the dream');if(!title)return;ensureDreams().push({id:uid('dream'),icon:'✦',title:title.trim(),summary:'',details:[],status:'Dream',due:'',next:'',notes:'',archived:false,custom:true});saveState();renderDreams()};document.getElementById('printBtn').onclick=()=>window.print();document.getElementById('printBtn2').onclick=()=>window.print();document.getElementById('exportBtn').onclick=exportData;document.getElementById('importBtn').onclick=()=>document.getElementById('importFile').click();document.getElementById('importFile').onchange=importData;document.getElementById('resetAll').onclick=()=>{if(confirm('Reset the entire planner?')){pauseAllTimers();state=defaultState();activeDate=todayISO();ensureLog(activeDate);rebalanceAll();saveState();renderAll();renderEditor()}}}
+function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Robert-Life-Planner-backup-'+activeDate+'.json';a.click();URL.revokeObjectURL(a.href)}
+function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{state=mergeState(JSON.parse(r.result));repairRowsAfterLibraryChange();rebalanceAll();saveState();renderAll();renderEditor();toast('Backup restored')}catch(err){alert('This file could not be read as a Life Planner backup.')}};r.readAsText(f);e.target.value=''}
+function renderAll(){document.getElementById('globalDate').value=activeDate;ensureLog(activeDate);ensureLifeLog(activeDate);ensureVocalLog(activeDate);ensureDreams();rebalanceAll();renderSeason();renderFoundations();renderWork();renderVocal();renderLife();renderDreams();bindGuideSections()}
 bindStatic();renderAll();setInterval(updateTimerDisplays,1000);
 </script>
 </body>
