@@ -20,16 +20,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20260811-5">
   <style>
-    .amazon-buy-options { margin-top: 1.5rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; max-width: 38rem; }
-    .amazon-buy-row { color: #102538; background: #f3c276; padding: .95rem 1.1rem; transition: transform .2s, background .2s; }
-    .amazon-buy-row:hover { background: #ffda9b; transform: translateY(-2px); }
-    .amazon-buy-label { display: block; margin-bottom: .45rem; font-size: .69rem; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
-    .amazon-market-links { display: flex; gap: .35rem .5rem; flex-wrap: wrap; align-items: baseline; font-size: .88rem; }
-    .amazon-market-links a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(16,37,56,.6); padding-bottom: .05rem; }
-    .amazon-market-links a:hover, .amazon-market-links a:focus-visible { border-bottom-color: currentColor; }
-    .amazon-market-separator { opacity: .45; }
-    .amazon-preview-note { grid-column: 1 / -1; margin: .25rem 0 0; font-size: .92em; opacity: .78; }
-    @media (max-width: 620px) { .amazon-buy-options { grid-template-columns: 1fr; } .amazon-preview-note { grid-column: auto; } }
+    .amazon-buy-options { margin-top: 1.5rem; max-width: 42rem; }
+    .amazon-buy-line { display: grid; grid-template-columns: 7.5rem 1fr; gap: .85rem; align-items: center; margin-bottom: .75rem; }
+    .amazon-format-label { font-size: .72rem; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+    .amazon-country-boxes { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .amazon-country-box { min-width: 3.25rem; color: #102538; background: #f3c276; padding: .72rem .8rem; text-align: center; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-decoration: none; transition: transform .2s, background .2s; }
+    .amazon-country-box:hover, .amazon-country-box:focus-visible { background: #ffda9b; transform: translateY(-2px); }
+    .amazon-preview-note { margin: .35rem 0 0; font-size: .92em; opacity: .78; }
+    @media (max-width: 620px) {
+      .amazon-buy-line { grid-template-columns: 1fr; gap: .45rem; }
+      .amazon-country-boxes { gap: .45rem; }
+      .amazon-country-box { flex: 1 1 calc(25% - .45rem); min-width: 3rem; }
+    }
   </style>
   <script type="application/ld+json">
   {
@@ -155,28 +157,22 @@
             <div><span>Series</span><strong>Owl Fred</strong></div>
           </div>
           <div class="amazon-buy-options" aria-label="Buy Owl Fred and the Giant on Amazon">
-            <div class="amazon-buy-row">
-              <span class="amazon-buy-label">Buy Paperback</span>
-              <span class="amazon-market-links">
-                <a href="https://www.amazon.com.au/dp/B0HFBT31C5" target="_blank" rel="noopener noreferrer">Australia <span aria-hidden="true">↗</span></a>
-                <span class="amazon-market-separator" aria-hidden="true">·</span>
-                <a href="https://www.amazon.com/dp/B0HFBT31C5" target="_blank" rel="noopener noreferrer">United States <span aria-hidden="true">↗</span></a>
-                <span class="amazon-market-separator" aria-hidden="true">·</span>
-                <a href="https://www.amazon.co.uk/dp/B0HFBT31C5" target="_blank" rel="noopener noreferrer">United Kingdom <span aria-hidden="true">↗</span></a>
-                <span class="amazon-market-separator" aria-hidden="true">·</span>
-                <a href="https://www.amazon.ca/dp/B0HFBT31C5" target="_blank" rel="noopener noreferrer">Canada <span aria-hidden="true">↗</span></a>
+            <div class="amazon-buy-line">
+              <span class="amazon-format-label">Paperback</span>
+              <span class="amazon-country-boxes">
+                <a class="amazon-country-box" href="https://www.amazon.com.au/dp/B0HFBT31C5" target="_blank" rel="noopener noreferrer" aria-label="Buy paperback on Amazon Australia">AU</a>
+                <a class="amazon-country-box" href="https://www.amazon.com/dp/B0HFBT31C5" target="_blank" rel="noopener noreferrer" aria-label="Buy paperback on Amazon United States">US</a>
+                <a class="amazon-country-box" href="https://www.amazon.co.uk/dp/B0HFBT31C5" target="_blank" rel="noopener noreferrer" aria-label="Buy paperback on Amazon United Kingdom">UK</a>
+                <a class="amazon-country-box" href="https://www.amazon.ca/dp/B0HFBT31C5" target="_blank" rel="noopener noreferrer" aria-label="Buy paperback on Amazon Canada">CA</a>
               </span>
             </div>
-            <div class="amazon-buy-row">
-              <span class="amazon-buy-label">Buy Kindle</span>
-              <span class="amazon-market-links">
-                <a href="https://www.amazon.com.au/dp/B0HFCZ8VWW" target="_blank" rel="noopener noreferrer">Australia <span aria-hidden="true">↗</span></a>
-                <span class="amazon-market-separator" aria-hidden="true">·</span>
-                <a href="https://www.amazon.com/dp/B0HFCZ8VWW" target="_blank" rel="noopener noreferrer">United States <span aria-hidden="true">↗</span></a>
-                <span class="amazon-market-separator" aria-hidden="true">·</span>
-                <a href="https://www.amazon.co.uk/dp/B0HFCZ8VWW" target="_blank" rel="noopener noreferrer">United Kingdom <span aria-hidden="true">↗</span></a>
-                <span class="amazon-market-separator" aria-hidden="true">·</span>
-                <a href="https://www.amazon.ca/dp/B0HFCZ8VWW" target="_blank" rel="noopener noreferrer">Canada <span aria-hidden="true">↗</span></a>
+            <div class="amazon-buy-line">
+              <span class="amazon-format-label">Kindle</span>
+              <span class="amazon-country-boxes">
+                <a class="amazon-country-box" href="https://www.amazon.com.au/dp/B0HFCZ8VWW" target="_blank" rel="noopener noreferrer" aria-label="Buy Kindle edition on Amazon Australia">AU</a>
+                <a class="amazon-country-box" href="https://www.amazon.com/dp/B0HFCZ8VWW" target="_blank" rel="noopener noreferrer" aria-label="Buy Kindle edition on Amazon United States">US</a>
+                <a class="amazon-country-box" href="https://www.amazon.co.uk/dp/B0HFCZ8VWW" target="_blank" rel="noopener noreferrer" aria-label="Buy Kindle edition on Amazon United Kingdom">UK</a>
+                <a class="amazon-country-box" href="https://www.amazon.ca/dp/B0HFCZ8VWW" target="_blank" rel="noopener noreferrer" aria-label="Buy Kindle edition on Amazon Canada">CA</a>
               </span>
             </div>
             <p class="amazon-preview-note">A <strong>Read sample</strong> option may be available on the Amazon book page for your region.</p>
