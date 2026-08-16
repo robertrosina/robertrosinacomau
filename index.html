@@ -19,6 +19,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20260811-5">
+  <style>
+    .amazon-buy-options { margin-top: 1.5rem; display: grid; gap: .7rem; max-width: 38rem; }
+    .amazon-buy-row { display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; }
+    .amazon-buy-label { min-width: 6.5rem; font-weight: 700; }
+    .amazon-market-links { display: flex; gap: .45rem; flex-wrap: wrap; align-items: baseline; }
+    .amazon-market-links a { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: .05rem; }
+    .amazon-market-links a:hover, .amazon-market-links a:focus-visible { opacity: .72; }
+    .amazon-market-separator { opacity: .45; }
+    .amazon-preview-note { margin: .25rem 0 0; font-size: .92em; opacity: .78; }
+  </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -142,9 +152,32 @@
             <div><span>Length</span><strong>30 pages</strong></div>
             <div><span>Series</span><strong>Owl Fred</strong></div>
           </div>
-          <div class="owl-actions">
-            <a class="button button-owl" href="https://www.amazon.com/dp/B0HFBT31C5?spcref=PRINT_LISTING" target="_blank" rel="noopener noreferrer">Buy on Amazon <span aria-hidden="true">↗</span></a>
-            <a class="owl-read-link" href="https://www.amazon.com/dp/B0HFBT31C5?ref_=kfw_samples_getbook_reader&amp;asin=B0HFBT31C5&amp;revisionId=&amp;format=4&amp;depth=1" target="_blank" rel="noopener noreferrer">Read Kindle preview <span aria-hidden="true">↗</span></a>
+          <div class="amazon-buy-options" aria-label="Buy Owl Fred and the Giant on Amazon">
+            <div class="amazon-buy-row">
+              <span class="amazon-buy-label">Paperback</span>
+              <span class="amazon-market-links">
+                <a href="https://www.amazon.com.au/dp/B0HFBT31C5" target="_blank" rel="noopener noreferrer">Australia <span aria-hidden="true">↗</span></a>
+                <span class="amazon-market-separator" aria-hidden="true">·</span>
+                <a href="https://www.amazon.com/dp/B0HFBT31C5" target="_blank" rel="noopener noreferrer">United States <span aria-hidden="true">↗</span></a>
+                <span class="amazon-market-separator" aria-hidden="true">·</span>
+                <a href="https://www.amazon.co.uk/dp/B0HFBT31C5" target="_blank" rel="noopener noreferrer">United Kingdom <span aria-hidden="true">↗</span></a>
+                <span class="amazon-market-separator" aria-hidden="true">·</span>
+                <a href="https://www.amazon.ca/dp/B0HFBT31C5" target="_blank" rel="noopener noreferrer">Canada <span aria-hidden="true">↗</span></a>
+              </span>
+            </div>
+            <div class="amazon-buy-row">
+              <span class="amazon-buy-label">Kindle</span>
+              <span class="amazon-market-links">
+                <a href="https://www.amazon.com.au/dp/B0HFCZ8VWW" target="_blank" rel="noopener noreferrer">Australia <span aria-hidden="true">↗</span></a>
+                <span class="amazon-market-separator" aria-hidden="true">·</span>
+                <a href="https://www.amazon.com/dp/B0HFCZ8VWW" target="_blank" rel="noopener noreferrer">United States <span aria-hidden="true">↗</span></a>
+                <span class="amazon-market-separator" aria-hidden="true">·</span>
+                <a href="https://www.amazon.co.uk/dp/B0HFCZ8VWW" target="_blank" rel="noopener noreferrer">United Kingdom <span aria-hidden="true">↗</span></a>
+                <span class="amazon-market-separator" aria-hidden="true">·</span>
+                <a href="https://www.amazon.ca/dp/B0HFCZ8VWW" target="_blank" rel="noopener noreferrer">Canada <span aria-hidden="true">↗</span></a>
+              </span>
+            </div>
+            <p class="amazon-preview-note">A <strong>Read sample</strong> option may be available on the Amazon book page for your region.</p>
           </div>
         </div>
         <figure class="owl-cover"><img src="assets/owl-fred-cover.webp" alt="Cover of Owl Fred and the Giant by Robert Rosina"></figure>
