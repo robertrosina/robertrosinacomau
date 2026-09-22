@@ -1,21 +1,20 @@
 ROBERT ROSINA — LIVE MUSIC WEBSITE
 
 Pages
-- index.html — main booking page
-- repertoire.html — full current repertoire
+- index.html — main booking page, listening showcase and complete tabbed repertoire
+- repertoire.html — compatibility redirect to the repertoire on the main page
 - contact.html — booking/contact page
 
 Current structure
 - 3-set main upbeat show
 - Optional fourth Jazz & Swing set
 - Robert Rosina & Daniel Ross duo option
-- 12-track audio showcase
+- Video-led performance showcase with 10 audio samples
 
 Notes
-- Repertoire is first in the main navigation.
-- The biography sits alongside a linked YouTube performance image.
-- The packages and show-format material are combined into one section.
-- The live/gallery material is combined into one section.
+- The main navigation follows the single-page structure: About, Performance samples, Repertoire and Booking.
+- The hero is led by Robert Rosina's name.
+- The complete repertoire sits below the listening section in four selectable tabs.
 - Moondance is included in the main Rock, Pop & Soul backing-track list.
 - Zombie has a local placeholder MP3 asset with no “coming soon” wording.
 - Booking calls-to-action route to contact.html.
